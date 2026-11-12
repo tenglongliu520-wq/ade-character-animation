@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+cache/
+logs/
+*.log
+*.psd
+*.psb
+*.blend
+*.zip
+*.tar.gz
+.DS_Store
+Thumbs.db

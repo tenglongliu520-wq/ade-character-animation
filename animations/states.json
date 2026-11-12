@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "characterId": "ade",
+  "status": "scaffold",
+  "initialState": "idle",
+  "states": ["enter", "idle", "listening", "thinking", "speaking", "wave", "settle", "paused"]
+}
