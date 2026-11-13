@@ -1,7 +1,20 @@
 {
   "schemaVersion": 1,
   "characterId": "ade",
-  "status": "scaffold",
+  "status": "runtime_available",
   "initialState": "idle",
-  "states": ["enter", "idle", "listening", "thinking", "speaking", "wave", "settle", "paused"]
+  "states": [
+    "idle",
+    "talk",
+    "listen",
+    "think",
+    "wave",
+    "hello",
+    "breathe",
+    "sway",
+    "hop",
+    "celebrate",
+    "sleep"
+  ],
+  "note": "这些是模型接受的模式；入场和收尾由时间驱动，暂停使用setPaused。部分模式使用通用姿态，并非都有专用动作。"
 }

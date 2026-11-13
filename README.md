@@ -1,27 +1,31 @@
 # 阿德人物动画库 · ade-character-animation
 
-得体说「阿德」IP 的人物素材、动作定义与动画接入说明。
+得体说阿德 IP 的古装分层素材、Canvas 动画运行代码及独立演示。
 
-已迁入古装阿德分层素材与 Canvas 运行代码；这是主站集成源码快照，独立运行需按 docs/hanfu-runtime-20261113.md 放置素材并提供页面DOM。
+## 本地预览
+
+需要 Python 3.9+，在本仓库目录运行 `python tools/preview.py`，打开 http://127.0.0.1:4191/ 。无需额外依赖。
+
+可查看小跑入场、挥手、待机、倾听、思考和暂停；选择本地音频后点击播放，嘴型随实际音量变化。所选文件仅在浏览器内播放。系统减少动态设置下保持静态。
+
+若同级有 `ade-voice` 仓库，可点击“I / M09”播放已选角色音频；单独下载本库也可用本地音频演示。预览仅监听本机，不开放外网。
 
 ## 目录
 
-- `assets/`：后续存放人物分层素材与表情。
-- `animations/states.json`：动作状态清单。
-- `src/`：后续存放动画控制器。
-- `examples/`：后续存放独立演示。
-- `docs/integration.md`：与语音库的协作约定。
+- `assets/hanfu-20261112/`：透明分层图集。
+- `src/web/`：动画模型、Canvas 渲染及主站挂载代码。
+- `animations/states.json`：实际接受的模式。
+- `examples/`、`tools/preview.py`：独立预览和本机静态服务。
+- `tests/ade-coordinated.cjs`：动作逻辑测试。
+- `docs/hanfu-runtime-20261113.md`：主站素材与代码来源。
+- `docs/integration.md`：语音联动接口与限制。
 
-## 人物与动作
+## 验证与边界
 
-以用户确认的阿德形象为准。素材需记录版本、来源和授权，避免将不同服饰、不同人物版本混用。入场、待机、倾听、思考、说话、挥手和收尾分别管理。
+运行 `node --test tests/ade-coordinated.cjs tests/renderer.cjs`（Node.js 18+）以及 `python tools/verify_preview.py`。
 
-说话嘴型由实际音频能量驱动，停顿闭嘴；头部、眼睛、身体和手势协调变化。已在主站完成动作模型与渲染检查；仓库没有独立应用启动器。
+嘴型由音量包络驱动，不是逐字音素对齐。部分可接受的模式共用通用姿态，不能据此宣称所有独立动作均已制作。自动测试不替代实际观看和听审。主站挂载脚本仍依赖主站DOM，独立演示只加载模型和渲染器。
 
-## 配套仓库
+配套语音库：https://github.com/tenglongliu520-wq/ade-voice 。仓库保持私有，未添加开源许可证；角色素材与第三方代码授权分别确认。
 
-语音：[ade-voice](https://github.com/tenglongliu520-wq/ade-voice)。
-
-## 使用与授权
-
-目前未添加开源许可证；代码与角色素材的授权分别确认。仓库初始按私有使用准备。
+Windows 本机也可双击 `启动预览.cmd`，再打开上面的本机地址；关闭启动窗口即可停止预览。脚本优先使用本机现有的 D:/AI/Ade-companion-20261104/venv Python，其他电脑使用 PATH 中的 Python。
