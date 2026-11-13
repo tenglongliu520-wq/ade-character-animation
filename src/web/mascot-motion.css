@@ -1,0 +1,12 @@
+.mascot-touch{display:block;position:relative;margin:0 auto;width:min(66vw,255px);height:clamp(210px,34svh,300px);padding:0;border:0;background:transparent;border-radius:24px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.mascot-touch:focus-visible,.mascot-toggle:focus-visible{outline:2px solid #326a54;outline-offset:5px}
+.welcome-character .mascot-touch img,.mascot-touch canvas{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 12px #51604415)}
+.mascot-touch canvas{position:absolute;inset:0;pointer-events:none}
+.mascot-touch [hidden],.mascot-tools [hidden]{display:none!important}
+.mascot-tools{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;margin-top:9px}
+.mascot-hint{font-size:11px;color:#718574;line-height:1.6}
+.mascot-toggle{border:0;border-bottom:1px dotted #a3b7a4;background:transparent;padding:5px 0;color:#58735f;font-size:11px;min-height:28px;cursor:pointer}
+.mascot-toggle:disabled{cursor:default;border-color:transparent;color:#899786}
+.mascot-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.mascot-actions{display:flex;justify-content:center;gap:8px;margin:8px 0 0}.mascot-actions button{font:inherit;font-size:11px;color:#456b55;background:#eef3e9;border:1px solid #dbe5d8;border-radius:18px;padding:7px 12px;min-height:32px;cursor:pointer}.mascot-actions button:focus-visible{outline:2px solid #326a54;outline-offset:3px}
