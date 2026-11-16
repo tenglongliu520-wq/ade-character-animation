@@ -19,3 +19,7 @@ I/M09已配音文本由语音库 `AdeVoice.plan(text)` 规划；未知文本返�
 早期文档中的 `speech-start`、`speech-level` 等通用事件总线仍是建议方案，当前代码没有该事件总线。
 
 当前基线为2026-11-13的I/M09音频与古装阿德动画，来源记录见各库版本文档。独立预览不修改已发布网站。接口变化应同步两仓库。
+
+## 2026年11月16日 首页按住说话
+
+首页挂载脚本依赖语音库的AdeHoldToTalk模块（主站路径/hold-to-talk.js）；必须先于companion-home.js加载。按住录音、松开转成待校对文字，上滑取消，iframe显式允许microphone。配套样式快照为src/web/companion.css。人物模型、素材与音量驱动接口未修改；回答播报与I声线暂不调整。浏览器需支持SpeechRecognition并允许麦克风，不代表所有微信浏览器或原生小程序已经验收。
