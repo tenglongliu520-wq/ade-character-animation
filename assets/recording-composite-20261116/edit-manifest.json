@@ -1,0 +1,106 @@
+{
+  "sources": [
+    {
+      "filename": "64258107a84437fbf7bd966dcf19be0a.mp4",
+      "sha256": "a0aeb8eb26391a8fec9c56425d7ad840d106965fbf572ae32c288ef5c64ac114"
+    },
+    {
+      "filename": "cbda065fffc6fa7e5630c96733cff944.mp4",
+      "sha256": "029cbb59af2b32964c9c3715830c6a2f6eb96a42cd333bc88f243db3b2df3cfe"
+    },
+    {
+      "filename": "e78beafb926601e87bcd04d7a632e5ea.mp4",
+      "sha256": "d75da52470a0c9a2f906eaf859b438bdd4abde685326843e4d6b7d7d8078f642"
+    },
+    {
+      "filename": "1a6acea2b9c36af025bd6a591eebd389.mp4",
+      "sha256": "c40975f673c7dbd2d6c819bbbe4d2d98394d3b01b5ddc73d5832b3af7cd1b5ce"
+    },
+    {
+      "filename": "a8b3404dcc6e5f77230792382db4ada6.mp4",
+      "sha256": "1f03e219adbbfe9cec3fb2dbc1bd2915ab4110b534d2f694230408ece4c19e2c"
+    }
+  ],
+  "outputs": [
+    {
+      "filename": "ade-recording-highlight-10s.mp4",
+      "duration": 10.0,
+      "frames": 300,
+      "size": [
+        720,
+        1280
+      ],
+      "fps": 30.0,
+      "audio": false,
+      "bytes": 3152415,
+      "sha256": "7bd443a3da36180b3d4d99eb1f373f2888d87e28e911a2a47a3e8a81e44944b7",
+      "cuts": [
+        {
+          "source": "64258107a84437fbf7bd966dcf19be0a.mp4",
+          "start": 0.5,
+          "duration": 2
+        },
+        {
+          "source": "a8b3404dcc6e5f77230792382db4ada6.mp4",
+          "start": 0.4,
+          "duration": 2
+        },
+        {
+          "source": "e78beafb926601e87bcd04d7a632e5ea.mp4",
+          "start": 3,
+          "duration": 2
+        },
+        {
+          "source": "cbda065fffc6fa7e5630c96733cff944.mp4",
+          "start": 0.6,
+          "duration": 2
+        },
+        {
+          "source": "1a6acea2b9c36af025bd6a591eebd389.mp4",
+          "start": 0.4,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "filename": "ade-recording-full.mp4",
+      "duration": 72.2,
+      "frames": 2166,
+      "size": [
+        720,
+        1280
+      ],
+      "fps": 30.0,
+      "audio": false,
+      "bytes": 22844328,
+      "sha256": "46e81c730b19fb21246a62c16532c22707056054c278b7e0f213519e3463aba3",
+      "cuts": [
+        {
+          "source": "64258107a84437fbf7bd966dcf19be0a.mp4",
+          "start": 0.4,
+          "duration": 14.4
+        },
+        {
+          "source": "a8b3404dcc6e5f77230792382db4ada6.mp4",
+          "start": 0.2,
+          "duration": 4.9
+        },
+        {
+          "source": "e78beafb926601e87bcd04d7a632e5ea.mp4",
+          "start": 0.4,
+          "duration": 20
+        },
+        {
+          "source": "cbda065fffc6fa7e5630c96733cff944.mp4",
+          "start": 0.4,
+          "duration": 26.8
+        },
+        {
+          "source": "1a6acea2b9c36af025bd6a591eebd389.mp4",
+          "start": 0.3,
+          "duration": 6.1
+        }
+      ]
+    }
+  ]
+}
