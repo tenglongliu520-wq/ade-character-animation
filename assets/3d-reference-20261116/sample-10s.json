@@ -1,0 +1,16 @@
+{
+  "status": "planned_not_rendered",
+  "duration_seconds": 10,
+  "character": "ade_hanfu",
+  "renderer_requirement": "real_3d_mesh_with_skeletal_animation",
+  "clips": [
+    { "from": 0, "to": 2, "action": "front_idle", "requirements": ["subtle breathing", "natural blink", "grounded feet"] },
+    { "from": 2, "to": 4, "action": "step_turn_180", "requirements": ["head leads shoulders and hips", "visible foot steps", "weight shifts before each step"] },
+    { "from": 4, "to": 5, "action": "back_idle", "requirements": ["visible back volume and hair tie", "no face on back", "no camera cut"] },
+    { "from": 5, "to": 7.5, "action": "continue_step_turn_180_to_front", "requirements": ["complete total 360 degree body rotation", "decelerate and settle feet", "no rigid turntable or sliding feet"] },
+    { "from": 7.5, "to": 10, "action": "front_smile_and_wave", "requirements": ["facial smile control", "shoulder elbow wrist coordination", "natural head and gaze response"] }
+  ],
+  "preserve_voice": "I/M09",
+  "generated_outputs": [],
+  "completion_requires": ["actual GLB inspected", "skeleton and skinning inspected", "facial controls inspected", "10 second rendered video probed and visually reviewed"]
+}

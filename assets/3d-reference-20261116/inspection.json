@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-16",
+  "assets": [
+    {
+      "file": "ade-hanfu-turnaround.png",
+      "width": 1774,
+      "height": 887,
+      "format": "PNG",
+      "mode": "RGBA",
+      "transparent_pixels": 879666,
+      "opaque_pixels": 971,
+      "file_bytes": 1501946,
+      "sha256": "57d30f38cc722e698179bd5c7d017fcce593646cd6d9ae4d6f92ead340977fb4"
+    },
+    {
+      "file": "ade-hanfu-apose-front.png",
+      "width": 1114,
+      "height": 1412,
+      "format": "PNG",
+      "mode": "RGBA",
+      "transparent_pixels": 972281,
+      "opaque_pixels": 870,
+      "file_bytes": 1269449,
+      "sha256": "6cb1995b5fa3d16f384378e7a4b233f4c8c8675879af3560d63877070432c6a3"
+    }
+  ],
+  "visual_checks": [
+    {
+      "requirement": "three views with no face on back",
+      "status": "passed",
+      "evidence": "assistant inspected turnaround pixels"
+    },
+    {
+      "requirement": "A-pose separated sleeves closed mouth distinct shoes",
+      "status": "passed",
+      "evidence": "assistant inspected front pixels"
+    },
+    {
+      "requirement": "exact identity and inferred back design",
+      "status": "partially_verified",
+      "evidence": "key traits retained; exact likeness awaits user review"
+    },
+    {
+      "requirement": "production edge quality",
+      "status": "unverified",
+      "evidence": "real alpha verified; subpixel edge quality not certified"
+    },
+    {
+      "requirement": "GLB skeleton facial controls 10 second animation",
+      "status": "not_generated",
+      "evidence": "fal reauthentication blocked; no model job submitted"
+    }
+  ]
+}
