@@ -1,0 +1,21 @@
+{
+  "blender_version": "4.5.3 LTS",
+  "model": "ade.glb",
+  "source": "build_ade.py",
+  "method": "authored volumetric approximation from video-derived reference; not original model recovery",
+  "objects": 47,
+  "vertices_before_modifiers": 99673,
+  "bones": 17,
+  "actions": [
+    "idle",
+    "think",
+    "wave"
+  ],
+  "limitations": [
+    "back and hidden anatomy authored",
+    "rigid part weights; not production organic skinning",
+    "no cloth simulation",
+    "likeness needs visual review",
+    "audio level mouth control is not phoneme lip sync"
+  ]
+}

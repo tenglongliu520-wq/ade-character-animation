@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-19",
+  "method": "authored Blender recreation from user video frames; not original Meshy recovery",
+  "reference": {
+    "date": "2026-11-19",
+    "status": "references-only-no-3d-model-generated",
+    "frames": [
+      {
+        "file": "front-neutral.png",
+        "source_video": "64258107a84437fbf7bd966dcf19be0a.mp4",
+        "source_sha256": "a0aeb8eb26391a8fec9c56425d7ad840d106965fbf572ae32c288ef5c64ac114",
+        "time_seconds": 3.35,
+        "crop_xywh": [
+          0,
+          60,
+          720,
+          950
+        ],
+        "processing": "Single video frame extraction and crop only; original dark background retained. No generated anatomy."
+      },
+      {
+        "file": "three-quarter-right.png",
+        "source_video": "e78beafb926601e87bcd04d7a632e5ea.mp4",
+        "source_sha256": "d75da52470a0c9a2f906eaf859b438bdd4abde685326843e4d6b7d7d8078f642",
+        "time_seconds": 0.0,
+        "crop_xywh": [
+          0,
+          60,
+          720,
+          950
+        ],
+        "processing": "Single video frame extraction and crop only; original dark background retained. No generated anatomy."
+      },
+      {
+        "file": "three-quarter-left.png",
+        "source_video": "e78beafb926601e87bcd04d7a632e5ea.mp4",
+        "source_sha256": "d75da52470a0c9a2f906eaf859b438bdd4abde685326843e4d6b7d7d8078f642",
+        "time_seconds": 1.51,
+        "crop_xywh": [
+          0,
+          60,
+          720,
+          950
+        ],
+        "processing": "Single video frame extraction and crop only; original dark background retained. No generated anatomy."
+      }
+    ]
+  },
+  "generation_fees_usd": 0,
+  "weights_included": false,
+  "back_details": "authored interpretation",
+  "mesh_sha256": "c7821fe5b940613b2e80d8643e5d9b13fc5292d55b618b1aa7063e9f44404ee2"
+}

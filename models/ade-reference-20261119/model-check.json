@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "sha256": "c7821fe5b940613b2e80d8643e5d9b13fc5292d55b618b1aa7063e9f44404ee2",
+  "bytes": 5736136,
+  "meshes": 47,
+  "vertices": 99673,
+  "triangles": 196120,
+  "skeleton_joints": 17,
+  "animated_nodes": {
+    "idle": 2,
+    "think": 3,
+    "wave": 4
+  },
+  "morph_primitives": 13,
+  "face_targets": [
+    "blink",
+    "jawOpen"
+  ],
+  "embedded_images": 1,
+  "limits": "Structure only; does not certify likeness, all-frame cloth quality, device FPS or phoneme lip sync."
+}

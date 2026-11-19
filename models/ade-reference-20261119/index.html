@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>阿德 · 三维模型检查</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Microsoft YaHei",sans-serif;color:#244c3b;background:#f6f5ee;font-synthesis:none}*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:28px 26px}header{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:1px solid #d8dfd2;padding-bottom:18px}h1{margin:0;font-size:26px;font-weight:600}header span{font-size:14px;color:#6b796c}.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);gap:35px;align-items:center}.stage{height: min(76vh,760px);min-height:400px;position:relative}.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.stage canvas:active{cursor:grabbing}.loading{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#667463;pointer-events:none}.loading[hidden]{display:none}.loading p{max-width:24em;padding:18px}.controls{padding:24px 0}.controls fieldset{border:0;padding:0;margin:0;min-width:0}.controls h2{font-size:21px;font-weight:600}.controls p{color:#647160;line-height:1.7;font-size:15px}.group{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 28px}button,a.download{font:inherit;font-size:15px;border:1px solid #c6d3c3;background:#fafbf6;color:#28543d;border-radius:9px;padding:11px 16px;cursor:pointer;text-decoration:none}button:hover,a.download:hover{background:#e8eee2}button[aria-pressed=true]{background:#28543d;color:white;border-color:#28543d}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #abbe6b;outline-offset:3px}label{display:block;font-size:15px;margin:20px 0 10px}input{width:100%;accent-color:#28543d}.note{border-top:1px solid #d8dfd2;padding-top:18px;margin-top:28px}footer{font-size:13px;color:#6f7b6b;border-top:1px solid #d8dfd2;padding:14px 0}.model-stat{font-size:13px!important;color:#74806f!important}@media(max-width:700px){main{padding:18px 16px}.layout{display:block}.stage{height:64vh;min-height:380px}.controls{padding:0 8px 20px}h1{font-size:22px}header span{max-width:9em;text-align:right;font-size:12px}}
+</style><script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script></head>
+<body><main><header><h1>阿德 · 三维模型</h1><span>依据录屏参照建模 · 初版检查</span></header>
+<div class="layout"><section id="stage" class="stage" aria-label="阿德三维预览"><div id="loading" class="loading" role="status"><p>正在加载阿德…</p></div></section>
+<section class="controls"><fieldset id="controls" disabled><h2>你好，我是阿德 ♡</h2><p>拖动查看不同角度，滚轮或双指缩放。</p>
+<div class="group" aria-label="查看角度"><button data-view="front">正面</button><button data-view="quarter">斜侧面</button><button data-view="side">侧面</button><button data-view="back">背面</button></div>
+<div class="group" aria-label="人物动作"><button data-action="idle" aria-pressed="true">待机</button><button data-action="wave" aria-pressed="false">打招呼</button><button data-action="think" aria-pressed="false">想一想</button><button id="pause" aria-pressed="false">暂停动作</button></div>
+<label for="mouth">张嘴检查</label><input type="range" id="mouth" min="0" max="1" step="0.01" value="0">
+<p id="stats" class="model-stat" role="status">模型载入后可操作</p>
+<div class="note"><p>这是可旋转的三维网格初版。背面与遮挡细节为补充设计，发型和五官仍需与录屏对照审定；本页尚未替换正式首页。</p><a class="download" href="./ade.glb" download="阿德-三维参照模型.glb">下载 GLB 模型</a></div>
+</fieldset></section></div><footer>保留阿德的棕发、竹纹古装、深绿腰带与红心。此预览不上传录音或调用在线生成服务。</footer></main>
+<script type="module">
+import {Ade3DAvatar} from './avatar-3d.js';
+const loading=document.querySelector('#loading'),stats=document.querySelector('#stats');
+let avatar,faceFrame=0;
+try{
+  avatar=new Ade3DAvatar(document.querySelector('#stage'));window.ade3d=avatar;
+  await avatar.ready;document.querySelector('#controls').disabled=false;loading.hidden=true;stats.textContent='三维网格已加载 · 支持旋转、骨骼动作和面部控制';
+  document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{
+    avatar.setState(b.dataset.action);document.querySelectorAll('[data-action]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  }));
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>avatar.setView(b.dataset.view)));
+  document.querySelector('#pause').addEventListener('click',e=>{avatar.setPaused(!avatar.paused);e.currentTarget.setAttribute('aria-pressed',String(avatar.paused));e.currentTarget.textContent=avatar.paused?'继续动作':'暂停动作';cancelAnimationFrame(faceFrame);updateMouth();});
+  const slider=document.querySelector('#mouth');
+  const updateMouth=()=>{faceFrame=0;const level=Number(slider.value);const moving=!avatar.paused&&!avatar.motion.matches&&!document.hidden;avatar.setSpeechLevel(moving?level:0);if(level>0&&moving)faceFrame=requestAnimationFrame(updateMouth);};
+  slider.addEventListener('input',()=>{cancelAnimationFrame(faceFrame);updateMouth();});avatar.motion.addEventListener('change',()=>{cancelAnimationFrame(faceFrame);updateMouth();});
+  document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(faceFrame);if(!document.hidden)updateMouth();});
+}catch(e){loading.hidden=false;loading.querySelector('p').textContent='三维预览未能加载。请使用本地预览启动器打开；若浏览器不支持 WebGL，可查看已保存的正侧背面渲染图。';stats.textContent='加载失败：'+e.message;console.error(e);avatar?.destroy();}
+</script></body></html>
+
+

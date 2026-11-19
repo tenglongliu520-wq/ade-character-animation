@@ -1,0 +1,4 @@
+# Model construction only; viewing and structural verification use the standard library.
+# bpy 4.5.3 requires CPython 3.11.
+bpy==4.5.3
+Pillow==13.0.0
