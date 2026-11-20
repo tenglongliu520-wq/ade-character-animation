@@ -1,0 +1,12 @@
+{
+  "method": "Recorded eye silhouettes and color on independent curved meshes. Authored brows, nose and smile. Re-cut coat, cuff facing and folded cap. Generated hair with smoothly blended baked color.",
+  "parts": 67,
+  "vertices": 191813,
+  "textures": [
+    "recording eye crops",
+    "authored blush",
+    "authored bamboo cloth"
+  ],
+  "status": "static likeness iteration",
+  "hidden_back": "inferred"
+}

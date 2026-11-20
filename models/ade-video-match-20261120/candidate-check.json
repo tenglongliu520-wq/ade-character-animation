@@ -1,0 +1,23 @@
+{
+  "bytes": 8330428,
+  "sha256": "df69bbc15fc9c403aafae5c3504c8d9e81ab8db3aae01bb6dd973982e45078ae",
+  "dimensions_gltf_y_up": [
+    0.9493818879127502,
+    2.3203479680221393,
+    0.789106011390686
+  ],
+  "depth_height_ratio": 0.34008089401492597,
+  "meshes": 67,
+  "embedded_images": 6,
+  "independent_facial_geometry": [
+    "Curved recorded eye left",
+    "Curved recorded eye right",
+    "Sculpted brow",
+    "Small sculpted nose",
+    "Sculpted smile"
+  ],
+  "skins": 0,
+  "animations": 0,
+  "status": "visual refinement; unrigged; likeness not accepted",
+  "limits": "Does not certify likeness, watertightness, animations or homepage integration."
+}
