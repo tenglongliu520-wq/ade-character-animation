@@ -1,0 +1,190 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "6c6d0789fca1929c5d7defa5018aa5f9d7882596ea553e90bf1ae03c4f7e585d"
+  },
+  {
+    "path": "requirements.txt",
+    "sha256": "c71307e6276a290b5e4070160baf7f09a3ef8153c28804293b2b10ea9e3bba65"
+  },
+  {
+    "path": "recording_details.py",
+    "sha256": "d59d8f915aee046f492d35d18437a90df0f984e92d55ee5b3f35a82c93277540"
+  },
+  {
+    "path": "fit_details.py",
+    "sha256": "31546734148d3f7ef32898bb974b882f4933dbfcd54317b054a0265be94da58a"
+  },
+  {
+    "path": "prepare_textures.py",
+    "sha256": "474dfadb3fe3a47389b999ae0bb45b1316e26ab5d2e565ceac54f5840fa7ea68"
+  },
+  {
+    "path": "build_refined.py",
+    "sha256": "3390f9a67c1ba28ce0f3a33ae25efc60c869f51d3dee98a2abe344918b4e61d9"
+  },
+  {
+    "path": "render_outline.py",
+    "sha256": "e50e7c166eee246f109e4d44e3686a9b5e514de499046c67e71a4fe0f6b6ef12"
+  },
+  {
+    "path": "make_comparison.py",
+    "sha256": "edf41d938367d1660bcd93bd3219439465161ffde654cca90fea6d08eac87324"
+  },
+  {
+    "path": "verify_candidate.py",
+    "sha256": "c5b4e48c78763687e00a0bd89f6f50edeba878beac70da3cdf0a39d1b41490bf"
+  },
+  {
+    "path": "validate_gltf.cjs",
+    "sha256": "eeec7f46085bcb5a5523596f28f1ce04dae89ab3dd4af9ae7d028cd7d19b6688"
+  },
+  {
+    "path": "preview.py",
+    "sha256": "bf14e10d188a2d92b29a7f4385b4404f27fbaaaf29f9f9d3310066c6f1902540"
+  },
+  {
+    "path": "avatar-3d.js",
+    "sha256": "51b0623a9078929b0372cb144e2820524192415c62d634a86d56806cd4f71495"
+  },
+  {
+    "path": "index.html",
+    "sha256": "5a5134a745a31bc6d185f46bc560a231fa35c61f8efaa744f4fad1bbfcc2226d"
+  },
+  {
+    "path": "package.json",
+    "sha256": "612a91b4f372f091c14f7e4e31d8aebffe97ba8dda919fa427f66bc2bdfb7548"
+  },
+  {
+    "path": "source-geometry.glb",
+    "sha256": "22e2bcd93d0d053106a38dbc4328f8b3fcce716809f0e0d48700db672308c7aa"
+  },
+  {
+    "path": "ade.glb",
+    "sha256": "272afdd7bb4b9f0b0d70eb087e249de102f6e1e27c1d6abffc70a03fdd35928d"
+  },
+  {
+    "path": "reference-front.png",
+    "sha256": "2d4dddbe7b59b97aafb0cc858c78afd79e7cb764dadb4ce3a56990290168bb4c"
+  },
+  {
+    "path": "reference-right.png",
+    "sha256": "9b874bd132ab99f20ca508745e294e5c17c26f1f08e0a323c63eb3c6afd8259a"
+  },
+  {
+    "path": "reference-left.png",
+    "sha256": "2860c0621b38aa90d5014aa19d8abfe8c0d0ceafe4b93eca2f49346d6db2ee50"
+  },
+  {
+    "path": "previous-front.png",
+    "sha256": "8f56cb13bbcbd7243003aef9aa3a226181de115b5bc57ad905b4f8a45d443765"
+  },
+  {
+    "path": "hair-color.png",
+    "sha256": "2ec527bb26aa75d6b7685aa5bebb17d52ab03981837f5b43ff51e2c8b912f310"
+  },
+  {
+    "path": "inferred-rear-hair.png",
+    "sha256": "0a0a710feb99e2cf973216f69198f0b712b2a5d84b194eae59b7403f2d3f52f1"
+  },
+  {
+    "path": "skin-blush.png",
+    "sha256": "6bd048802eb63bd4b54610d26fb7ade2d40af3d57a39ec7dd401d9aac0fd7451"
+  },
+  {
+    "path": "eye-left.png",
+    "sha256": "2814650f98780c8f0a50e212a91f5ad9c42cb74c9ed181573bc23f07905a0365"
+  },
+  {
+    "path": "eye-right.png",
+    "sha256": "0ee502879fc33a992e4979fa09b9e1a39adb879b7c22fd09322c93b10ca67150"
+  },
+  {
+    "path": "bamboo-cloth.png",
+    "sha256": "fa45c9d066a0029eb433b7d6f26be23d4f2b070e3bae9e9285eaa7b487612c20"
+  },
+  {
+    "path": "bamboo-sash.png",
+    "sha256": "10cc4bc5310c4f5c7d7bb9b147afaa1304de9bb2b4316a9bf46b4967493ab0cc"
+  },
+  {
+    "path": "recorded-fabric.png",
+    "sha256": "19b500fa42527fd9f8e81ddcd96434a69e34d288ebe461ca0d812ad923786467"
+  },
+  {
+    "path": "front.png",
+    "sha256": "0f919aa0411d93f9ece2b89a4ea9055daa6b7b0fc0184abb6de6a6f38b4566b1"
+  },
+  {
+    "path": "quarter-right.png",
+    "sha256": "30b0746b5caf067972ffa32392c019ad004f387cfa23f52a3161a9e53e991a6e"
+  },
+  {
+    "path": "quarter-left.png",
+    "sha256": "4e192104df2786dabcdc759032419e3c24af9c48358d6aa0810d294bfda54028"
+  },
+  {
+    "path": "side.png",
+    "sha256": "a6e198066e0c58d9c1c83df6d4a9597907bf551764332a8a1a026d0b6de0b47d"
+  },
+  {
+    "path": "back.png",
+    "sha256": "c28a02fb57d6a098f02043247aeb8d3e82782ba6a32ed560aa7069fa1e4b3161"
+  },
+  {
+    "path": "comparison.jpg",
+    "sha256": "659f07ef14110814fc2d8c16fd9da8fd5efe8558afc62fb894cfc853ab3ac16a"
+  },
+  {
+    "path": "multi-view-comparison.jpg",
+    "sha256": "d5dfadf16cb804895ae46ce3523c44323c7de232b681b6e6e3db920388f9a847"
+  },
+  {
+    "path": "outline-comparison.jpg",
+    "sha256": "5e7d28adb34a1bc332baa903e9fab35f97b1256382cce166c64744addaf8003e"
+  },
+  {
+    "path": "build-report.json",
+    "sha256": "80a1f11f7c8786158844e08114a98c4644961df4f674db39737635ac33f14bb7"
+  },
+  {
+    "path": "candidate-check.json",
+    "sha256": "a5baeee2d19e785d198c7957533aef8e8508e3cf3f7a385f66043d1db9685d90"
+  },
+  {
+    "path": "gltf-validation.json",
+    "sha256": "75ac1314d387fb7a7ab6ef41b1cf074ea05412ce38b955ba904a0f52e0de315b"
+  },
+  {
+    "path": "vendor/LICENSE",
+    "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+  },
+  {
+    "path": "vendor/three.core.js",
+    "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+  },
+  {
+    "path": "vendor/three.module.js",
+    "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+  },
+  {
+    "path": "vendor/VERSION",
+    "sha256": "3a381f606ed1406de0e1ad104aa0716dea598ee47831be583f01177a24e5e69e"
+  },
+  {
+    "path": "vendor/controls/OrbitControls.js",
+    "sha256": "e7fca2fe9e7670a828af9b28084669a5909445b7f36f1f26cee9bf8f2961c32c"
+  },
+  {
+    "path": "vendor/loaders/GLTFLoader.js",
+    "sha256": "532ac726e120039acbcd6cf54328c57acbf7b438176afaa6951257126d11bff1"
+  },
+  {
+    "path": "vendor/utils/BufferGeometryUtils.js",
+    "sha256": "7bda2a8ba836b2bcf67cb938d4b9e1bb5d1b1bc616817103ed858c0b58296ce7"
+  },
+  {
+    "path": "vendor/utils/SkeletonUtils.js",
+    "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+  }
+]

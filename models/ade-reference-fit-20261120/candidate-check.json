@@ -1,0 +1,31 @@
+{
+  "bytes": 8685792,
+  "sha256": "272afdd7bb4b9f0b0d70eb087e249de102f6e1e27c1d6abffc70a03fdd35928d",
+  "dimensions_gltf_y_up": [
+    0.964135617017746,
+    2.2945318650454283,
+    0.793755829334259
+  ],
+  "depth_height_ratio": 0.3459336701425778,
+  "meshes": 71,
+  "embedded_images": 5,
+  "independent_facial_geometry": [
+    "Curved recorded eye left",
+    "Curved recorded eye right",
+    "Sculpted brow",
+    "Small sculpted nose",
+    "Sculpted smile"
+  ],
+  "skins": 0,
+  "animations": 0,
+  "status": "visual refinement; unrigged; likeness not accepted",
+  "limits": "Does not certify likeness, watertightness, animations or homepage integration.",
+  "verified_vertex_color_surfaces": [
+    "Flowing open bamboo coat",
+    "Soft bell sleeve -1",
+    "Soft bell sleeve 1",
+    "Central swept fringe",
+    "Left temple curl",
+    "Right raised temple curl"
+  ]
+}
