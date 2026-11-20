@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-20",
+  "status": "User rejected previous candidate; this is another unaccepted visual refinement.",
+  "reference_frames": [
+    {
+      "file": "reference-front.png",
+      "sha256": "2d4dddbe7b59b97aafb0cc858c78afd79e7cb764dadb4ce3a56990290168bb4c"
+    },
+    {
+      "file": "reference-right.png",
+      "sha256": "9b874bd132ab99f20ca508745e294e5c17c26f1f08e0a323c63eb3c6afd8259a"
+    },
+    {
+      "file": "reference-left.png",
+      "sha256": "2860c0621b38aa90d5014aa19d8abfe8c0d0ceafe4b93eca2f49346d6db2ee50"
+    }
+  ],
+  "recording_frame_provenance": "../../assets/reconstruction-reference-20261119/provenance.json",
+  "generated_hair_input": {
+    "file": "source-geometry.glb",
+    "sha256": "22e2bcd93d0d053106a38dbc4328f8b3fcce716809f0e0d48700db672308c7aa",
+    "provider": "Tencent official public Hunyuan3D-2 demo",
+    "url": "https://huggingface.co/spaces/tencent/Hunyuan3D-2",
+    "endpoint": "/shape_generation",
+    "steps": 50,
+    "seed": 42,
+    "octree_resolution": 256,
+    "reused_input": "No cloud generation or new authorization this iteration."
+  },
+  "new_authored_geometry": [
+    "continuous coat",
+    "bell sleeves",
+    "inner robe",
+    "trouser hems",
+    "thin-soled shoes",
+    "hands",
+    "collar",
+    "sash",
+    "clasp",
+    "heart",
+    "face",
+    "separate curved eye components",
+    "eyelids/brows/nose/smile",
+    "cap and cloth ribbons"
+  ],
+  "facial_appearance": "Skin/blush texture only; eyes/brows/nose/smile are separate curved geometry. Not full anatomical eyeballs/eye sockets.",
+  "inferred": [
+    "rear hair details",
+    "occluded garment anatomy",
+    "pattern placement"
+  ],
+  "final_glb_sha256": "93b74d9d0a97e121ca178c87484fd6ae1941ad1787b46a82ca8a78c1f336a90a",
+  "rigs": 0,
+  "animations": 0,
+  "homepage_changed": false,
+  "voice_changed": false
+}

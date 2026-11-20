@@ -1,0 +1,25 @@
+{
+  "bytes": 8829224,
+  "sha256": "93b74d9d0a97e121ca178c87484fd6ae1941ad1787b46a82ca8a78c1f336a90a",
+  "dimensions_gltf_y_up": [
+    0.9792362749576569,
+    2.2934036385267973,
+    0.789106011390686
+  ],
+  "depth_height_ratio": 0.34407637545110914,
+  "meshes": 77,
+  "embedded_images": 6,
+  "independent_facial_geometry": [
+    "Separate sclera",
+    "Brown iris",
+    "Pupil",
+    "Sculpted upper eyelid",
+    "Sculpted brow",
+    "Small sculpted nose",
+    "Sculpted smile"
+  ],
+  "skins": 0,
+  "animations": 0,
+  "status": "visual refinement; unrigged; likeness not accepted",
+  "limits": "Does not certify likeness, watertightness, animations or homepage integration."
+}

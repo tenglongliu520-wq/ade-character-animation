@@ -1,0 +1,23 @@
+{
+  "iteration": "user rejected previous version; continuing recorded-shape refinement",
+  "method": "recording-shaped authored body and independent 3D eyes/eyelids/nose/smile; generated layered hair retained",
+  "parts": 77,
+  "vertices": 201299,
+  "actual_3d_features": [
+    "sclera",
+    "iris",
+    "pupil",
+    "catchlights",
+    "eyelids",
+    "brows",
+    "nose",
+    "smile"
+  ],
+  "textures": [
+    "hair color field from recording",
+    "authored blush",
+    "authored dense bamboo cloth"
+  ],
+  "status": "visual iteration; not accepted; no rig/actions",
+  "hidden_back": "inferred"
+}
