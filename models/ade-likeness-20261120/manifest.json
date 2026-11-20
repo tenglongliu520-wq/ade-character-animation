@@ -1,0 +1,182 @@
+[
+  {
+    "file": "README.md",
+    "sha256": "8d883202f31d27c93bed33fe9cc7a300528ca249d832c17fe63145789ef07bd0",
+    "bytes": 2754
+  },
+  {
+    "file": "qa.md",
+    "sha256": "5500868c618fd0c47bbd770e194674f2d8a2e6cfcd9106edb4e5e36be6a4d90d",
+    "bytes": 1002
+  },
+  {
+    "file": "requirements.txt",
+    "sha256": "c71307e6276a290b5e4070160baf7f09a3ef8153c28804293b2b10ea9e3bba65",
+    "bytes": 40
+  },
+  {
+    "file": "build_candidate.py",
+    "sha256": "fd7f52acd1d22170f97fb195f5d0f99a94e2c09f40d4aa7275c7f38e648069a2",
+    "bytes": 7838
+  },
+  {
+    "file": "prepare_color.py",
+    "sha256": "dd9bc35137b8ee7cd366f914c5a96493d3741d38e8f7c875e5f202c1be67dae9",
+    "bytes": 3739
+  },
+  {
+    "file": "make_comparison.py",
+    "sha256": "74702d062006f5f516a6e7aa42eee4cba6a0649b5352f2905d6cd3d75c6fd316",
+    "bytes": 1025
+  },
+  {
+    "file": "verify_candidate.py",
+    "sha256": "2c151bead1cc8947d3f15586e772ed047e4de1dca31e4cdde1922dbecb0314a9",
+    "bytes": 2013
+  },
+  {
+    "file": "validate_gltf.cjs",
+    "sha256": "eeec7f46085bcb5a5523596f28f1ce04dae89ab3dd4af9ae7d028cd7d19b6688",
+    "bytes": 540
+  },
+  {
+    "file": "preview.py",
+    "sha256": "7b89ee02550e6d3153350410a70ac6b30bc1bfa14784e42d0d6f13ff6b6f6462",
+    "bytes": 1118
+  },
+  {
+    "file": "index.html",
+    "sha256": "4de6313d4ef1d566891954b375686b1da68c00ef14b04ad568aeae30a6122846",
+    "bytes": 2820
+  },
+  {
+    "file": "avatar-3d.js",
+    "sha256": "32a5b4fced1004976ca7cb440f7caf7ac14e42293342d1f219d03cc72d3efb58",
+    "bytes": 6199
+  },
+  {
+    "file": "package.json",
+    "sha256": "612a91b4f372f091c14f7e4e31d8aebffe97ba8dda919fa427f66bc2bdfb7548",
+    "bytes": 219
+  },
+  {
+    "file": "candidate-report.json",
+    "sha256": "3119bdf6cc37176e5e565ab422e5f42d3de42075c5beec47e6234ce04dfea30b",
+    "bytes": 436
+  },
+  {
+    "file": "candidate-check.json",
+    "sha256": "e54923c6dd64cc2ed9d3ec0dda4df3137e2cedeee37d779b39fa61680ba72566",
+    "bytes": 498
+  },
+  {
+    "file": "gltf-validation.json",
+    "sha256": "5fba05e7e147b66f564ac6e3405c1612b8bd75620909dcba99312cf68ad33fbb",
+    "bytes": 3162
+  },
+  {
+    "file": "provenance.json",
+    "sha256": "744ca50052a5cb83ba006fca60b2474a8e517ec09058e88a47f4fa314239640d",
+    "bytes": 1908
+  },
+  {
+    "file": "source-geometry.glb",
+    "sha256": "22e2bcd93d0d053106a38dbc4328f8b3fcce716809f0e0d48700db672308c7aa",
+    "bytes": 6290764
+  },
+  {
+    "file": "authored-body.glb",
+    "sha256": "c7821fe5b940613b2e80d8643e5d9b13fc5292d55b618b1aa7063e9f44404ee2",
+    "bytes": 5736136
+  },
+  {
+    "file": "ade.glb",
+    "sha256": "7bf920b3bf4d158d4f2f3fc9604567c89ace69a977515826ab645ad449fc33fb",
+    "bytes": 4737812
+  },
+  {
+    "file": "reference-front.png",
+    "sha256": "2d4dddbe7b59b97aafb0cc858c78afd79e7cb764dadb4ce3a56990290168bb4c",
+    "bytes": 346766
+  },
+  {
+    "file": "reference-v1.png",
+    "sha256": "df78d3e3c20bae099174f63e39de1ff78ec6b5ba86e90cc9235a844de79e5789",
+    "bytes": 880416
+  },
+  {
+    "file": "recorded-object-color.png",
+    "sha256": "0085d441987d91a012998d62741b948d8f6516d65814e0b41d1787332190afaa",
+    "bytes": 372120
+  },
+  {
+    "file": "recorded-face-color.png",
+    "sha256": "c901c3cdd341f91d41a9dc7e267772d2e0b63729db99694db3e310358ba5bfb4",
+    "bytes": 47963
+  },
+  {
+    "file": "front.png",
+    "sha256": "10b99a2522bb784f2067dc7319ca076bdedc5b12b8ae58195449a2c5d7917ab2",
+    "bytes": 699048
+  },
+  {
+    "file": "quarter.png",
+    "sha256": "2de39857d04ed3059676785b8869b9ffdcff523c53952a41892e8cf3f2f802fe",
+    "bytes": 696698
+  },
+  {
+    "file": "back.png",
+    "sha256": "53f61d08c1f9714895795846573ce4b6b7f3871ef5ce63a9a0c81e07dcf56d77",
+    "bytes": 633954
+  },
+  {
+    "file": "comparison.jpg",
+    "sha256": "1a0ed1dd6fa8da55a1dc2625ce5ca34a4228a3fb773f86e66bbbd56d15e7129d",
+    "bytes": 175902
+  },
+  {
+    "file": "preview-evidence.jpg",
+    "sha256": "c822cb613a3634d658297ef04fadfc130d13a10220cd4ed7ab80eb0e969c37c8",
+    "bytes": 92261
+  },
+  {
+    "file": "vendor/LICENSE",
+    "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "bytes": 1081
+  },
+  {
+    "file": "vendor/three.core.js",
+    "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578",
+    "bytes": 1474799
+  },
+  {
+    "file": "vendor/three.module.js",
+    "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341",
+    "bytes": 658900
+  },
+  {
+    "file": "vendor/VERSION",
+    "sha256": "3a381f606ed1406de0e1ad104aa0716dea598ee47831be583f01177a24e5e69e",
+    "bytes": 91
+  },
+  {
+    "file": "vendor/controls/OrbitControls.js",
+    "sha256": "e7fca2fe9e7670a828af9b28084669a5909445b7f36f1f26cee9bf8f2961c32c",
+    "bytes": 40918
+  },
+  {
+    "file": "vendor/loaders/GLTFLoader.js",
+    "sha256": "532ac726e120039acbcd6cf54328c57acbf7b438176afaa6951257126d11bff1",
+    "bytes": 119861
+  },
+  {
+    "file": "vendor/utils/BufferGeometryUtils.js",
+    "sha256": "7bda2a8ba836b2bcf67cb938d4b9e1bb5d1b1bc616817103ed858c0b58296ce7",
+    "bytes": 39153
+  },
+  {
+    "file": "vendor/utils/SkeletonUtils.js",
+    "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f",
+    "bytes": 11535
+  }
+]

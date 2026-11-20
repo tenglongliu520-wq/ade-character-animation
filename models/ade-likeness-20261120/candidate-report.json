@@ -1,0 +1,13 @@
+{
+  "method": "generated layered hair + smooth authored face + clean authored hanfu body",
+  "face": "recording projected onto a volumetric face; eyes not separately sculpted",
+  "hidden_back": "inferred",
+  "status": "visual-only candidate; unrigged; not user-accepted",
+  "original_scan_dimensions": [
+    0.9036270380020142,
+    0.7737693786621094,
+    1.9557114839553833
+  ],
+  "mesh_objects": 29,
+  "vertices": 104413
+}

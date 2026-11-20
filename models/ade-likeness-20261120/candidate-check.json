@@ -1,0 +1,16 @@
+{
+  "bytes": 4737812,
+  "sha256": "7bf920b3bf4d158d4f2f3fc9604567c89ace69a977515826ab645ad449fc33fb",
+  "dimensions_gltf_y_up": [
+    0.9791652262210846,
+    2.2892499482259154,
+    0.7901310324668884
+  ],
+  "depth_height_ratio": 0.34514843303991816,
+  "meshes": 28,
+  "embedded_images": 3,
+  "skins": 0,
+  "animations": 0,
+  "status": "visual candidate; unrigged; likeness not accepted",
+  "limits": "Does not certify likeness, watertightness, animations or homepage integration."
+}
