@@ -1,0 +1,12 @@
+{
+  "method": "Reference adjusted cheek and jaw, softened fringe and brow, plus head tilt, blink, cheek lift and delayed ribbon motion.",
+  "parts": 71,
+  "vertices": 222357,
+  "textures": [
+    "recorded eye crops",
+    "authored blush",
+    "recorded fabric motifs blended with authored cloth"
+  ],
+  "status": "authored facial and body gesture",
+  "hidden_back": "inferred"
+}

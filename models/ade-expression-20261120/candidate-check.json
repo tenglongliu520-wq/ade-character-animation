@@ -1,0 +1,69 @@
+{
+  "bytes": 8935004,
+  "sha256": "547e1a94e024c0fe55082bfe7f91398282ee2a18688119da032c3d89c279820a",
+  "dimensions_gltf_y_up": [
+    0.9552367627620697,
+    2.2945318650454283,
+    0.789106011390686
+  ],
+  "depth_height_ratio": 0.34390719231744593,
+  "meshes": 71,
+  "embedded_images": 5,
+  "independent_facial_geometry": [
+    "Curved recorded eye left",
+    "Curved recorded eye right",
+    "Sculpted brow",
+    "Small sculpted nose",
+    "Sculpted smile"
+  ],
+  "skins": 0,
+  "animations": [
+    {
+      "name": "LookTiltReturn",
+      "seconds": 3.6,
+      "tracks": [
+        [
+          "Curved recorded eye left",
+          "weights"
+        ],
+        [
+          "Curved recorded eye right",
+          "weights"
+        ],
+        [
+          "Hair ribbon follow through",
+          "rotation"
+        ],
+        [
+          "Head expression pivot",
+          "rotation"
+        ],
+        [
+          "Sculpted smile",
+          "weights"
+        ],
+        [
+          "Soft tapered face",
+          "weights"
+        ],
+        [
+          "Upper body balance",
+          "rotation"
+        ],
+        [
+          "Upper body balance",
+          "translation"
+        ]
+      ]
+    }
+  ],
+  "status": "exported short gesture; appearance subject to review",
+  "verified_vertex_color_surfaces": [
+    "Flowing open bamboo coat",
+    "Soft bell sleeve -1",
+    "Soft bell sleeve 1",
+    "Central swept fringe",
+    "Left temple curl",
+    "Right raised temple curl"
+  ]
+}
