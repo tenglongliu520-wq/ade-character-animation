@@ -53,6 +53,15 @@ expected = {
 }
 torso = next(node for node in g['nodes'] if node.get('name') == 'Upper body balance')
 assert np.allclose(torso['translation'], [0,1.02,0], atol=1e-4), 'Incorrect neutral hierarchy'
+hands = {node['name']: node for i in torso['children']
+         if (node := g['nodes'][i]).get('name', '').startswith('Relaxed unified hand ')}
+assert set(hands) == {'Relaxed unified hand left', 'Relaxed unified hand right'}
+for side, label in ((1, 'left'), (-1, 'right')):
+    hand = hands['Relaxed unified hand ' + label]
+    accessors = [g['accessors'][p['attributes']['POSITION']]
+                 for p in g['meshes'][hand['mesh']]['primitives']]
+    assert all(side * (a[bound][0] + hand.get('translation', [0, 0, 0])[0]) > 0
+               for a in accessors for bound in ('min', 'max')), label
 observed = set()
 duration = 0
 binary = memoryview(data)[28+n:]

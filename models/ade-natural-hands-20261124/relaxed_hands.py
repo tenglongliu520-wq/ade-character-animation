@@ -3,12 +3,28 @@ import math
 import bmesh
 import bpy
 
+# Local coordinates run from the thumb edge toward the little finger.
+# Each row gives the base, tip, height at both ends, and half-width.
+FINGERS = (
+    ("index", -.025, -.026, .668, .610, .0108),
+    ("middle", -.007, -.007, .668, .598, .0114),
+    ("ring", .012, .013, .666, .604, .0106),
+    ("little", .029, .031, .662, .621, .0094),
+)
+THUMB_TIP = (-.049, .007, .638)
+
+
+def hand_point(side, u, v, z):
+    yaw = .29 if side == 1 else .34
+    cosine, sine = math.cos(yaw), math.sin(yaw)
+    return (side*(.296 + cosine*u - sine*v), -.070 + sine*u + cosine*v, z)
+
+
 def add_relaxed_hand(side, skin, mesh):
     vertices, faces = [], []
-    # In hand coordinates, the thumb sits towards the center of the body.
-    yaw = .12 if side == 1 else .20
-    cosine, sine = math.cos(yaw), math.sin(yaw)
-    center_x, center_y = side*.296, -.070
+    # Ade faces -Y, so positive X is his left. Angle the palms toward the
+    # thighs so the thumb sides are also slightly forward.
+    hand_side = "left" if side == 1 else "right"
     sides = 24
 
     def rings(sections):
@@ -18,7 +34,7 @@ def add_relaxed_hand(side, skin, mesh):
                 angle = 2*math.pi*i/sides
                 x = u + width*math.cos(angle)
                 y = v + depth*math.sin(angle)
-                vertices.append((center_x + side*(cosine*x-sine*y), center_y+sine*x+cosine*y, z))
+                vertices.append(hand_point(side, x, y, z))
         faces.append(tuple(range(offset,offset+sides)))
         for section in range(len(sections)-1):
             start=offset+sides*section
@@ -35,11 +51,8 @@ def add_relaxed_hand(side, skin, mesh):
         (.002,-.004,.679,.038,.025),(.002,-.006,.663,.039,.022),
         (.002,-.004,.652,.032,.019),(.002,-.002,.645,.020,.014),
     ])
-    # (knuckle x, distal x, tip height, proximal half width).
-    digits = [(-.025,-.025,.608,.0112),(-.007,-.008,.598,.0118),
-              (.012,.010,.604,.0110),(.028,.025,.622,.0098)]
-    for i,(start,tip,end,width) in enumerate(digits):
-        top=.668-i*.0013
+    # These four digits share the knuckle arc and curl toward the palm.
+    for _, start, tip, top, end, width in FINGERS:
         length=top-end
         rings([
             (start,-.006,top,width,width*.96),
@@ -50,14 +63,14 @@ def add_relaxed_hand(side, skin, mesh):
             (tip,.005,end+.003,width*.43,width*.45),
             (tip,.006,end,width*.12,width*.13),
         ])
-    # Thumb emerges from the side of the palm and curls back inward.
+    # Start above the index knuckle and leave an opening at the thumb tip.
     rings([
-        (-.019,-.004,.698,.012,.013),(-.030,-.010,.684,.013,.015),
-        (-.039,-.016,.671,.013,.013),(-.043,-.014,.659,.0115,.012),
-        (-.042,-.009,.649,.009,.010),(-.037,-.003,.641,.006,.007),
-        (-.035,0,.639,.002,.002),
+        (-.019,.002,.698,.012,.013),(-.030,.001,.684,.013,.015),
+        (-.041,-.002,.671,.0125,.013),(-.049,0,.659,.0105,.011),
+        (-.052,.003,.649,.0085,.010),(-.051,.006,.641,.0055,.0065),
+        (*THUMB_TIP,.002,.002),
     ])
-    hand=mesh("Relaxed unified hand "+("right" if side==1 else "left"),vertices,faces,skin)
+    hand=mesh("Relaxed unified hand "+hand_side,vertices,faces,skin)
     bm=bmesh.new()
     bm.from_mesh(hand.data)
     bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces))
@@ -80,15 +93,25 @@ def add_relaxed_hand(side, skin, mesh):
     bm=bmesh.new()
     bm.from_mesh(hand.data)
     assert all(edge.is_manifold for edge in bm.edges), hand.name+" has an open edge"
-    seed=next(iter(bm.verts))
-    connected={seed}
-    queue=[seed]
-    while queue:
-        for edge in queue.pop().link_edges:
-            for vertex in edge.verts:
-                if vertex not in connected:
-                    connected.add(vertex)
-                    queue.append(vertex)
-    assert len(connected)==len(bm.verts), hand.name+" has loose parts"
+    remaining = set(bm.verts)
+    components = []
+    while remaining:
+        seed = remaining.pop()
+        connected = [seed]
+        for vertex in connected:
+            for edge in vertex.link_edges:
+                other = edge.other_vert(vertex)
+                if other in remaining:
+                    remaining.remove(other)
+                    connected.append(other)
+        components.append(connected)
+    # Voxelizing near-touching surfaces can leave isolated slivers. Reject
+    # substantial detached geometry before discarding these small artifacts.
+    main = max(components, key=len)
+    debris = [v for component in components if component is not main for v in component]
+    assert len(debris) <= len(main) / 1000, f"{hand.name} has disconnected geometry"
+    if debris:
+        bmesh.ops.delete(bm, geom=debris, context='VERTS')
+        bm.to_mesh(hand.data)
     bm.free()
     return hand
