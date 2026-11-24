@@ -15,15 +15,16 @@ THUMB_TIP = (-.049, .007, .638)
 
 
 def hand_point(side, u, v, z):
-    yaw = .29 if side == 1 else .34
+    # The right palm turns forward so its thumb reads on the outer edge
+    # in the front view. Keep the left hand in its original resting pose.
+    yaw = .29 if side == 1 else 2.72
     cosine, sine = math.cos(yaw), math.sin(yaw)
     return (side*(.296 + cosine*u - sine*v), -.070 + sine*u + cosine*v, z)
 
 
 def add_relaxed_hand(side, skin, mesh):
     vertices, faces = [], []
-    # Ade faces -Y, so positive X is his left. Angle the palms toward the
-    # thighs so the thumb sides are also slightly forward.
+    # Ade faces -Y, so positive X is his left.
     hand_side = "left" if side == 1 else "right"
     sides = 24
 

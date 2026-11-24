@@ -37,7 +37,9 @@ for column, (side, name) in enumerate(((-1, "right"), (1, "left"))):
     surface = BVHTree.FromPolygons(vertices, [face.vertices for face in hand.data.polygons])
     tips = [THUMB_TIP, *((tip, .006, end) for _, _, tip, _, end, _ in FINGERS)]
     positions = [Vector(hand_point(side, *tip)) for tip in tips]
-    assert all(side*a.x < side*b.x for a, b in zip(positions, positions[1:])), name
+    # Facing Ade, screen x follows world x. His right thumb must be the
+    # far-left digit, with the index finger immediately to its right.
+    assert all(a.x < b.x for a, b in zip(positions, positions[1:])), name
     for tip in positions:
         assert surface.find_nearest(tip, .005)[0] is not None, (name, tip)
 
@@ -46,7 +48,7 @@ for column, (side, name) in enumerate(((-1, "right"), (1, "left"))):
     last = Vector(hand_point(side, lateral, depth+.09, notch_height))
     assert surface.ray_cast(first, last-first, .18)[0] is None, f"{name} thumb-index gap is closed"
 
-    for row, direction in enumerate((-1, 1)):
+    for row, direction in enumerate((-1, side)):
         for obj in all_meshes:
             obj.hide_render = row == 1 and obj != hand
         target = Vector(hand_point(side, -.009, 0, .671))
@@ -67,11 +69,11 @@ for column, (side, name) in enumerate(((-1, "right"), (1, "left"))):
             projected = world_to_camera_view(scene, camera, tip)
             px, py = x+projected.x*440, y+(1-projected.y)*440
             label_y = y+395 if number > 1 else py+32
-            label_x = px if number > 1 else px + side*25
+            label_x = px + side*25 if number == 1 else px
             draw.line(((px, py), (label_x, label_y)), fill="#f7ebcf", width=2)
             draw.ellipse((px-3, py-3, px+3, py+3), fill="#f7ebcf")
             draw.ellipse((label_x-12, label_y-12, label_x+12, label_y+12), fill="#f7ebcf")
             draw.text((label_x, label_y), str(number), fill="#263e34", font=number_font, anchor="mm")
 
 sheet.save(root / "hand-order.jpg", quality=93)
-print("Verified two mirrored hands, ten modeled digit tips, and both thumb-index gaps.")
+print("Verified both hands, ten digit tips, both thumb-index gaps, and the outward right thumb.")

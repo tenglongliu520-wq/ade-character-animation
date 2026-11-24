@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "2dd019e4528f8a50dec27f59f0ef4dfc6d6a34c42ed429a2931f406ca440ff26"
+    "sha256": "de5f7c6f322c1193f5b32a75533a8db799398eefbf791036191588ef24a875eb"
   },
   {
     "path": "requirements.txt",
@@ -29,7 +29,7 @@
   },
   {
     "path": "relaxed_hands.py",
-    "sha256": "6f7f673fa579b1a2886a3c70ae59324af498b234bfd46e644ad8aaeca754a842"
+    "sha256": "a68cd47819d265e1474c513aa891778482546b449bb109c7a3d9ecd9c1459a51"
   },
   {
     "path": "prepare_textures.py",
@@ -57,7 +57,7 @@
   },
   {
     "path": "review_hands.py",
-    "sha256": "cfb05aaea93204e88f7bb20ac1ffa022a72e071e143695ff165d48b7468557b0"
+    "sha256": "bf228bd1c434cc855d09a9929c7ef72d1546baa07dc0dbb29e37fe2e128be85a"
   },
   {
     "path": "preview.py",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "89dcba1027c7d3216849544bd4210288e2e7441869be354580823f2f63a3625c"
+    "sha256": "73a972460ed0e9e30752e944ab3968441aa9a86170b30cbcbdafa775e1b6169f"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "0d2d1602074d357cb768f41da5c42e896b53140b6facf5f94c56514311e13b46"
+    "sha256": "3a019998fa720f63bcd4c3839d9ed0c30bdaa8ef4657e631cd8fb612cdb870ff"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "69866930650f530e51966e4fbb7dc9b47bd28a1f64c8b7e2ce91b1c46a09c3bf"
+    "sha256": "9ae60f45fccd03dc69a4fd8abb2d691588e232deabaa2133bccaaafbb72939ea"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "cc1568d1ca9dea8ef03432e539ac9b2a3aa14c6151976dc119fc5c9f532b1e70"
+    "sha256": "aff74c26cd121eb5b7b4d3b4054b543ff85acefdb84139449139169020692ba9"
   },
   {
     "path": "side.png",
-    "sha256": "f7efb83eacff4477f3578654bfc71a37b13ade8fd504d5392318e125b9b20052"
+    "sha256": "c07b3718d2ee8d822cf110ceef7c4017b15a12d0df719acf5271584270251d4b"
   },
   {
     "path": "back.png",
-    "sha256": "1351b3c857eee996beb5d3f60f8eaa206b29110cc210c1838fa7d80fcfbefa99"
+    "sha256": "ba24c0dcd9b4ca1d1c0c93b36c141261fa9102bbbd8998907c12de13aa0379a5"
   },
   {
     "path": "gesture.png",
-    "sha256": "75a2ec5caeeb274ed9dd2902a2e14bfdf3005dac70216cdb531f862763a18304"
+    "sha256": "a0938b0f3f5baa814a13c00af2b5d10ea63c4edb9f5dd34f797bb3444b53e239"
   },
   {
     "path": "blink.png",
-    "sha256": "d7ded96625a81f5d7df5a0f612a98e200b210db9ef77d6ba4c4b36b65effda8c"
+    "sha256": "d01aff568537e5e35eb6f406d1506b9f5921f9c8beec726cbd92f80529c0c379"
   },
   {
     "path": "glance.png",
-    "sha256": "79bc843e6f44d9d19b1e59368a86af22343bddfd2dabbfacb9d22b50428076ae"
+    "sha256": "d0bc4760896a7a2d6dc88d838b4bc5f47cff9281b466df864c7495ccb413db08"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,15 +185,15 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "a1e8fc79c8235ee7e5ed3bb472282a0ca3e9f56017f6a1ab6a9af0db1520aed4"
+    "sha256": "330707eccf175215ea7c90538acdadabc4073f888c8ab8e4847bab50f9d7bfdb"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "093d1f87ab83442879766f166a75fcb35c8218fd01a6aed666e5ea95c7387f49"
+    "sha256": "4dd8e47b1eabdd04c4a6e062b7222db38e0ac0e9dc3178f5f703abe8cdbf3d2f"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "be62643848b431a439394231adc328536fac75895f35c4a761d7ed63ab074da2"
+    "sha256": "8288a4cae61b401c709fc3fb2dd2ddab0995d436934f9e1bb4fb67d9bcfc7558"
   },
   {
     "path": "outline-comparison.jpg",
@@ -201,19 +201,19 @@
   },
   {
     "path": "build-report.json",
-    "sha256": "90ca3989d991accc985a27b53a9d93ead507a79bc22d0208e5169a0f9290e872"
+    "sha256": "5688df97be80ebfbf7f651420a44ed44bb1042d22d3e59e5336ecb0803659e2d"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "52fe187819b62a7584cc5bb342d21556a6a5cb62a06c49275bde768e6b46592f"
+    "sha256": "81296bd55e35a2d372522304d1560a6713c4250ace8b370a4c24c9f5d3e23e2c"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "e0586d9d4aa2fe30f7c94342677a9029365ea4f00aac4883840642508e6b6a87"
+    "sha256": "237de976fbace060331f926334954258f45ee59a4756d326d21417ed7091f5db"
   },
   {
     "path": "hand-order.jpg",
-    "sha256": "023bce33db53c54f2fb62ae1f3ac9d9842d1ed6b11939ef8d89b217e02cd2d01"
+    "sha256": "95dcacda7671256fde3c1c886ee160676c42f21c61a3276d17b3098faf3908fe"
   },
   {
     "path": "vendor/LICENSE",
