@@ -1,0 +1,8 @@
+{
+  "name": "ade-3d-reference-preview",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"validate:gltf": "node validate_gltf.cjs"},
+  "devDependencies": {"gltf-validator": "2.0.0-dev.3.10"}
+}

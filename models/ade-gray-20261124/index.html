@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>阿德 · 浅灰内搭试色</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f6f4ed;color:#213c30;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:24px}h1{font-size:26px;margin:0}p{margin:8px 0 20px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}figure{margin:0;background:#17161b;border-radius:18px;overflow:hidden}figure img{display:block;width:100%;height:600px;object-fit:contain}figcaption{padding:10px 16px;color:#fff}#stage{height:600px}#stage canvas{width:100%;height:100%;display:block;touch-action:none}nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}button,a{font:inherit;color:inherit}button{padding:8px 20px;border:1px solid #99a79a;border-radius:20px;background:white;cursor:pointer}button:disabled{opacity:.45}.note{padding:18px;background:#fff4d5;border-radius:14px}a{margin-right:18px}@media(max-width:650px){main{padding:16px}.compare{grid-template-columns:1fr}figure img,#stage{height:480px}h1{font-size:23px}}</style>
+<main><h1>阿德 · 浅灰内搭试色</h1><p>点选正面或左右斜侧对照录屏原帧。拖动模型旋转，滚轮缩放。</p>
+<div class="compare"><figure><img src="reference-front.png" alt="用户录屏中的阿德正面参考"><figcaption>录屏原帧 · 目标形象</figcaption></figure><figure><div id="stage"></div><figcaption id="status">正在加载形象修订候选…</figcaption></figure></div>
+<nav aria-label="模型观察角度"><button disabled data-view="front">正面对照</button><button disabled data-view="rightQuarter">右侧对照</button><button disabled data-view="leftQuarter">左侧对照</button><button disabled data-view="side">侧面</button><button disabled data-view="back">背面</button></nav>
+<section aria-label="短动作">
+  <button id="play" disabled>播放「看过来」</button>
+  <button id="pose" disabled>看笑容定格</button>
+  <button id="portrait" disabled>脸部特写</button>
+  <label for="timeline">动作进度</label>
+  <input id="timeline" type="range" min="0" max="0" value="0" step="0.01" disabled>
+</section>
+<p class="note">浅灰试色覆盖内搭、领口、袖口内侧和裤脚。</p>
+<a href="ade.glb" download>下载三维 GLB</a><a href="garment-gray-comparison.jpg">奶白与浅灰对照</a><a href="multi-view-comparison.jpg">多角度对照</a><a href="outline-comparison.jpg">轮廓叠加对照</a></main>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+<script type="module" src="./expression-preview.js"></script>
+</html>
