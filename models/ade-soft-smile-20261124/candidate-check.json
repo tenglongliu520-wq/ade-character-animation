@@ -1,0 +1,105 @@
+{
+  "bytes": 9233524,
+  "sha256": "d5451ae1828d01024776ad9d4b16e9b4a3d3faf03da0505b3f87f249e4f797ab",
+  "dimensions_gltf_y_up": [
+    0.9552367627620697,
+    2.2945318650454283,
+    0.789106011390686
+  ],
+  "depth_height_ratio": 0.34390719231744593,
+  "meshes": 100,
+  "embedded_images": 5,
+  "independent_facial_geometry": [
+    "Curved recorded eye left",
+    "Curved recorded eye right",
+    "Sculpted brow",
+    "Small sculpted nose",
+    "Sculpted smile"
+  ],
+  "skins": 0,
+  "animations": [
+    {
+      "name": "LookTiltReturn",
+      "seconds": 3.6,
+      "tracks": [
+        [
+          "Closed lash left",
+          "weights"
+        ],
+        [
+          "Closed lash right",
+          "weights"
+        ],
+        [
+          "Curved recorded eye left",
+          "weights"
+        ],
+        [
+          "Curved recorded eye right",
+          "weights"
+        ],
+        [
+          "Hair ribbon follow through",
+          "rotation"
+        ],
+        [
+          "Head expression pivot",
+          "rotation"
+        ],
+        [
+          "Lower eyelid left",
+          "weights"
+        ],
+        [
+          "Lower eyelid right",
+          "weights"
+        ],
+        [
+          "Sculpted brow -1",
+          "weights"
+        ],
+        [
+          "Sculpted brow 1",
+          "weights"
+        ],
+        [
+          "Sculpted smile",
+          "weights"
+        ],
+        [
+          "Soft open smile",
+          "weights"
+        ],
+        [
+          "Soft tapered face",
+          "weights"
+        ],
+        [
+          "Upper body balance",
+          "rotation"
+        ],
+        [
+          "Upper body balance",
+          "translation"
+        ],
+        [
+          "Upper eyelid left",
+          "weights"
+        ],
+        [
+          "Upper eyelid right",
+          "weights"
+        ]
+      ]
+    }
+  ],
+  "status": "exported short gesture; appearance subject to review",
+  "verified_vertex_color_surfaces": [
+    "Flowing open bamboo coat",
+    "Soft bell sleeve -1",
+    "Soft bell sleeve 1",
+    "Central swept fringe",
+    "Left temple curl",
+    "Right raised temple curl"
+  ]
+}
