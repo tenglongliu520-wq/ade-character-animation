@@ -1,0 +1,32 @@
+{
+  "method": "Recorded eye color with local gaze deformation, eyelid occlusion, unequal brow lifts, cheek squint and soft open smile.",
+  "parts": 88,
+  "vertices": 248992,
+  "textures": [
+    "recorded eye crops",
+    "authored blush",
+    "recorded fabric motifs blended with authored cloth"
+  ],
+  "skin_palette": {
+    "base_srgb": [
+      251,
+      221,
+      209
+    ],
+    "inner_ear_srgb": [
+      246,
+      187,
+      178
+    ],
+    "blush_srgb": [
+      251,
+      151,
+      141
+    ]
+  },
+  "inner_cloth_srgb": "cfdcd8",
+  "decoration": "fitted bamboo embroidery",
+  "hands": "two closed connected hand meshes with curled fingers",
+  "status": "relaxed hand sculpt",
+  "hidden_back": "inferred"
+}
