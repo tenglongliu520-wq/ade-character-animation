@@ -1,0 +1,12 @@
+{
+  "method": "Recorded eye color with local gaze deformation, eyelid occlusion, unequal brow lifts, cheek squint and soft open smile.",
+  "parts": 78,
+  "vertices": 223991,
+  "textures": [
+    "recorded eye crops",
+    "authored blush",
+    "recorded fabric motifs blended with authored cloth"
+  ],
+  "status": "animated expression revision",
+  "hidden_back": "inferred"
+}

@@ -1,0 +1,222 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "8db4012157e271d0beddb9f4a117899f49bd3bc6c6ec36199fc7d0be30c10a9b"
+  },
+  {
+    "path": "requirements.txt",
+    "sha256": "c71307e6276a290b5e4070160baf7f09a3ef8153c28804293b2b10ea9e3bba65"
+  },
+  {
+    "path": "recording_details.py",
+    "sha256": "d59d8f915aee046f492d35d18437a90df0f984e92d55ee5b3f35a82c93277540"
+  },
+  {
+    "path": "fit_details.py",
+    "sha256": "31546734148d3f7ef32898bb974b882f4933dbfcd54317b054a0265be94da58a"
+  },
+  {
+    "path": "expression_motion.py",
+    "sha256": "b2534f9aa403139129ff9c12fe44c5272e4d7b07c9694c89aa043ef827292290"
+  },
+  {
+    "path": "facial_expression.py",
+    "sha256": "1eccf20e4c0ce9ec2031d230d0eb2e26d1b4454f7d28fec90aefe2def3136e63"
+  },
+  {
+    "path": "prepare_textures.py",
+    "sha256": "1638907f7f7d34dd732c9c7a59213f413872a94113087fded7b35f1cd235c83a"
+  },
+  {
+    "path": "build_refined.py",
+    "sha256": "e0a55da2e28455011672ef41fac20b05825bdfba1df23c44321d3dad8c11aed3"
+  },
+  {
+    "path": "render_outline.py",
+    "sha256": "e50e7c166eee246f109e4d44e3686a9b5e514de499046c67e71a4fe0f6b6ef12"
+  },
+  {
+    "path": "make_comparison.py",
+    "sha256": "bfe831186226771c11480cc04f78711566e141e11892a1f9378793e5bb22cc3d"
+  },
+  {
+    "path": "verify_candidate.py",
+    "sha256": "1f06e793333f651b19d7ff274f22c9181331058182f82957244868aa84663c68"
+  },
+  {
+    "path": "validate_gltf.cjs",
+    "sha256": "eeec7f46085bcb5a5523596f28f1ce04dae89ab3dd4af9ae7d028cd7d19b6688"
+  },
+  {
+    "path": "preview.py",
+    "sha256": "64086fbc406decfc153b52982357ce2a6e482bd69f950b6f243dd1a77cd41506"
+  },
+  {
+    "path": "avatar-3d.js",
+    "sha256": "cd660db07691db563c0434def1125bd93fb450654287a942529990c71c0b0d9b"
+  },
+  {
+    "path": "expression-preview.js",
+    "sha256": "e915c39fb66cd85a5de8ed930c1d9d76f3d20151727ab90980fca5ba10874ebb"
+  },
+  {
+    "path": "index.html",
+    "sha256": "4b3bd43152ccaf7f41e24bf0531bf5572cb0b66579b980feb94a70458d955a25"
+  },
+  {
+    "path": "package.json",
+    "sha256": "612a91b4f372f091c14f7e4e31d8aebffe97ba8dda919fa427f66bc2bdfb7548"
+  },
+  {
+    "path": "source-geometry.glb",
+    "sha256": "22e2bcd93d0d053106a38dbc4328f8b3fcce716809f0e0d48700db672308c7aa"
+  },
+  {
+    "path": "ade.glb",
+    "sha256": "e9a942b435e67df7119749c2d6f40ad2e3f18690e577eb16e592790456db181f"
+  },
+  {
+    "path": "reference-front.png",
+    "sha256": "2d4dddbe7b59b97aafb0cc858c78afd79e7cb764dadb4ce3a56990290168bb4c"
+  },
+  {
+    "path": "reference-right.png",
+    "sha256": "9b874bd132ab99f20ca508745e294e5c17c26f1f08e0a323c63eb3c6afd8259a"
+  },
+  {
+    "path": "reference-left.png",
+    "sha256": "2860c0621b38aa90d5014aa19d8abfe8c0d0ceafe4b93eca2f49346d6db2ee50"
+  },
+  {
+    "path": "previous-front.png",
+    "sha256": "4833a48ddc6ec6d80177d7318514c73e64a73987283ca1816b8522f0f82a9e47"
+  },
+  {
+    "path": "previous-quarter.png",
+    "sha256": "60814fabd620d8aeb106e2576d6613f92f358614e69cb8d1a9195d78e37f8cb8"
+  },
+  {
+    "path": "hair-color.png",
+    "sha256": "2ec527bb26aa75d6b7685aa5bebb17d52ab03981837f5b43ff51e2c8b912f310"
+  },
+  {
+    "path": "inferred-rear-hair.png",
+    "sha256": "0a0a710feb99e2cf973216f69198f0b712b2a5d84b194eae59b7403f2d3f52f1"
+  },
+  {
+    "path": "skin-blush.png",
+    "sha256": "c12a4dbff42e91f22ba0b1f100fd0958d632101e439a6a2b02fae1301efd8adb"
+  },
+  {
+    "path": "eye-left.png",
+    "sha256": "2814650f98780c8f0a50e212a91f5ad9c42cb74c9ed181573bc23f07905a0365"
+  },
+  {
+    "path": "eye-right.png",
+    "sha256": "0ee502879fc33a992e4979fa09b9e1a39adb879b7c22fd09322c93b10ca67150"
+  },
+  {
+    "path": "bamboo-cloth.png",
+    "sha256": "fa45c9d066a0029eb433b7d6f26be23d4f2b070e3bae9e9285eaa7b487612c20"
+  },
+  {
+    "path": "bamboo-sash.png",
+    "sha256": "10cc4bc5310c4f5c7d7bb9b147afaa1304de9bb2b4316a9bf46b4967493ab0cc"
+  },
+  {
+    "path": "recorded-fabric.png",
+    "sha256": "19b500fa42527fd9f8e81ddcd96434a69e34d288ebe461ca0d812ad923786467"
+  },
+  {
+    "path": "front.png",
+    "sha256": "4458b0f4c0d2db7bd6ed68e08de6a54641c21fbf63e3649e2cb4f338a194f5e2"
+  },
+  {
+    "path": "quarter-right.png",
+    "sha256": "6da895d83d7cc388d16a42fd7da3f3cb3e4dd80c2fc0894467cbfc72e8246fc6"
+  },
+  {
+    "path": "quarter-left.png",
+    "sha256": "dfe84d841c4f51419febf961e918c4d386d7adf88d47519e324b5a9e608e843c"
+  },
+  {
+    "path": "side.png",
+    "sha256": "3e18557d84b5b3d2e07dffa087eb29b14514bdafdfd29cce8b385092e74af373"
+  },
+  {
+    "path": "back.png",
+    "sha256": "d2a3967a1450ee838fce29c4c594c664c317be1962dcdee32c204e6f17237460"
+  },
+  {
+    "path": "gesture.png",
+    "sha256": "92552eeda918c72a5b51c114288ee665de918e9942ab4582f485479447582b64"
+  },
+  {
+    "path": "blink.png",
+    "sha256": "c51d23e695f65cf528d013f75dc9d5a2ef0efdd081111414d8081748fd431a5d"
+  },
+  {
+    "path": "glance.png",
+    "sha256": "2fab2355feb9d51938d29662640c8976582d244d94bd48dd74152eb7081eda1d"
+  },
+  {
+    "path": "expression-comparison.jpg",
+    "sha256": "29e4d47c7c71b9a5079a9cb833b6acca3174994782d9a8640ba121b87e8f7a01"
+  },
+  {
+    "path": "comparison.jpg",
+    "sha256": "bf97719ea9ef7acc2c4538a0d199d01d105aaeddaba8c9eea84e6da8f5122752"
+  },
+  {
+    "path": "multi-view-comparison.jpg",
+    "sha256": "5e086139aa1e3f0be162b571d3cb879a3652d731e6a072eb13455f66dc5d1597"
+  },
+  {
+    "path": "outline-comparison.jpg",
+    "sha256": "e52f8621a05d6cf867481a85b5c684557ed78ef8dce9a3739209f00cb92f8a5b"
+  },
+  {
+    "path": "build-report.json",
+    "sha256": "1e150cce3806892ad38acdd410636e9e726efef0ae0fff5509f8a5c549d7fb6e"
+  },
+  {
+    "path": "candidate-check.json",
+    "sha256": "51abf8075ba9e3382acbf761025367f4481505717413a6681c5ab11fb179fb12"
+  },
+  {
+    "path": "gltf-validation.json",
+    "sha256": "14b9a69bdb95938715c090817abea50371871490b6dc640e56b1c81bb7e66fd7"
+  },
+  {
+    "path": "vendor/LICENSE",
+    "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+  },
+  {
+    "path": "vendor/three.core.js",
+    "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+  },
+  {
+    "path": "vendor/three.module.js",
+    "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+  },
+  {
+    "path": "vendor/VERSION",
+    "sha256": "3a381f606ed1406de0e1ad104aa0716dea598ee47831be583f01177a24e5e69e"
+  },
+  {
+    "path": "vendor/controls/OrbitControls.js",
+    "sha256": "e7fca2fe9e7670a828af9b28084669a5909445b7f36f1f26cee9bf8f2961c32c"
+  },
+  {
+    "path": "vendor/loaders/GLTFLoader.js",
+    "sha256": "532ac726e120039acbcd6cf54328c57acbf7b438176afaa6951257126d11bff1"
+  },
+  {
+    "path": "vendor/utils/BufferGeometryUtils.js",
+    "sha256": "7bda2a8ba836b2bcf67cb938d4b9e1bb5d1b1bc616817103ed858c0b58296ce7"
+  },
+  {
+    "path": "vendor/utils/SkeletonUtils.js",
+    "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+  }
+]
