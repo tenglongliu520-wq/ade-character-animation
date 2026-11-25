@@ -9,6 +9,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 from expression_motion import adopt, pivot
+from relaxed_hands import add_relaxed_hand
 
 
 ROOT = Path(__file__).resolve().parent
@@ -156,6 +157,18 @@ def animate_shapes(obj, values, baked=False):
     add_track(data, obj.name + ' dance', baked=baked)
 
 
+def extend_hand_into_sleeve(side, hand):
+    def replace_mesh(name, vertices, faces, skin):
+        geometry = bpy.data.meshes.new(name)
+        geometry.from_pydata(vertices, [], faces)
+        geometry.materials.append(skin)
+        geometry.update()
+        hand.data = geometry
+        return hand
+
+    add_relaxed_hand(side, hand.data.materials[0], replace_mesh, forearm=True)
+
+
 def add_arm_shapes(obj, elbow, bends):
     world = obj.matrix_world.copy()
     inverse = world.inverted()
@@ -168,7 +181,7 @@ def add_arm_shapes(obj, elbow, bends):
             flex = t*t*(3-2*t)
             rotation = Matrix.Rotation(math.radians(-angle*flex), 3, 'X')
             vertex.co = inverse @ (elbow + rotation @ (point-elbow))
-    # Use one continuous blend for sleeve, cuff and hand, even as flex
+    # Use one continuous blend for sleeve, cuff and arm, even as flex
     # crosses the original pose boundaries.
     ratios = [(beat,min(1,max(0,value/66))) for beat,value in bends]
     animate_shapes(obj, {
@@ -262,8 +275,10 @@ def build_dance():
         bpy.context.view_layer.update()
         delay = .14+index*.075
         bends = [(beat,curves['bend',index](phased(beat,delay))) for beat in beats]
+        hand_name = f'Relaxed unified hand {label}'
+        extend_hand_into_sleeve(side, bpy.data.objects[hand_name])
         arm_names = [f'{part} {side}' for part in ('Soft bell sleeve','Inner cuff facing','Thin cuff seam')]
-        arm_names.append(f'Relaxed unified hand {label}')
+        arm_names.append(hand_name)
         for name in arm_names:
             obj = bpy.data.objects[name]
             add_arm_shapes(obj, elbow_point, bends)

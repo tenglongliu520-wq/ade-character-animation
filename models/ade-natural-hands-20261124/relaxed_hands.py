@@ -22,11 +22,12 @@ def hand_point(side, u, v, z):
     return (side*(.296 + cosine*u - sine*v), -.070 + sine*u + cosine*v, z)
 
 
-def add_relaxed_hand(side, skin, mesh):
+def add_relaxed_hand(side, skin, mesh, *, forearm=False):
     vertices, faces = [], []
     # Ade faces -Y, so positive X is his left.
     hand_side = "left" if side == 1 else "right"
     sides = 24
+    hand_drop = .058 if forearm else 0
 
     def rings(sections):
         offset = len(vertices)
@@ -45,8 +46,21 @@ def add_relaxed_hand(side, skin, mesh):
         start=offset+(len(sections)-1)*sides
         faces.append(tuple(reversed(range(start,start+sides))))
 
+    # Start inside the sleeve and taper continuously to the palm.
+    arm_sections = [
+        (.137,-.006,1.20,.028,.029),
+        (.125,-.012,1.18,.036,.037),
+        (.104,-.020,1.12,.043,.037),
+        (.076,-.030,1.06,.043,.036),
+        (.057,-.035,.99,.042,.035),
+        (.043,-.038,.91,.037,.032),
+        (.019,-.023,.84,.033,.028),
+        (.008,-.012,.78,.027,.024),
+        (.001,-.001,.736,.020,.020),
+    ]
+    arm_sections = [(u, v, z+hand_drop, w, d) for u, v, z, w, d in arm_sections] if forearm else []
     # Rounded trapezoid palm, with a narrow wrist and a flat knuckle arc.
-    rings([
+    rings(arm_sections + [
         (-.002,.007,.758,.016,.016),(-.001,.006,.734,.020,.020),
         (0,.003,.713,.025,.023),(.001,-.003,.695,.033,.025),
         (.002,-.004,.679,.038,.025),(.002,-.006,.663,.039,.022),
@@ -88,6 +102,10 @@ def add_relaxed_hand(side, skin, mesh):
     smooth.factor=.65
     smooth.iterations=4
     bpy.ops.object.modifier_apply(modifier=smooth.name)
+    if forearm:
+        simplify = hand.modifiers.new("Reduce dense voxel triangles for playback", 'DECIMATE')
+        simplify.ratio = .38
+        bpy.ops.object.modifier_apply(modifier=simplify.name)
     for face in hand.data.polygons:
         face.use_smooth=True
 
@@ -110,9 +128,12 @@ def add_relaxed_hand(side, skin, mesh):
     # substantial detached geometry before discarding these small artifacts.
     main = max(components, key=len)
     debris = [v for component in components if component is not main for v in component]
-    assert len(debris) <= len(main) / 1000, f"{hand.name} has disconnected geometry"
+    assert len(debris) <= len(main) / 1000, f"{hand.name} has {len(debris)} disconnected vertices"
     if debris:
         bmesh.ops.delete(bm, geom=debris, context='VERTS')
         bm.to_mesh(hand.data)
     bm.free()
+    if forearm:
+        for vertex in hand.data.vertices:
+            vertex.co.z -= hand_drop
     return hand

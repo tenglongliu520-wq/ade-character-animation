@@ -2,7 +2,7 @@
   "uri": "ade-rowing.glb",
   "mimeType": "model/gltf-binary",
   "validatorVersion": "2.0.0-dev.3.10",
-  "validatedAt": "2026-11-25T08:55:01.725Z",
+  "validatedAt": "2026-11-25T09:14:11.739Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -29,7 +29,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 18439068
+        "byteLength": 20890236
       },
       {
         "pointer": "/images/0",
@@ -91,8 +91,8 @@
     "hasTextures": true,
     "hasDefaultScene": true,
     "drawCallCount": 93,
-    "totalVertexCount": 260205,
-    "totalTriangleCount": 516349,
+    "totalVertexCount": 282901,
+    "totalTriangleCount": 561741,
     "maxUVs": 1,
     "maxInfluences": 0,
     "maxAttributes": 3
