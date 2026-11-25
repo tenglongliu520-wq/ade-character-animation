@@ -7,7 +7,7 @@ import bpy,bmesh,math,json,random,argparse
 from mathutils import Vector
 from PIL import Image,ImageDraw
 from recording_details import EYES, EYE_CROPS, SKIN_RGB, INNER_EAR_RGB
-from fit_details import hair_lock, recorded_coordinates, smooth_samples
+from fit_details import add_hair_tip_shape, hair_lock, recorded_coordinates, smooth_samples
 from expression_motion import add_acknowledgment, PEAK
 from bamboo_embroidery import add_bamboo
 from relaxed_hands import add_relaxed_hand
@@ -163,7 +163,10 @@ for o in raw:
  for v in bm.verts:
   x,y,z=v.co;px=max(0,min(719,round(302+x*376)));py=max(0,min(949,round(915-z*376)));r,g,b=ref.getpixel((px,py));hairpixel=45<r<220 and r>g*1.20 and r>b*1.35;mint=g>110 and g>r*.97 and g>b*1.03
   accessory=(x>.30 and y>.015 and z<1.96) or (z>2.05 and cap_mask.getpixel((px,py)))
-  if accessory or ((z<1.64 or (z<1.81 and not hairpixel)) if y<.11 else z<1.59):remove.append(v)
+  # Recess the imported central edge behind the newly swept hairline.
+  forehead_cut=1.70+.187*math.exp(-(x/.145)**4)
+  exposed_fringe=y<-.135 and z<forehead_cut
+  if accessory or exposed_fringe or ((z<1.64 or (z<1.81 and not hairpixel)) if y<.11 else z<1.59):remove.append(v)
   elif z>2.21 and x>-.05:
    # Only the narrow former cap attachment needs to be tucked under the fabric.
    v.co.z=2.21+(z-2.21)*.14
@@ -173,18 +176,48 @@ use_vertex_color(hair_surface,"HairColor")
 
 # Width and depth are fitted independently so the tips keep volume from the side.
 fringe_controls = {
- "Central swept fringe": [(250,154,-.178,.018,.021),(263,196,-.270,.030,.028),
-  (266,232,-.305,.032,.025),(273,258,-.301,.026,.019),
-  (285,279,-.283,.016,.012),(306,282,-.255,.001,.003)],
- "Left temple curl": [(168,202,-.145,.035,.023),(156,232,-.164,.033,.033),
-  (146,250,-.147,.031,.027),(155,274,-.132,.025,.018),(174,294,-.129,.003,.004)],
- "Right raised temple curl": [(388,168,-.118,.020,.019),(419,190,-.132,.035,.024),
-  (443,203,-.121,.027,.018),(461,207,-.095,.014,.011),(479,188,-.071,.001,.003)],
+ "Soft parted hairline": [(274,185,-.226,.026,.029),(294,197,-.265,.040,.033),
+  (316,209,-.267,.040,.021),(337,208,-.261,.043,.024),(362,208,-.247,.031,.023)],
+ "Central swept fringe": [(234,147,-.198,.020,.023),(252,174,-.251,.040,.035),
+  (265,207,-.281,.044,.034),(274,237,-.289,.039,.029),
+  (277,259,-.295,.029,.020),(287,279,-.302,.016,.013),(311,285,-.292,.001,.002)],
+ "Inner fringe wisp": [(259,192,-.248,.019,.023),(260,224,-.276,.029,.025),
+  (249,250,-.290,.023,.015),(253,272,-.294,.012,.008),(276,290,-.289,.001,.002)],
+ "Swept left front lock": [(274,153,-.223,.021,.026),(237,169,-.253,.045,.035),
+  (218,199,-.274,.050,.036),(202,228,-.267,.036,.025),
+  (184,257,-.222,.028,.019),(156,268,-.179,.015,.012),(136,251,-.145,.001,.002)],
+ "Swept right front lock": [(310,155,-.188,.018,.024),(334,178,-.226,.046,.035),
+  (351,209,-.260,.044,.035),(358,238,-.268,.036,.024),
+  (373,268,-.247,.023,.015),(394,293,-.203,.001,.003)],
+ "Left temple curl": [(208,196,-.176,.025,.020),(185,225,-.211,.036,.027),
+  (163,257,-.181,.035,.026),(147,274,-.136,.023,.017),
+  (153,289,-.121,.013,.011),(173,291,-.122,.001,.002)],
+ "Right cheek sweep": [(360,175,-.179,.022,.025),(384,206,-.219,.040,.033),
+  (403,240,-.217,.039,.028),(424,261,-.182,.028,.020),
+  (455,268,-.136,.014,.011),(476,251,-.093,.001,.002)],
+ "Right raised temple curl": [(388,166,-.118,.022,.019),(419,190,-.134,.034,.024),
+  (444,207,-.128,.028,.021),(464,209,-.100,.012,.012),(481,190,-.071,.001,.002)],
+ "Left temple hairline taper": [(174,239,-.171,.023,.020),(168,265,-.166,.032,.026),
+  (174,290,-.142,.022,.016),(185,308,-.122,.013,.010),(202,324,-.118,.001,.002)],
+ "Right temple hairline taper": [(403,230,-.177,.023,.025),(414,254,-.159,.031,.024),
+  (424,279,-.132,.024,.017),(428,295,-.114,.014,.010),(416,316,-.115,.001,.002)],
 }
+tip_movement = {
+ "Central swept fringe": ((.011,-.008,.010),0),
+ "Swept left front lock": ((-.014,-.010,.015),1),
+ "Swept right front lock": ((.010,-.009,.013),2),
+ "Left temple curl": ((-.012,-.006,.013),3),
+ "Right raised temple curl": ((.016,-.006,.015),4),
+}
+moving_hair=[]
 for name,controls in fringe_controls.items():
  vertices,faces=hair_lock(controls)
  lock=mesh(name,vertices,faces,hair_surface)
  bake_hair_color(lock,recorded_hair,inferred_hair)
+ if name in tip_movement:
+  delta,delay=tip_movement[name]
+  add_hair_tip_shape(lock,delta)
+  moving_hair.append((lock,delay))
 # The visible side curls turn under the cap toward the nape. The rear ends are
 # inferred because the recordings show the ears and temples at oblique angles.
 for sign in (-1,1):
@@ -407,7 +440,7 @@ for o in PARTS:
  for mod in list(o.modifiers):bpy.ops.object.modifier_apply(modifier=mod.name)
  if not any(m and m.use_nodes and any(n.type=='TEX_IMAGE' for n in m.node_tree.nodes) for m in o.data.materials):
   for layer in list(o.data.uv_layers):o.data.uv_layers.remove(layer)
-controls=add_acknowledgment(PARTS,HEAD_PARTS,eye_groups,brow_meshes,smile,smile_open,head)
+controls=add_acknowledgment(PARTS,HEAD_PARTS,eye_groups,brow_meshes,smile,smile_open,head,moving_hair)
 assert abs(controls[0].matrix_world.translation.z-1.02)<.001, "Torso lost its neutral transform"
 bpy.ops.object.select_all(action='DESELECT')
 for o in PARTS+controls:o.select_set(True)

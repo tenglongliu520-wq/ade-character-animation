@@ -57,7 +57,7 @@ def animate_shapes(obj, tracks):
     stash_action(data, obj.name + " stroke")
 
 
-def add_acknowledgment(parts, head_parts, eye_groups, brows, smile, mouth, face):
+def add_acknowledgment(parts, head_parts, eye_groups, brows, smile, mouth, face, moving_hair):
     # Head attaches above the collar. Lower legs remain planted in this gesture.
     torso = pivot("Upper body balance", (0,0,1.02))
     head = pivot("Head expression pivot", (0,0,.335), torso)
@@ -112,6 +112,11 @@ def add_acknowledgment(parts, head_parts, eye_groups, brows, smile, mouth, face)
     animate_shapes(mouth,{"smile":smile_keys,"smileOpen":[(1,0),(35,0),(43,.61),(51,1),(59,.89),
                                      (65,.33),(69,0),(END,0)]})
     animate_shapes(face,{"cheekLift":smile_keys})
+    for lock, delay in moving_hair:
+        animate_shapes(lock, {'tipFollow': [
+            (1, 0), (10, 0), (22+delay, .38), (33+delay, .09),
+            (47+delay, .95), (56+delay, .55), (66+delay, .16), (88, 0), (END, 0),
+        ]})
     scene = bpy.context.scene
     scene.render.fps = FPS
     scene.frame_start = 1

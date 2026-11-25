@@ -1,13 +1,13 @@
 {
-  "bytes": 10196876,
-  "sha256": "72ba8444d12e87ca4f4217f34a3c912956c4d46e3d65c937636fae5978e3f27f",
+  "bytes": 10351048,
+  "sha256": "0d774470ac6f32596ef912b611db3178c5419856090ca0d2f10e7500802b3a4f",
   "dimensions_gltf_y_up": [
-    0.9552367627620697,
+    0.9604960680007935,
     2.2945318650454283,
     0.789106011390686
   ],
   "depth_height_ratio": 0.34390719231744593,
-  "meshes": 86,
+  "meshes": 93,
   "embedded_images": 5,
   "independent_facial_geometry": [
     "Curved recorded eye left",
@@ -22,6 +22,10 @@
       "name": "LookTiltReturn",
       "seconds": 3.6,
       "tracks": [
+        [
+          "Central swept fringe",
+          "weights"
+        ],
         [
           "Closed lash left",
           "weights"
@@ -47,11 +51,19 @@
           "rotation"
         ],
         [
+          "Left temple curl",
+          "weights"
+        ],
+        [
           "Lower eyelid left",
           "weights"
         ],
         [
           "Lower eyelid right",
+          "weights"
+        ],
+        [
+          "Right raised temple curl",
           "weights"
         ],
         [
@@ -72,6 +84,14 @@
         ],
         [
           "Soft tapered face",
+          "weights"
+        ],
+        [
+          "Swept left front lock",
+          "weights"
+        ],
+        [
+          "Swept right front lock",
           "weights"
         ],
         [
@@ -101,6 +121,9 @@
     "Central swept fringe",
     "Left temple curl",
     "Right raised temple curl",
+    "Swept left front lock",
+    "Swept right front lock",
+    "Soft parted hairline",
     "Soft ear -1",
     "Soft ear 1"
   ]

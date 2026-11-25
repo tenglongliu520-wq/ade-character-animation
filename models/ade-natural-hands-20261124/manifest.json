@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "9301fd797409bb92f311becf2781d9b750dd0de9cfd9b51483bd2f1e4898db70"
+    "sha256": "46dd8d2ab47f2c9c910d545037542f74f92bc99b6692f612017ffa50a6ac2138"
   },
   {
     "path": "requirements.txt",
@@ -13,11 +13,11 @@
   },
   {
     "path": "fit_details.py",
-    "sha256": "31546734148d3f7ef32898bb974b882f4933dbfcd54317b054a0265be94da58a"
+    "sha256": "594bc36ef60df7c104bd84ff995482f93a174abbbb03905c349cd39f6c39afa5"
   },
   {
     "path": "expression_motion.py",
-    "sha256": "4f346260a41c81fdea7b8213241c2827c4f26f9fca5f1826ee83567e76c33c56"
+    "sha256": "f67c1a9d50437e0d87734ae59edd1b407be57a0b0e35e93baa9dbacb4acd8d5a"
   },
   {
     "path": "facial_expression.py",
@@ -37,7 +37,7 @@
   },
   {
     "path": "build_refined.py",
-    "sha256": "67dd523e534ca949dce07fcf87c4a62b4a8a6de652ffabcc18c1fb4e13e51e52"
+    "sha256": "67d027bc86a5b7d2d1f75be76b6faa925b99ef6ffe37903bfa9fc79ad683ba51"
   },
   {
     "path": "render_outline.py",
@@ -49,7 +49,7 @@
   },
   {
     "path": "verify_candidate.py",
-    "sha256": "b856a9cfc1923547356c939b8829fc3833b8a39e2eb2f5d5dc9a3290c85d6d34"
+    "sha256": "0acf7366e3c974babc8b9ba56f1ae55f977f68514ea371270759329a334e7f7a"
   },
   {
     "path": "validate_gltf.cjs",
@@ -73,7 +73,7 @@
   },
   {
     "path": "index.html",
-    "sha256": "4386e840969a3028a154437749aab352b16586dbdbd049ea438f2573fffa4231"
+    "sha256": "d9bf226840d6a98b532cb74ddae6cf207d92b905689f0d04e2f45c4b22627ff8"
   },
   {
     "path": "package.json",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "72ba8444d12e87ca4f4217f34a3c912956c4d46e3d65c937636fae5978e3f27f"
+    "sha256": "0d774470ac6f32596ef912b611db3178c5419856090ca0d2f10e7500802b3a4f"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "412382ca5ac8a09f610f2ecd011a2ace4a626a923e29cf19da986ee4bee4807c"
+    "sha256": "06e4a5790b0a8e33e9ec2579edbde267ab12b18c36b453b91b50818b9d22e738"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "381fa085755119e47b11092a401d086a95e6d7508c8394f214977bc4e00bc2f9"
+    "sha256": "f8cf84af1a625b171ab8f1e257799297195e2a87134091c8458cd8a356f786c3"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "71036edc925f9932d8e158381ee5e1e3a8d8a436fc3c7cb0aa5f1d8d3fd4d42a"
+    "sha256": "86f37d634e50bae7d71ee59acfc16d8da09d0522b68fd6f02c01c459bee0235c"
   },
   {
     "path": "side.png",
-    "sha256": "919cddb6eb9722160a6325b0debee275e0aa7c2977fa1775feef42610fc6c10a"
+    "sha256": "6c6f12a6c01fdf1188042a3f3c18c6f78a12a8ed18c43342d3de5b652cbbac12"
   },
   {
     "path": "back.png",
-    "sha256": "15dfe46641335f1585c9720af4d7f0853b375b022b6a7b512b7ed4c15da475ca"
+    "sha256": "e116f53ef07405874028585784f25308ab87d930294bd87a7c296d59d2d1c8dc"
   },
   {
     "path": "gesture.png",
-    "sha256": "e75271f78e4f8d654eceb33042f627e459c81d27d4c6c6dc715ee7030374f2c4"
+    "sha256": "61c0a4f6f38fa4b9d4875e1360c2976db0f62bbf69a45a60a0acec0eb8498b45"
   },
   {
     "path": "blink.png",
-    "sha256": "6afe15fcd262ad3d2c200ed3316e2ed7ec04b54159e29d467feedb91f3df1bf3"
+    "sha256": "da43e54979b321b00c188b5418b3bb4b70070271fbae15d8c263fb98a9e405fd"
   },
   {
     "path": "glance.png",
-    "sha256": "5f2b7096498a59495abefd069b4162e090be985c9038d8ccc46ddef2706011ee"
+    "sha256": "0feaafd757e30dbb3ee990c53ae47e60703e73ab2c30dc5db40889706511e3a7"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,31 +185,31 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "7d517a5b154f1b15b4268c1c545220fc12221a858b9f5cdacbe7bbf69ec6c2fd"
+    "sha256": "4e31c9503abb03c90d3baf2be045f0eaea396efe568d7f0a9b65fcb267bfd1fe"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "9df2c5d422945edd5c6b9b88739cbd62af23685a2e031f0483d482b50effb56f"
+    "sha256": "55635c4671b958ae6de61918816ff7d6e4780d019788951279477fad9eeb6791"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "c41411488e0ce1381ae18062de5ce00d1c852f4c3ec51403e5a037b25cfb45d1"
+    "sha256": "1fbdf8dd08db1ada4a22278bf4fb225f4129a858ab70b771d20ea8bb4ccf605b"
   },
   {
     "path": "outline-comparison.jpg",
-    "sha256": "636befaf27a3a86ca5607d1ec301ab5b2362abb85fd81132dc036c098521b765"
+    "sha256": "219918f1360e795b660d79c8e9f75a863001bac4de5d17faeb82c65fc0f58fb6"
   },
   {
     "path": "build-report.json",
-    "sha256": "c2bd791a7295e033ab3d6d4fb6245a1281d34c0ce9c5b0f76b5158f8cb0ca439"
+    "sha256": "6eae645b71f2c9523b647cc6030a9b12eafd22784309d61d6c08d0b50c3810b6"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "8af90a82c45731cf513cf03bb868873c4199809bddc7edf76e609b5b7bf43023"
+    "sha256": "aa7123d465ad39e50db13fa03b03af1a05446f5137965933f9552bcb30f147c9"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "f3073933689571a24d7c461e9a8698c1b75aff635e2cc68d43a081b922beb7d2"
+    "sha256": "c58e9f0557c54dfeae6aa1d9c4687bdefe52eeca04360e911b34dcc7295708ee"
   },
   {
     "path": "hand-order.jpg",
@@ -222,6 +222,10 @@
   {
     "path": "ear-comparison.jpg",
     "sha256": "6d729ca6f172e941ba8f9edbc8b4ae978904f71c316466ff3e9f8a5c2278f165"
+  },
+  {
+    "path": "hair-flow-comparison.jpg",
+    "sha256": "b292e874c1265c83f24213bede11bd220ae6ec9b09b0071acc1a4334dd878b1b"
   },
   {
     "path": "vendor/LICENSE",

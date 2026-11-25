@@ -29,9 +29,13 @@ assert 2.25<dims[1]<2.36 and dims[2]/dims[1]>.20,'Incorrect neutral pose height'
 names=[n.get('name','') for n in g['nodes'] if 'mesh' in n]
 features=['Curved recorded eye left','Curved recorded eye right','Sculpted brow','Small sculpted nose','Sculpted smile']
 assert all(any(name.startswith(feature) for name in names) for feature in features),'Separate facial geometry missing'
+moving_hair = {
+    'Central swept fringe', 'Swept left front lock', 'Swept right front lock',
+    'Left temple curl', 'Right raised temple curl',
+}
 colored_surfaces = [
     'Flowing open bamboo coat', 'Soft bell sleeve -1', 'Soft bell sleeve 1',
-    'Central swept fringe', 'Left temple curl', 'Right raised temple curl',
+    *sorted(moving_hair), 'Soft parted hairline',
     'Soft ear -1', 'Soft ear 1',
 ]
 for name in colored_surfaces:
@@ -39,7 +43,13 @@ for name in colored_surfaces:
     primitives = g['meshes'][node['mesh']]['primitives']
     assert all('COLOR_0' in primitive['attributes'] for primitive in primitives), name
 head = next(node for node in g['nodes'] if node.get('name') == 'Head expression pivot')
-assert {'Soft ear -1', 'Soft ear 1'}.issubset(g['nodes'][i].get('name') for i in head['children'])
+head_children = {g['nodes'][i].get('name') for i in head['children']}
+assert {'Soft ear -1', 'Soft ear 1', 'Soft parted hairline'} | moving_hair <= head_children
+for node in (node for node in g['nodes'] if node.get('name') in moving_hair):
+    for primitive in g['meshes'][node['mesh']]['primitives']:
+        target, = primitive['targets']
+        delta = g['accessors'][target['POSITION']]
+        assert all(max(abs(low), abs(high)) > .004 for low, high in zip(delta['min'], delta['max'])), node['name']
 assert not any(name.startswith('Inner ear ') for name in names)
 assert 'Single folded pale sage cap' in names
 clip, = g['animations']
@@ -55,6 +65,7 @@ expected = {
     ('Sculpted brow -1','weights'), ('Sculpted brow 1','weights'),
     ('Soft open smile','weights'),
 }
+expected.update((name, 'weights') for name in moving_hair)
 torso = next(node for node in g['nodes'] if node.get('name') == 'Upper body balance')
 assert np.allclose(torso['translation'], [0,1.02,0], atol=1e-4), 'Incorrect neutral hierarchy'
 hands = {node['name']: node for i in torso['children']

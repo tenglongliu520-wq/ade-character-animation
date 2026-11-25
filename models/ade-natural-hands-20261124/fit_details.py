@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent
+HAIR_LOCK_SIDES = 16
 
 # The interiors stay clear of skin, the ivory lining, the sash and background.
 CLOTH_PANELS = (
@@ -68,7 +69,7 @@ def hair_lock(controls):
         points.append(Vector((x,depth,z,width,thickness)))
     samples = list(smooth_samples(points))
     vertices, faces = [], []
-    sides = 16
+    sides = HAIR_LOCK_SIDES
     for i, value in enumerate(samples):
         center = Vector(value[:3])
         direction = Vector(samples[min(i+1,len(samples)-1)][:3]) - Vector(samples[max(i-1,0)][:3])
@@ -86,6 +87,20 @@ def hair_lock(controls):
                 faces.append((a,b,b+sides,a+sides))
     faces.extend([tuple(reversed(range(sides))), tuple(range(len(vertices)-sides,len(vertices)))])
     return vertices, faces
+
+
+def add_hair_tip_shape(lock, movement):
+    """Flex the free end along the sweep while keeping the root anchored."""
+    from mathutils import Vector
+
+    lock.shape_key_add(name='Basis')
+    tip = lock.shape_key_add(name='tipFollow')
+    last_ring = len(tip.data) // HAIR_LOCK_SIDES - 1
+    delta = Vector(movement)
+    for index, vertex in enumerate(tip.data):
+        along = (index // HAIR_LOCK_SIDES) / last_ring
+        free_end = max(0, (along-.25)/.75)
+        vertex.co += delta * free_end**2
 
 if __name__ == "__main__":
     prepare_fabric()
