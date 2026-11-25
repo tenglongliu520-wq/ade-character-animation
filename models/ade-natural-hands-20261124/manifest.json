@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "56e0921f7ce5e6dc08d29bf418f1e1b6ca729f8af7628fe40a8a62462f9a15dc"
+    "sha256": "4ad636d97670a29106ffb45bc5965f99c4d5e8ad4db7efe2f0b88b786f9c0c6b"
   },
   {
     "path": "requirements.txt",
@@ -21,7 +21,7 @@
   },
   {
     "path": "facial_expression.py",
-    "sha256": "0e83581a6b833f5b5299f20c4d9671956d133299061b922ba506fcf78e1b0d0b"
+    "sha256": "5c77189e406b65d18fa7d0a331af95f91100b09a608c9e80f5fca6ab3f6547f6"
   },
   {
     "path": "bamboo_embroidery.py",
@@ -37,7 +37,7 @@
   },
   {
     "path": "build_refined.py",
-    "sha256": "1109d11750a2a92c7fc091327b909a51b4c9041c3a4d427f48255db1b907e738"
+    "sha256": "50c9755f6abb1c17cbb5f3d2ce4ea55f920360fc7fc05fe13a6ee3c8be0045a9"
   },
   {
     "path": "render_outline.py",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "14bb21325062598747de9ccb272dbf9700d60ba1659542caa1546f218b95d966"
+    "sha256": "9fa1db0e31065b953ffc37dcf31fc70f695bd1a3f833408f605ca227a35b7138"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "1df35192ca446da00f4d25ddf4b140c34009aaf59b68a3f59511009b77d67549"
+    "sha256": "cb7bd8ed2ef9c1c3c3b72756f42ba6839c7a44ac0ec32a918d8516e3b0daffbb"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "62785649a2517d463854d04fa248770dd5b45cd2b5ed8298c4643e01a01df6c3"
+    "sha256": "a5cc4c535fcbf8d909445ad4caf45bdf4c333e2152dbb90e3f82be49a328bb29"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "89c3b925d925cebfa6b2795507728f91c4dfae1ff2c8324ab1c7c82ab22ea407"
+    "sha256": "91561426bfde64a2b24434b720c77a84317357302cf17ad993e8250d85f70362"
   },
   {
     "path": "side.png",
-    "sha256": "9cb3145fb33f391de55443c586bca0aea02d38f5cf2fbaf0292bb97866f75b36"
+    "sha256": "9166933964f6b34d4094fa34d3b9f74eff979d95d0e19d9cc1d173e742f8423e"
   },
   {
     "path": "back.png",
-    "sha256": "1742f2679690bb237eac51218e19cf71b9481301f600dcc8c00ebb40d8dc0dea"
+    "sha256": "344ce560821d180ea8302168963e714404bad4e9e40021cb6bae1ef830c020cb"
   },
   {
     "path": "gesture.png",
-    "sha256": "4c5629dba1cc46a31d6b0e8e4ead0e2b109eab48a96050eddbf8bd52ef562601"
+    "sha256": "5b0bdbcd884c5c994c1c4b2fefeaaa53d182304787a946bdc47072a240276ae6"
   },
   {
     "path": "blink.png",
-    "sha256": "0ac5b7c94fd9718b041641529b477d55f90bb48971412a60566211cc6554aa70"
+    "sha256": "9f84d047c1ff0de584556fd1aae5d75f387143803883a12051f9634ff2ff0976"
   },
   {
     "path": "glance.png",
-    "sha256": "eaeb785f2b8298caab57b55b624baeb526972c01292973eb20d88f2f9521b74c"
+    "sha256": "57d13f48fa2c4dc3ac04f891697238da585e4686d2e9dae53887e276a6d4eecc"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,15 +185,15 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "00fa582b318ec4dac3b81c3f432415db1429ddb4e33bd77b3b669a50eb1759cc"
+    "sha256": "9ff972fded8f1b323f1a78e3987ea993feb3aed488c9ce61bf8c66005842fca3"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "5bcd5740d8ee6a637d8c5ff3952e10ff32575cfb2021b9559a0baf3d81030c73"
+    "sha256": "98dbea715546a23155635f1887cae20b1fa0080b6a285d96d00f87170ca953fc"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "8dc7d6ccac0777fdfd0b153a05cdbd92cd3f53b82ffa271bd048cff2ddb28e7d"
+    "sha256": "b005da109d951c119ec3f367c5eb1d36cafc3667dcda691d0fc6c4f29e7c92c9"
   },
   {
     "path": "outline-comparison.jpg",
@@ -201,15 +201,15 @@
   },
   {
     "path": "build-report.json",
-    "sha256": "cdfc57b28a5548ad25fab0c1a4e0db9ec6be4e67fc2eae3176c4667c0338fd73"
+    "sha256": "53e2700edba073f7bcd177d833a9838a543c9e04c0f302a2c55bc738f426a351"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "3dd9fa3c21979e49108edd36c43701c7b5dd35d397453e99001a5dfa125c61d1"
+    "sha256": "93ed59d48a1a3784a1bc8a883adf456b3486ce34b4a0061bc94a40917e56c394"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "112f7401a20cc6a729cfe478a31a2aece6e1f0baf62f6f34b0dbd56785df65b2"
+    "sha256": "283fffac6bdd24a6529b9aecad4d8cebc60ba716da92326dbdb199ebec7b5661"
   },
   {
     "path": "hand-order.jpg",
@@ -246,6 +246,10 @@
   {
     "path": "ear-shape-comparison.jpg",
     "sha256": "a608bd2ab02e69191150c54dcd24c178a3dc6ebf465976a5d3d682188cabd87f"
+  },
+  {
+    "path": "face-symmetry-comparison.jpg",
+    "sha256": "3692fff9acc1afbce7169a85d87335c8e57f4fb0c50f7a9fe756378db4aec419"
   },
   {
     "path": "vendor/LICENSE",

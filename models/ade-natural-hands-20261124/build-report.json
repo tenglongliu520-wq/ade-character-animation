@@ -1,9 +1,9 @@
 {
-  "method": "Recorded eye color with local gaze deformation, eyelid occlusion, unequal brow lifts, cheek squint and soft open smile.",
+  "method": "Recorded eye color with local gaze deformation, eyelid occlusion, synchronous mirrored brow lifts, cheek squint and soft open smile.",
   "parts": 93,
   "vertices": 259963,
   "textures": [
-    "recorded eye crops",
+    "shared recorded eye crop",
     "authored blush",
     "recorded fabric motifs blended with authored cloth"
   ],

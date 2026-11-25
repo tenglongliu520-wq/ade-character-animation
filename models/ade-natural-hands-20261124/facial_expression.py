@@ -6,7 +6,7 @@ iris proportions as the aperture decreases.
 import math
 
 
-def add_gaze(eye, radii, side, face_depth):
+def add_gaze(eye, radii, face_depth):
     eye.shape_key_add(name="Basis")
     neutral = eye.data.shape_keys.key_blocks["Basis"].data
     for name, direction in (("glanceLeft", -1), ("glanceRight", 1)):
@@ -14,8 +14,7 @@ def add_gaze(eye, radii, side, face_depth):
         for vertex, rest, radius in zip(target.data, neutral, radii):
             weight = (1 - radius**3)**1.5
             x, y, z = rest.co
-            outer = (side == "right") == (direction > 0)
-            new_x=x+direction*(.015 if outer else .012)*weight
+            new_x=x+direction*.0135*weight
             new_z=z+(.0015 if direction<0 else .003)*weight
             vertex.co=(new_x,y+face_depth(new_x,new_z)-face_depth(x,z),new_z)
 
@@ -86,12 +85,12 @@ def lid_meshes(name, outline, mesh, face_depth, skin, lash_color):
     return lids,lash
 
 
-def brow_expression(brow, side, face_depth):
+def brow_expression(brow, face_depth):
     brow.shape_key_add(name="Basis")
     raised=brow.shape_key_add(name="curiousLift")
     for vertex in raised.data:
         x,y,z=vertex.co
-        lift=(.009 if side==-1 else .016)+.003*math.cos((abs(x)-.13)*23)
+        lift=.0125+.003*math.cos((abs(x)-.13)*23)
         vertex.co=(x,y+face_depth(x,z+lift)-face_depth(x,z),z+lift)
 
 

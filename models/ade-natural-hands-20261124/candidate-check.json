@@ -1,6 +1,6 @@
 {
-  "bytes": 10713852,
-  "sha256": "14bb21325062598747de9ccb272dbf9700d60ba1659542caa1546f218b95d966",
+  "bytes": 10689304,
+  "sha256": "9fa1db0e31065b953ffc37dcf31fc70f695bd1a3f833408f605ca227a35b7138",
   "dimensions_gltf_y_up": [
     0.9604960680007935,
     2.2945318650454283,
@@ -8,7 +8,7 @@
   ],
   "depth_height_ratio": 0.34390719231744593,
   "meshes": 93,
-  "embedded_images": 5,
+  "embedded_images": 4,
   "independent_facial_geometry": [
     "Curved recorded eye left",
     "Curved recorded eye right",

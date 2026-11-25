@@ -287,8 +287,8 @@ for vertex in cheek_lift.data:
  strength=math.exp(-((abs(x)-.165)/.077)**2-((z+FACE_Z-1.486)/.049)**2)*min(1,-y/.18)
  vertex.co.y-=.005*strength
  vertex.co.z+=.013*strength
-def recorded_eye(name, contour, crop):
- """Trace the observed eye and wrap its recorded color over a curved surface."""
+def recorded_eye(name, contour, crop, placement, side, eye_material):
+ """Place a shared eye trace and color map on either side of the face."""
  corners = [Vector(p) for p in contour]
  center = sum(corners, Vector((0, 0))) / len(corners)
  boundary = []
@@ -298,9 +298,13 @@ def recorded_eye(name, contour, crop):
    t = step / 5
    boundary.append(.5 * (2*point + (end-prev)*t + (2*prev-5*point+4*end-after)*t*t + (-prev+3*point-3*end+after)*t**3))
  vertices, faces, uv, radii = [], [], [], []
+ def placed_pixel(point):
+  px,py=point+placement
+  return (px if side<0 else 604-px,py)
+
  def add_pixel(point, radius):
   px, py = point
-  x, z = (px-302)/376, (915-py)/376
+  x, z = recorded_coordinates(*placed_pixel(point))
   y = face_y(x,z) - .0018 - .0048*(1-radius*radius)
   vertices.append((x,y,z))
   radii.append(radius)
@@ -319,10 +323,11 @@ def recorded_eye(name, contour, crop):
    a=1+ring*count+j
    b=1+ring*count+(j+1)%count
    faces.append((a,b,b+count,a+count))
- mat=material(f"Recorded {name} iris and lash color","ffffff",.72,texture=f"eye-{name}.png")
- eye=mesh(f"Curved recorded eye {name}",vertices,faces,mat,uv)
- add_gaze(eye,radii,name,face_y)
- lids,lash=lid_meshes(name,boundary,mesh,face_y,FACE,LASH)
+ if side>0:
+  faces=[tuple(reversed(face)) for face in faces]
+ eye=mesh(f"Curved recorded eye {name}",vertices,faces,eye_material,uv)
+ add_gaze(eye,radii,face_y)
+ lids,lash=lid_meshes(name,[placed_pixel(point) for point in boundary],mesh,face_y,FACE,LASH)
  return eye,lids,lash
 
 def sculpt_ear(side):
@@ -393,17 +398,27 @@ def sculpt_ear(side):
 
 EAR.name='Ear skin with soft inner tint'
 use_vertex_color(EAR,'EarColor')
-eye_groups=[recorded_eye(name,contour,EYE_CROPS[name]) for name,contour in EYES.items()]
-brow_meshes=[]
-brow_traces=[[(216,290),(229,286),(241,286),(252,290)],
-             [(329,292),(340,288),(351,287),(363,292)]]
+def contour_midpoint(contour):
+ return Vector(tuple((min(axis)+max(axis))/2 for axis in zip(*contour)))
+
+left_eye_center=contour_midpoint(EYES['left'])
+right_eye_center=contour_midpoint(EYES['right'])
+eye_midpoint=(left_eye_center+right_eye_center)/2
+eye_placement=Vector((302-eye_midpoint.x,eye_midpoint.y-left_eye_center.y))
+eye_material=material('Shared recorded iris and lash color','ffffff',.72,texture='eye-left.png')
+eye_groups=[recorded_eye(name,EYES['left'],EYE_CROPS['left'],eye_placement,side,eye_material)
+            for name,side in (('left',-1),('right',1))]
+
 for side in (-1,1):
  sculpt_ear(side)
- coordinates=[recorded_coordinates(px,py) for px,py in brow_traces[int(side>0)]]
- taper=(.14,.69,1,.58) if side<0 else (.61,1,.76,.14)
- brow=curve('Sculpted brow '+str(side),[(x,face_y(x,z)-.002,z) for x,z in coordinates],.0105,BROW,taper)
- brow_expression(brow,side,face_y)
- brow_meshes.append(brow)
+brow_trace=[(228.5,291),(241,286.5),(252.5,287),(263.5,291)]
+coordinates=[recorded_coordinates(px,py) for px,py in brow_trace]
+left_brow=curve('Sculpted brow -1',[(x,face_y(x,z)-.002,z) for x,z in coordinates],.0105,BROW,(.14,.72,1,.59))
+right_brow=mesh('Sculpted brow 1',[(-v.co.x,v.co.y,v.co.z) for v in left_brow.data.vertices],
+                [tuple(reversed(face.vertices)) for face in left_brow.data.polygons],BROW)
+brow_meshes=[left_brow,right_brow]
+for brow in brow_meshes:
+ brow_expression(brow,face_y)
 sphere('Small sculpted nose',(0,face_y(0,1.486)+.005,1.486),(.016,.013,.012),SKIN)
 smile,smile_open=friendly_smile(mesh,face_y,LIP,material('Soft rose mouth interior','a87573'))
 HEAD_PARTS=set(PARTS)
@@ -582,7 +597,7 @@ w=scene.world;w.use_nodes=True;n=w.node_tree.nodes;l=w.node_tree.links;n['Backgr
 for name,loc,power,size,color in [('Warm key',(-2.8,-3.1,4.4),115,3.0,(1,.88,.78)),('Face fill',(2.5,-3,2.9),42,4.2,(.94,.96,1)),('Hair rim',(1.5,2.0,3.8),85,2.5,(1,.87,.69))]:
  d=bpy.data.lights.new(name,'AREA');d.energy=power;d.size=size;d.color=color;o=bpy.data.objects.new(name,d);scene.collection.objects.link(o);o.location=loc;o.rotation_euler=(Vector((0,0,1.55))-o.location).to_track_quat('-Z','Y').to_euler()
 d=bpy.data.cameras.new('Inspection camera');cam=bpy.data.objects.new('Inspection camera',d);scene.collection.objects.link(cam);d.type='ORTHO';d.ortho_scale=2.526;scene.camera=cam;cam.location=(0,-5,1.17);cam.rotation_euler=(Vector((0,0,1.17))-cam.location).to_track_quat('-Z','Y').to_euler();bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'ade.blend'))
-report={'method':'Recorded eye color with local gaze deformation, eyelid occlusion, unequal brow lifts, cheek squint and soft open smile.','parts':len(PARTS),'vertices':sum(len(o.data.vertices) for o in PARTS),'textures':['recorded eye crops','authored blush','recorded fabric motifs blended with authored cloth'],'skin_palette':{'base_srgb':SKIN_RGB,'inner_ear_srgb':INNER_EAR_RGB,'blush_srgb':(251,151,141)},'inner_cloth_srgb':'cfdcd8','decoration':'fitted bamboo embroidery','hands':'two closed connected hand meshes with curled fingers','status':'relaxed hand sculpt','hidden_back':'inferred'}
+report={'method':'Recorded eye color with local gaze deformation, eyelid occlusion, synchronous mirrored brow lifts, cheek squint and soft open smile.','parts':len(PARTS),'vertices':sum(len(o.data.vertices) for o in PARTS),'textures':['shared recorded eye crop','authored blush','recorded fabric motifs blended with authored cloth'],'skin_palette':{'base_srgb':SKIN_RGB,'inner_ear_srgb':INNER_EAR_RGB,'blush_srgb':(251,151,141)},'inner_cloth_srgb':'cfdcd8','decoration':'fitted bamboo embroidery','hands':'two closed connected hand meshes with curled fingers','status':'relaxed hand sculpt','hidden_back':'inferred'}
 (ROOT/'build-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8')
 views=[('front',(0,-5,1.17)),('quarter-right',(-3,-5,1.4)),('quarter-left',(3,-5,1.4)),('side',(5,0,1.17)),('back',(0,5,1.17))]
 if args.quick:views=[views[0],views[2]];scene.cycles.samples=24
