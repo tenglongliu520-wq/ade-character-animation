@@ -15,9 +15,9 @@ THUMB_TIP = (-.049, .007, .638)
 
 
 def hand_point(side, u, v, z):
-    # The right palm turns forward so its thumb reads on the outer edge
-    # in the front view. Keep the left hand in its original resting pose.
-    yaw = .29 if side == 1 else 2.72
+    # Reflect the same forward-facing palm pose across the body centerline.
+    # Both thumbs sit on the outer edges when Ade faces the viewer.
+    yaw = 2.72
     cosine, sine = math.cos(yaw), math.sin(yaw)
     return (side*(.296 + cosine*u - sine*v), -.070 + sine*u + cosine*v, z)
 
