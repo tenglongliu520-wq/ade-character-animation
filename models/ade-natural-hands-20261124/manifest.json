@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "a5841f30ce118b657b81052dea8c532f04b9de0b17d02e2096f40ff4dc01b991"
+    "sha256": "56e0921f7ce5e6dc08d29bf418f1e1b6ca729f8af7628fe40a8a62462f9a15dc"
   },
   {
     "path": "requirements.txt",
@@ -37,7 +37,7 @@
   },
   {
     "path": "build_refined.py",
-    "sha256": "bf6137f34585b83279328afdf246a131c03ed1f311ff3c3adedfc2d3dbefd241"
+    "sha256": "1109d11750a2a92c7fc091327b909a51b4c9041c3a4d427f48255db1b907e738"
   },
   {
     "path": "render_outline.py",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "1075f7b3e114ad08045d0f348b27fca9c21e9b9528c990290fd4b26ff1601e85"
+    "sha256": "14bb21325062598747de9ccb272dbf9700d60ba1659542caa1546f218b95d966"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "92207b7d13294c4602d711a906f231b7e2af3a501a4a79ce43e9920007b14002"
+    "sha256": "1df35192ca446da00f4d25ddf4b140c34009aaf59b68a3f59511009b77d67549"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "9b98875955f1ac521fc343ff7124a411f0015d87707ca9b89ddcf2f4619de2b8"
+    "sha256": "62785649a2517d463854d04fa248770dd5b45cd2b5ed8298c4643e01a01df6c3"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "5e5cb4eeaaa8b7bf3d029e8fa80d76e383190385badd60512db68bb5132856fc"
+    "sha256": "89c3b925d925cebfa6b2795507728f91c4dfae1ff2c8324ab1c7c82ab22ea407"
   },
   {
     "path": "side.png",
-    "sha256": "3fc2439cf27e6bd408ad43542c8db853bb0d697c5f4256df66f04544fe4dbe24"
+    "sha256": "9cb3145fb33f391de55443c586bca0aea02d38f5cf2fbaf0292bb97866f75b36"
   },
   {
     "path": "back.png",
-    "sha256": "2c97898b5de69b89d09d84d71ce54938ed0a8aaad312db4fb0d1426bacfd6fda"
+    "sha256": "1742f2679690bb237eac51218e19cf71b9481301f600dcc8c00ebb40d8dc0dea"
   },
   {
     "path": "gesture.png",
-    "sha256": "bf649684efc65e11f76ecf205f866423daad865b27d14247ecfaf24fd53e62de"
+    "sha256": "4c5629dba1cc46a31d6b0e8e4ead0e2b109eab48a96050eddbf8bd52ef562601"
   },
   {
     "path": "blink.png",
-    "sha256": "3bb62d41566ff5c567ed0b99d72a10b3465528a4ceaee5a4d986e721fa9c40a8"
+    "sha256": "0ac5b7c94fd9718b041641529b477d55f90bb48971412a60566211cc6554aa70"
   },
   {
     "path": "glance.png",
-    "sha256": "8fd2164823f63f107739e017ab6d08369be41e765a4d752755d9147fae258a8d"
+    "sha256": "eaeb785f2b8298caab57b55b624baeb526972c01292973eb20d88f2f9521b74c"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,31 +185,31 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "1d406e0a14289a3536fdf6e2088128168545992dec97db2faea460ff78e6d552"
+    "sha256": "00fa582b318ec4dac3b81c3f432415db1429ddb4e33bd77b3b669a50eb1759cc"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "f373aa1307f8e86e6b21e9afd4e21997b5536b82db0206f4489fad033677627c"
+    "sha256": "5bcd5740d8ee6a637d8c5ff3952e10ff32575cfb2021b9559a0baf3d81030c73"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "18729d8b9e95e84d978a8e8572778eccf7830b020510e907723335f061175c77"
+    "sha256": "8dc7d6ccac0777fdfd0b153a05cdbd92cd3f53b82ffa271bd048cff2ddb28e7d"
   },
   {
     "path": "outline-comparison.jpg",
-    "sha256": "0c276ad429b78004301e9bd09a2ffc7efabe9f1cf66cfd8ca62b106c70a12586"
+    "sha256": "a42c76783b7d1c5133c688a93232d534fe71ea5e5292871ce4b39eb9eb2e61c6"
   },
   {
     "path": "build-report.json",
-    "sha256": "52e748ab09ea8e973d718eba7106d847e8884b37ade340f2441bbff442bcb7f8"
+    "sha256": "cdfc57b28a5548ad25fab0c1a4e0db9ec6be4e67fc2eae3176c4667c0338fd73"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "0586b1b686c12245b1cd9960311ae72585ee7f3960df8612cff6195a41f5f950"
+    "sha256": "3dd9fa3c21979e49108edd36c43701c7b5dd35d397453e99001a5dfa125c61d1"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "914357c22c76f0ce19769164388eafe3c9abfc72cd8b6ba4dd515e8cbc7aa0e0"
+    "sha256": "112f7401a20cc6a729cfe478a31a2aece6e1f0baf62f6f34b0dbd56785df65b2"
   },
   {
     "path": "hand-order.jpg",
@@ -242,6 +242,10 @@
   {
     "path": "neck-collar-comparison.jpg",
     "sha256": "f17c61f2abef7d44e6831dbdac063fdf70f572aafa53035abd5d1b6c2ba2acf0"
+  },
+  {
+    "path": "ear-shape-comparison.jpg",
+    "sha256": "a608bd2ab02e69191150c54dcd24c178a3dc6ebf465976a5d3d682188cabd87f"
   },
   {
     "path": "vendor/LICENSE",

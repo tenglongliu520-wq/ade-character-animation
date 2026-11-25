@@ -326,28 +326,69 @@ def recorded_eye(name, contour, crop):
  return eye,lids,lash
 
 def sculpt_ear(side):
- """Fit a continuous outer rim, shallow bowl, and tapered earlobe."""
- width,depth,height=.062,.052,.060
- ear=sphere('Soft ear '+str(side),(side*.285,-.013,1.529),(width,depth,height),EAR,64,48)
+ """Trace the pinna and sculpt the helix, concha, and lobule as one mesh."""
+ outline=[
+  (.017,.061),(.039,.074),(.061,.073),(.086,.057),(.103,.039),
+  (.108,.017),(.100,-.010),(.085,-.033),(.063,-.052),(.040,-.058),
+  (.018,-.047),(.004,-.027),(-.003,-.003),(-.006,.023),(.002,.045),
+ ]
+ knots=[Vector(point) for point in outline]
+ steps=6
+ boundary=list(smooth_samples([knots[-1],*knots,knots[0],knots[1]],steps))[steps:steps*(len(knots)+1)]
+ center=Vector((.061,-.003))
+ vertices,faces,tints=[],[],[]
+
+ def add_vertex(position,radius,front):
+  outward,z=position
+  thickness=math.sqrt(max(0,1-radius*radius))
+  ear_plane=-.014+.25*(outward-.061)+.05*z
+  tint=0
+  if front:
+   concha=math.exp(-((outward-.073)/.027)**2-((z+.003)/.037)**2)
+   helix=math.exp(-((radius-.78)/.155)**2)
+   upper=max(.28,min(1,(z+.055)/.075))
+   fold=math.exp(-((outward-(.058+.25*z))/.010)**2-((z-.008)/.032)**2)
+   crease=math.exp(-((outward-(.077+.18*z))/.009)**2-((z-.006)/.028)**2)
+   tragus=math.exp(-((outward-.030)/.012)**2-((z+.016)/.014)**2)
+   # Roll the outer rim forward. The interior dips behind it before
+   # rising at the inner fold and the small ridge next to the cheek.
+   relief=.044-.028*concha+.024*helix*upper+.013*fold-.007*crease+.006*tragus
+   y=ear_plane-thickness*relief
+   tint=min(.90,(concha*(.63-.30*fold)+.30*crease)*min(1,thickness*1.65))
+  else:
+   y=ear_plane+.035*thickness
+  vertices.append((side*(.237+outward),y,1.531+z))
+  tints.append(tint)
+  return len(vertices)-1
+
+ edge=[add_vertex(point,1,False) for point in boundary]
+ segments=len(edge)
+ rings=24
+ for front in (True,False):
+  pole=add_vertex(center,0,front)
+  previous=None
+  for ring in range(1,rings+1):
+   radius=math.sin(PI*ring/(2*rings))
+   current=edge if ring==rings else [
+    add_vertex(center.lerp(point,radius),radius,front) for point in boundary
+   ]
+   for i in range(segments):
+    j=(i+1)%segments
+    face=(pole,current[i],current[j]) if previous is None else (previous[i],current[i],current[j],previous[j])
+    faces.append(tuple(reversed(face)) if (side<0)==front else face)
+   previous=current
+
+ ear=mesh('Soft ear '+str(side),vertices,faces,EAR)
  colors=ear.data.color_attributes.new(name='EarColor',type='FLOAT_COLOR',domain='POINT')
  ear.data.color_attributes.active_color=colors
- cosine,sine=math.cos(.24),math.sin(.24)
- for vertex,color in zip(ear.data.vertices,colors.data):
-  x,y,z=vertex.co
-  outward=side*x/width
-  vertical=z/height
-  radius=math.hypot((outward-.49+.10*vertical)/.36,(vertical-.09)/.57)
-  front=max(0,min(1,-y/.036))
-  front=front*front*(3-2*front)
-  bowl=front*math.exp(-radius*radius)
-  rim=front*math.exp(-((radius-1.12)/.29)**2)
-  # Angle the ear to show the rim and bowl in the three-quarter view.
-  local_x=side*x+.008*vertical-.007*vertical*vertical
-  local_y=y+.017*bowl-.0035*rim
-  vertex.co.x=side*(cosine*local_x-sine*local_y)
-  vertex.co.y=sine*local_x+cosine*local_y
-  tint=.84*bowl
+ for color,tint in zip(colors.data,tints):
   color.color_srgb=tuple((base*(1-tint)+inner*tint)/255 for base,inner in zip(SKIN_RGB,INNER_EAR_RGB))+(1,)
+ topology=bmesh.new()
+ topology.from_mesh(ear.data)
+ assert all(edge.is_manifold for edge in topology.edges), 'Ear rim must be a continuous closed surface'
+ bmesh.ops.recalc_face_normals(topology,faces=list(topology.faces))
+ topology.to_mesh(ear.data)
+ topology.free()
  return ear
 
 EAR.name='Ear skin with soft inner tint'
