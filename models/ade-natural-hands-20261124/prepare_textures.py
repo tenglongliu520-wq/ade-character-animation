@@ -2,9 +2,23 @@
 from pathlib import Path
 from collections import deque
 from PIL import Image,ImageDraw,ImageFilter
-import numpy as np,random,math
+import numpy as np,random,math,sys
 from recording_details import SKIN_RGB
 ROOT=Path(__file__).resolve().parent
+
+def write_skin_blush():
+ yy,xx=np.indices((950,720))
+ skin=np.empty((950,720,3),float)
+ skin[:]=SKIN_RGB
+ for cx,cy in ((223,363),(378,366)):
+  weight=.52*np.exp(-((xx-cx)/34)**2-((yy-cy)/21)**2)
+  skin=skin*(1-weight[:,:,None])+np.array((251,151,141))*weight[:,:,None]
+ Image.fromarray(np.uint8(skin)).resize((1024,1024),Image.Resampling.LANCZOS).save(ROOT/'skin-blush.png')
+
+if sys.argv[1:]==['--skin-only']:
+ write_skin_blush()
+ raise SystemExit(0)
+
 raw=np.asarray(Image.open(ROOT/'reference-front.png').convert('RGB')).copy();a=raw.astype(float)
 y,x=np.indices(a.shape[:2]);valid=(y<310)&(y>60)&(x>125)&(x<485)&(a[:,:,0]>55)&(a[:,:,0]<220)&(a[:,:,0]>a[:,:,1]*1.22)&(a[:,:,0]>a[:,:,2]*1.4)
 seen=valid.copy();q=deque(zip(*np.where(valid)))
@@ -21,11 +35,7 @@ yy,xx=np.indices((512,512));nx=(xx-256)/256;nz=(256-yy)/256;rad=np.sqrt(nx*nx+nz
 for k,(low,high) in enumerate(zip((61,38,35),(174,111,62))):ar[:,:,k]=low+(high-low)*f
 Image.fromarray(np.uint8(ar)).save(ROOT/'iris-brown.png')
 # A continuous skin field with blush only. Eyes, eyebrows and smile are geometry.
-yy,xx=np.indices((950,720));arr=np.zeros((950,720,3),float);arr[:]=SKIN_RGB
-for cx,cy in ((226,356),(370,360)):
- g=np.exp(-((xx-cx)/36)**2-((yy-cy)/22)**2)*.43
- arr=arr*(1-g[:,:,None])+np.array((251,151,141))*g[:,:,None]
-Image.fromarray(np.uint8(arr)).resize((1024,1024),Image.Resampling.LANCZOS).save(ROOT/'skin-blush.png')
+write_skin_blush()
 W=1536;rng=random.Random(1120);im=Image.new('RGB',(W,W),(177,197,174));d=ImageDraw.Draw(im)
 for xx in range(0,W,3):d.line((xx,0,xx,W),fill=(177+rng.randint(-2,2),197+rng.randint(-2,2),174+rng.randint(-2,2)))
 for k in range(22):

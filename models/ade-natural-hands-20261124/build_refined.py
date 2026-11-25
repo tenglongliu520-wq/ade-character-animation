@@ -35,9 +35,11 @@ def mesh(name,vs,fs,mat,uv=None):
  return register(o,mat)
 def sphere(name,loc,size,mat,segments=48,rings=32):
  bpy.ops.mesh.primitive_uv_sphere_add(segments=segments,ring_count=rings,location=loc);o=bpy.context.object;o.name=name;o.scale=size;bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);return register(o,mat)
-def curve(name,pts,radius,mat):
+def curve(name,pts,radius,mat,radii=None):
  d=bpy.data.curves.new(name,'CURVE');d.dimensions='3D';d.resolution_u=12;d.bevel_depth=radius;d.bevel_resolution=3;s=d.splines.new('BEZIER');s.bezier_points.add(len(pts)-1)
  for p,co in zip(s.bezier_points,pts):p.co=co;p.handle_left_type='AUTO';p.handle_right_type='AUTO'
+ if radii:
+  for point,taper in zip(s.bezier_points,radii):point.radius=taper
  o=bpy.data.objects.new(name,d);bpy.context.collection.objects.link(o);bpy.ops.object.select_all(action='DESELECT');bpy.context.view_layer.objects.active=o;o.select_set(True);bpy.ops.object.convert(target='MESH');return register(bpy.context.object,mat)
 def project(o):
  for l in list(o.data.uv_layers):o.data.uv_layers.remove(l)
@@ -200,23 +202,33 @@ for sign in (-1,1):
 underlay=sphere('Continuous hair underlayer',(0,.04,1.87),(.325,.260,.300),REAR)
 bm=bmesh.new();bm.from_mesh(underlay.data);bmesh.ops.delete(bm,geom=[v for v in bm.verts if (v.co.z<-.10 if v.co.y<.08 else v.co.z<-.32)],context='VERTS');bm.to_mesh(underlay.data);bm.free()
 FACE_Z=1.646
+FACE_UPPER_RADIUS=.308
+FACE_LOWER_RADIUS=.273
+FACE_LOWER_POWER=2.38
+
 def jaw_width(z):
- return 1-.115*math.exp(-((z-1.383)/.100)**2)+.040*math.exp(-((z-1.535)/.097)**2)
+ return 1-.032*math.exp(-((z-1.391)/.058)**2)+.092*math.exp(-((z-1.492)/.090)**2)
 
 def cheek_relief(x,z):
- lower_face=.026*math.exp(-((z-1.472)/.133)**2)
- cheeks=.018*math.exp(-((abs(x)-.199)/.080)**2-((z-1.493)/.073)**2)
+ lower_face=.022*math.exp(-((z-1.472)/.133)**2)
+ cheeks=.040*math.exp(-((abs(x)-.196)/.095)**2-((z-1.493)/.070)**2)
  eye_socket=.004*math.exp(-((abs(x)-.146)/.085)**2-((z-1.588)/.055)**2)
  return lower_face+cheeks-eye_socket
 
 def face_y(x,z):
  width=.310*jaw_width(z)
- depth=.265*math.sqrt(max(.001,1-(x/width)**2-((z-FACE_Z)/.308)**2))
+ height=z-FACE_Z
+ profile=(height/FACE_UPPER_RADIUS)**2 if height>=0 else (-height/FACE_LOWER_RADIUS)**FACE_LOWER_POWER
+ depth=.265*math.sqrt(max(.001,1-(x/width)**2-profile))
  fade=min(1,depth/.12)
  return -.015-depth-cheek_relief(x,z)*fade*fade*(3-2*fade)
 
-head=sphere('Soft tapered face',(0,-.015,FACE_Z),(.310,.265,.308),FACE,80,64)
+head=sphere('Soft tapered face',(0,-.015,FACE_Z),(.310,.265,FACE_UPPER_RADIUS),FACE,80,64)
 for v in head.data.vertices:
+ if v.co.z<0:
+  # Keep the upper face and shorten only the lower silhouette. This is
+  # the inverse of the lower-face profile used to fit the features above.
+  v.co.z=-FACE_LOWER_RADIUS*(-v.co.z/FACE_UPPER_RADIUS)**(2/FACE_LOWER_POWER)
  z=v.co.z+FACE_Z
  v.co.x*=jaw_width(z)
  if v.co.y<0:
@@ -232,7 +244,7 @@ for vertex in cheek_lift.data:
  x,y,z=vertex.co
  if y>=0:
   continue
- strength=math.exp(-((abs(x)-.167)/.083)**2-((z+FACE_Z-1.479)/.049)**2)*min(1,-y/.18)
+ strength=math.exp(-((abs(x)-.183)/.084)**2-((z+FACE_Z-1.490)/.049)**2)*min(1,-y/.18)
  vertex.co.y-=.005*strength
  vertex.co.z+=.013*strength
 def recorded_eye(name, contour, crop):
@@ -280,9 +292,10 @@ for side in (-1,1):
  ear.rotation_euler.y=side*.27
  inner=sphere('Inner ear '+str(side),(side*.314,-.091,1.532),(.024,.010,.029),EAR)
  inner.rotation_euler.y=side*.27
- brows=[[(211,285),(229,278),(247,279),(256,283)],[(327,287),(340,281),(353,281),(366,286)]]
+ brows=[[(214,288),(229,284),(243,284),(254,287)],[(327,289),(339,285),(351,284),(364,289)]]
  coordinates=[((px-302)/376,(915-py)/376) for px,py in brows[int(side>0)]]
- brow=curve('Sculpted brow '+str(side),[(x,face_y(x,z)-.0035,z) for x,z in coordinates],.007,BROW)
+ taper=(.18,.82,1,.62) if side<0 else (.62,1,.82,.18)
+ brow=curve('Sculpted brow '+str(side),[(x,face_y(x,z)-.003,z) for x,z in coordinates],.010,BROW,taper)
  brow_expression(brow,side,face_y)
  brow_meshes.append(brow)
 sphere('Small sculpted nose',(0,face_y(0,1.486)+.005,1.486),(.016,.013,.012),SKIN)
