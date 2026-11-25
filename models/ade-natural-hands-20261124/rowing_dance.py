@@ -27,43 +27,50 @@ class Pose:
     turn: float = 0
     nod: float = 0
     spread: float = 0
+    sweep: tuple[int, int] = (0, 0)
 
 
+# The two arm entries are Ade's right and left. Pose accents use the same
+# half-time count that the reference accompaniment uses in the player.
 POSES = (
     Pose(0),
-    Pose(1, (-20,-20), (22,22), rise=.009, nod=-4, spread=8),
-    Pose(2, (-52,-52), (12,12), rise=.016, nod=-7, spread=12),
-    Pose(3, (-21,-21), (58,58), rise=-.013, nod=4, spread=11),
-    Pose(4, (7,7), (10,10), rise=.006, spread=6),
-    Pose(5, (-32,-18), (20,24), sway=-.035, turn=-7, spread=13),
-    Pose(6, (-54,-38), (15,16), sway=-.063, rise=.014, turn=-12, nod=-4, spread=14),
-    Pose(7, (-18,-32), (59,42), sway=-.040, rise=-.014, turn=-7, nod=4, spread=11),
-    Pose(8, (2,4), (9,12), rise=.005, spread=6),
-    Pose(9, (-18,-32), (24,20), sway=.035, turn=7, spread=13),
-    Pose(10, (-38,-54), (16,15), sway=.063, rise=.014, turn=12, nod=-4, spread=14),
-    Pose(11, (-32,-18), (42,59), sway=.040, rise=-.014, turn=7, nod=4, spread=11),
-    Pose(12, (4,2), (12,9), rise=.005, spread=6),
-    Pose(13, (-23,-23), (23,23), nod=-4, spread=9),
-    Pose(14, (-56,-56), (9,9), rise=.021, nod=-7, spread=13),
-    Pose(15, (-21,-21), (62,62), rise=-.016, nod=5, spread=12),
-    Pose(16, (-8,-8), (20,20), spread=10),
-    Pose(17, (-17,-38), (9,40), sway=-.030, rise=.009, turn=-5, spread=15),
-    Pose(18, (-6,-55), (14,62), sway=-.068, rise=.016, turn=-11, nod=-7, spread=19),
-    Pose(19.2, (-25,-25), (16,18), sway=-.039, rise=-.006, turn=-4, spread=43),
-    Pose(20, (-12,-12), (18,18), spread=12),
-    Pose(21, (-38,-17), (40,9), sway=.030, rise=.009, turn=5, spread=15),
-    Pose(22, (-55,-6), (62,14), sway=.068, rise=.016, turn=11, nod=-7, spread=19),
-    Pose(23.2, (-25,-25), (18,16), sway=.039, rise=-.006, turn=4, spread=43),
-    Pose(24, (-10,-10), (15,15), spread=10),
-    Pose(25, (-27,-27), (19,19), nod=-4, spread=11),
-    Pose(26, (-55,-55), (13,13), rise=.015, nod=-6, spread=13),
-    Pose(27, (-19,-19), (60,60), rise=-.014, nod=6, spread=10),
-    Pose(28, (-10,-10), (31,31), rise=.007, spread=12),
-    Pose(29, (2,2), (16,16), nod=-2, spread=8),
-    Pose(30.2, (-9,-9), (13,13), rise=-.021, nod=17, spread=5),
+    Pose(1, (-31,-30), (24,25), rise=.012, nod=-4, spread=10),
+    Pose(2, (-68,-65), (58,60), rise=.015, nod=-5, spread=14, sweep=(9,-9)),
+    Pose(3, (-40,-40), (14,16), rise=.030, nod=-2, spread=42),
+    Pose(4, (-33,-14), (48,52), rise=-.028, nod=5, spread=2, sweep=(26,-18)),
+    Pose(5, (-18,-44), (22,40), sway=-.058, rise=-.036, turn=-11, spread=18),
+    Pose(6, (-12,-71), (20,61), sway=-.135, rise=-.052, turn=-24, nod=-6, spread=20, sweep=(0,-9)),
+    Pose(7, (-40,-29), (32,19), sway=-.092, rise=.023, turn=-14, nod=2, spread=53),
+    Pose(8, (-39,-15), (52,46), sway=-.018, rise=-.022, turn=-4, nod=7, spread=4, sweep=(34,-17)),
+    Pose(9, (-44,-18), (40,22), sway=.058, rise=-.036, turn=11, spread=18),
+    Pose(10, (-71,-12), (61,20), sway=.135, rise=-.052, turn=24, nod=-6, spread=20, sweep=(9,0)),
+    Pose(11, (-29,-40), (19,32), sway=.092, rise=.023, turn=14, nod=2, spread=53),
+    Pose(12, (-15,-39), (46,52), sway=.018, rise=-.022, turn=4, nod=7, spread=4, sweep=(17,-34)),
+    Pose(13, (-35,-35), (44,44), rise=-.020, nod=5, spread=8, sweep=(17,-17)),
+    Pose(14, (-16,-16), (11,11), rise=.035, nod=-8, spread=72),
+    Pose(15, (-51,-51), (39,39), rise=-.017, nod=4, spread=16),
+    Pose(16, (-24,-15), (47,34), rise=-.008, spread=5, sweep=(17,-12)),
+    Pose(17, (-16,-49), (14,50), sway=-.069, rise=-.027, turn=-13, spread=18),
+    Pose(18, (1,-73), (11,63), sway=-.145, rise=-.044, turn=-23, nod=-6, spread=25, sweep=(-6,35)),
+    Pose(19, (-20,-18), (12,15), sway=-.079, rise=.032, turn=-10, nod=-4, spread=70),
+    Pose(20, (-56,-13), (54,48), sway=-.016, rise=-.028, nod=7, spread=1, sweep=(40,-26)),
+    Pose(21, (-49,-16), (50,14), sway=.069, rise=-.027, turn=13, spread=18),
+    Pose(22, (-73,1), (63,11), sway=.145, rise=-.044, turn=23, nod=-6, spread=25, sweep=(-35,6)),
+    Pose(23, (-18,-20), (15,12), sway=.079, rise=.032, turn=10, nod=-4, spread=70),
+    Pose(24, (-13,-56), (48,54), sway=.016, rise=-.028, nod=7, spread=1, sweep=(26,-40)),
+    Pose(25, (-25,-32), (21,28), sway=-.030, rise=.006, turn=-6, nod=-4, spread=20),
+    Pose(26, (-68,-66), (22,23), sway=-.057, rise=.023, turn=-11, nod=-5, spread=18),
+    Pose(27, (-16,-18), (64,62), sway=.052, rise=-.034, turn=11, nod=7, spread=19),
+    Pose(28, (-18,-18), (10,10), rise=.022, nod=-6, spread=63),
+    Pose(29, (-22,-16), (44,31), nod=1, spread=3, sweep=(24,-17)),
+    Pose(30.2, (-10,-10), (13,13), rise=-.038, nod=22, spread=5),
     Pose(31.2, nod=2),
     Pose(32),
 )
+
+STEP_PHRASES = ((-1,5,.165,-.025), (1,9,.165,-.025),
+                (-1,17,.185,-.066), (1,21,.185,-.066))
+MAX_STEP = max(stride for _,_,stride,_ in STEP_PHRASES)
 
 
 def frame_at(beat):
@@ -102,7 +109,7 @@ def make_curve(keys):
 def sample_motion():
     curves = {name:make_curve([(p.beat,getattr(p,name)) for p in POSES])
               for name in ('sway','rise','turn','nod','spread')}
-    for name in ('swing','bend'):
+    for name in ('swing','bend','sweep'):
         for i in range(2):
             curves[name,i]=make_curve([(p.beat,getattr(p,name)[i]) for p in POSES])
     return curves, [(frame-1)*BPM/(60*FPS) for frame in range(1,frame_at(BEATS)+1)]
@@ -172,27 +179,45 @@ def add_arm_shapes(obj, elbow, bends):
 
 
 def add_side_step(side, foot, beats):
-    phrases = (5,17) if side<0 else (9,21)
-
     def step(beat):
-        for start in phrases:
+        for foot_side,start,stride,depth in STEP_PHRASES:
+            if side!=foot_side:
+                continue
             at = beat-start
-            if -.48<=at<.72:
-                phase=(at+.48)/1.20
+            if -.52<=at<.71:
+                phase=(at+.52)/1.23
                 progress=ease(phase)
-            elif .72<=at<1.35:
-                return (side*.086,-.028,0),(0,0,0)
-            elif 1.35<=at<2.70:
-                phase=(at-1.35)/1.35
+            elif .71<=at<1.42:
+                return (side*stride,depth,0),(0,0,side*11)
+            elif 1.42<=at<2.72:
+                phase=(at-1.42)/1.30
                 progress=1-ease(phase)
             else:
                 continue
             lift=math.sin(math.pi*phase)**2
-            toe=12*lift*(1-2*phase)
-            return (side*.086*progress,-.028*progress,.056*lift),(toe,0,0)
+            toe=15*lift*(1-2*phase)
+            return (side*stride*progress,depth*progress,.071*lift),(toe,0,side*11*progress)
         return (0,0,0),(0,0,0)
 
-    animate_transform(foot,[(beat,*step(beat)) for beat in beats])
+    keys=[(beat,*step(beat)) for beat in beats]
+    animate_transform(foot,keys)
+    return [(beat,abs(offset[0])/MAX_STEP) for beat,offset,_ in keys]
+
+
+def add_trouser_follow(trouser, side, step_amount):
+    """Keep the upper trouser inside the robe while the cuff follows the foot."""
+    world=trouser.matrix_world.copy()
+    inverse=world.inverted()
+    basis=trouser.shape_key_add(name='Basis')
+    tuck=trouser.shape_key_add(name='Step tuck')
+    for vertex,rest in zip(tuck.data,basis.data):
+        point=world @ rest.co
+        bound=ease((point.z-.135)/.223)
+        center_x=side*.113
+        point.x=center_x+(point.x-center_x)*(1-.48*bound)-side*MAX_STEP*.76*bound
+        point.y=point.y*(1-.39*bound)+.094*bound
+        vertex.co=inverse @ point
+    animate_shapes(trouser,{'Step tuck':step_amount},baked=True)
 
 
 def add_cloth_follow(obj, waves):
@@ -206,7 +231,7 @@ def add_cloth_follow(obj, waves):
         for vertex,rest in zip(target.data,basis.data):
             point = world @ rest.co
             amount = ease((1.00-point.z)/(.51 if sash else .70))
-            drift = Vector((direction*(.062 if sash else .032),direction*.010,direction*.003))*amount
+            drift = Vector((direction*(.087 if sash else .048),direction*.015,direction*.003))*amount
             vertex.co = inverse @ (point+drift)
     animate_shapes(obj, {
         name:[(beat,max(0,direction*value)) for beat,value in waves]
@@ -249,30 +274,30 @@ def build_dance():
             (beat,(0,0,0),(
                 curves['swing',index](phased(beat,index*.045)),
                 -side*curves['spread'](phased(beat,.04+index*.04)),
-                side*curves['turn'](phased(beat,.09))*.16,
+                curves['sweep',index](phased(beat,.06+index*.03))+side*curves['turn'](phased(beat,.09))*.10,
             )) for beat in beats
         ])
-        add_side_step(side,foot,beats)
+        step_amount=add_side_step(side,foot,beats)
+        add_trouser_follow(bpy.data.objects[f'Loose trouser hem {side}'],side,step_amount)
 
     torso_keys,head_keys,ribbon_keys,waves,tip_follow=[],[],[],[],[]
-    step_phrases=((-1,5),(1,9),(-1,17),(1,21))
     for beat in beats:
         body_beat=phased(beat,-.16)
         head_beat=phased(beat,.085)
         cloth_beat=phased(beat,.25)
         counterweight=0
-        for side,start in step_phrases:
-            landing=(beat-start+.48)/1.20
+        for side,start,_,_ in STEP_PHRASES:
+            landing=(beat-start+.52)/1.23
             if 0<landing<1:
-                counterweight-=side*.022*math.sin(math.pi*landing)**2
+                counterweight-=side*.041*math.sin(math.pi*landing)**2
         sway=curves['sway'](body_beat)+counterweight
         rise=curves['rise'](body_beat)
         turn=curves['turn'](body_beat)
-        torso_keys.append((beat,(sway,-rise*.34,rise),(max(0,curves['nod'](body_beat))*.25,sway*57,turn)))
-        head_keys.append((beat,(0,0,0),(curves['nod'](head_beat),-curves['sway'](head_beat)*56,-curves['turn'](head_beat)*.52)))
-        ribbon_keys.append((beat,(0,0,0),(-curves['nod'](cloth_beat)*.32,curves['sway'](cloth_beat)*65,-curves['turn'](cloth_beat)*.50)))
-        follow=curves['sway'](cloth_beat)/.075
-        waves.append((beat,-follow*.69-curves['turn'](cloth_beat)*.018))
+        torso_keys.append((beat,(sway,-rise*.34,rise),(curves['nod'](body_beat)*.25,sway*68,turn)))
+        head_keys.append((beat,(0,0,0),(curves['nod'](head_beat),-curves['sway'](head_beat)*49,-curves['turn'](head_beat)*.48)))
+        ribbon_keys.append((beat,(0,0,0),(-curves['nod'](cloth_beat)*.32,curves['sway'](cloth_beat)*62,-curves['turn'](cloth_beat)*.50)))
+        follow=curves['sway'](cloth_beat)/.151
+        waves.append((beat,-follow*.63-curves['turn'](cloth_beat)*.012))
         turn_change=curves['turn'](cloth_beat)-curves['turn'](phased(beat,.40))
         tip_follow.append((beat,min(.72,abs(turn_change)*.12+abs(curves['nod'](cloth_beat))*.020)))
     animate_transform(torso,torso_keys)
@@ -312,8 +337,9 @@ def render_review(scene):
     scene.cycles.samples = 16
     scene.render.resolution_x, scene.render.resolution_y = 520, 600
     for name,beat,position in (
-        ('reach',2,(2.6,-5,1.62)), ('pull',7,(2.6,-5,1.62)),
-        ('step',18,(-1.8,-5,1.43)), ('open',19.2,(1.9,-5,1.43)), ('bow',30.2,(2.3,-5,1.43)),
+        ('reach',2,(.8,-5,1.49)), ('pull',27.2,(1.7,-5,1.50)),
+        ('step',18.2,(-.65,-5,1.40)), ('open',19.1,(.6,-5,1.40)),
+        ('cross',20.1,(.8,-5,1.45)), ('bow',30.2,(1.3,-5,1.43)),
     ):
         scene.frame_set(frame_at(beat))
         camera.location = position

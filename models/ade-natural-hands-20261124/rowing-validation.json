@@ -2,7 +2,7 @@
   "uri": "ade-rowing.glb",
   "mimeType": "model/gltf-binary",
   "validatorVersion": "2.0.0-dev.3.10",
-  "validatedAt": "2026-11-25T08:21:31.823Z",
+  "validatedAt": "2026-11-25T08:55:01.725Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -29,7 +29,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 17838288
+        "byteLength": 18439068
       },
       {
         "pointer": "/images/0",

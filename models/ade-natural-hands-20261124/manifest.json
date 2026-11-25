@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "46230511642113fcf3b28fe280ebb331f3f0d44c93350e1cb015bfcfade6e84d"
+    "sha256": "a8413da4c6e601166c616788b6bc5e96d0b69d8bb55187bc409503e843462e74"
   },
   {
     "path": "requirements.txt",
@@ -261,7 +261,7 @@
   },
   {
     "path": "rowing_dance.py",
-    "sha256": "8bc6a0852677edb3c1f3380607ba9462186431246488f1254736a9840841f3bf"
+    "sha256": "70962c1ea68c577d027d0493486feb35df29dda64cb9df5a50cbec239a5984ec"
   },
   {
     "path": "rowing_music.py",
@@ -269,7 +269,7 @@
   },
   {
     "path": "ade-rowing.glb",
-    "sha256": "12e7848bdcd24c6c45db8da04b689bde33dd995aabe2883c8ffa5ed1c7971c0d"
+    "sha256": "a6c03f122ec8c31f82003f0090fd71003d429991870bfff0857729e7c0254bbe"
   },
   {
     "path": "rowing-beat.wav",
@@ -277,11 +277,11 @@
   },
   {
     "path": "rowing-dance-review.jpg",
-    "sha256": "4702770f7e269830e2e01da6d6354b026eabd7793950b0fb0cf844404678d462"
+    "sha256": "9bbdc4eacf0f9e2ab0c79981b6748ce07aa9595ba8f485d51f0a54d6ff8469a1"
   },
   {
     "path": "rowing-validation.json",
-    "sha256": "fe16804f1fc52fddbb5a83c7ef5ecb6740f26182217c3ce36660154ae82a7905"
+    "sha256": "1d0a7a6ce8579b87a996c3962db8b9a6e28a96ee45b364216ad67b9249cd4f67"
   },
   {
     "path": "vendor/LICENSE",
