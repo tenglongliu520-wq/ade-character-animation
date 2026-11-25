@@ -358,7 +358,7 @@ sphere('Neck',(0,0,1.323),(.063,.067,.105),SKIN)
 # Continuous sloping shoulders and curved open coat replace the old cylinders.
 inner_robe=loft('Inner garment',[(.222,.195,.125),(.42,.205,.133),(.98,.198,.137),(1.20,.18,.115),(1.319,.074,.072)],INNER_CLOTH,pleats=.0035)
 add_bamboo(inner_robe,material,mesh,curve)
-loft('Flowing open bamboo coat',[(.30,.363,.178,.192),(.48,.309,.147,.170),(.68,.268,.159,.155),(.85,.244,.146,.131),(1.03,.213,.142,.126),(1.17,.205,.125,.096),(1.28,.138,.098,.070),(1.32,.078,.073,.044)],CLOTH,True,.012)
+outer_coat=loft('Flowing open bamboo coat',[(.30,.363,.178,.192),(.48,.309,.147,.170),(.68,.268,.159,.155),(.85,.244,.146,.131),(1.03,.213,.142,.126),(1.17,.205,.125,.096),(1.28,.138,.098,.070),(1.32,.078,.073,.044)],CLOTH,True,.012)
 for side in (-1,1):
  vs=[];fs=[];uv=[];nr=72;nt=96
  rows=[(0,.130,1.25,.048,.063),(.18,.178,1.185,.079,.091),(.48,.252,1.035,.098,.115),(.78,.278,.873,.118,.133),(1,.285,.737,.122,.128)]
@@ -400,11 +400,53 @@ ribbon('Woven sash right',[(.105,-.160,1.015),(.112,-.171,.83),(.116,-.184,.64),
 for a in range(7):
  t=a/7*2*PI;sphere('Cream flower clasp petal '+str(a),(.062+.013*math.sin(t),-.169,1.019+.013*math.cos(t)),(.0055,.004,.008),TRIM,20,12)
 sphere('Sage clasp centre',(.062,-.175,1.019),(.007,.004,.007),CAP,20,12)
-vs=[]
-for y in (-.112,-.120):
- for j in range(48):
-  t=j/48*2*PI;vs.append((.154+16*math.sin(t)**3*.0010,y,1.254+(13*math.cos(t)-5*math.cos(2*t)-2*math.cos(3*t)-math.cos(4*t))*.0010))
-fs=[tuple(reversed(range(48))),tuple(range(48,96))]+[(j,(j+1)%48,(j+1)%48+48,j+48) for j in range(48)];heart=mesh('Small red heart',vs,fs,HEART);bevel=heart.modifiers.new('Soft heart edge','BEVEL');bevel.width=.002;bevel.segments=3
+def fit_heart_pin(coat):
+ """Project the heart onto the left front panel and round its visible edge."""
+ bpy.context.view_layer.update()
+ depsgraph=bpy.context.evaluated_depsgraph_get()
+ surface=coat.evaluated_get(depsgraph)
+ sleeve=bpy.data.objects['Soft bell sleeve 1'].evaluated_get(depsgraph)
+ center_x,center_z=.118,1.183
+ direction=Vector((0,1,0))
+
+ def cloth_point(x,z,raise_by):
+  origin=Vector((x,-.55,z))
+  hit,point,normal,_=surface.ray_cast(origin,direction,distance=.53)
+  assert hit and normal.y<-.22, 'Heart pin must stay on the front panel'
+  if raise_by>0:
+   covered,sleeve_point,_,_=sleeve.ray_cast(origin,direction,distance=.53)
+   assert not covered or sleeve_point.y>point.y-raise_by+.001, 'Sleeve covers the heart pin'
+  return (x,point.y-raise_by,z)
+
+ vertices,faces=[],[]
+ sides=64
+ layers=((.94,-.0008),(1,.0026),(.88,.0052),(.46,.0065))
+ for size,raise_by in layers:
+  for index in range(sides):
+   angle=index*2*PI/sides
+   x=center_x+.00136*size*16*math.sin(angle)**3
+   z=center_z+.00136*size*(13*math.cos(angle)-5*math.cos(2*angle)-2*math.cos(3*angle)-math.cos(4*angle))
+   vertices.append(cloth_point(x,z,raise_by))
+ faces.append(tuple(reversed(range(sides))))
+ for ring in range(len(layers)-1):
+  for index in range(sides):
+   a=ring*sides+index
+   b=ring*sides+(index+1)%sides
+   faces.append((a,b,b+sides,a+sides))
+ face_center=len(vertices)
+ vertices.append(cloth_point(center_x,center_z,.007))
+ start=(len(layers)-1)*sides
+ for index in range(sides):
+  faces.append((start+index,start+(index+1)%sides,face_center))
+ heart=mesh('Small red heart',vertices,faces,HEART)
+ bm=bmesh.new()
+ bm.from_mesh(heart.data)
+ assert all(edge.is_manifold for edge in bm.edges), 'Heart pin mesh has an open edge'
+ bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces))
+ bm.to_mesh(heart.data)
+ bm.free()
+
+fit_heart_pin(outer_coat)
 # The temple side of the cap is lower and flares into the folded lower edge.
 accessory_start=len(PARTS)
 # Ring bounds are measured on the front. Their depth is inferred.

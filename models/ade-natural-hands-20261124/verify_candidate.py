@@ -68,6 +68,8 @@ expected = {
 expected.update((name, 'weights') for name in moving_hair)
 torso = next(node for node in g['nodes'] if node.get('name') == 'Upper body balance')
 assert np.allclose(torso['translation'], [0,1.02,0], atol=1e-4), 'Incorrect neutral hierarchy'
+heart_index, = (i for i,node in enumerate(g['nodes']) if node.get('name') == 'Small red heart')
+assert heart_index in torso['children'] and 'mesh' in g['nodes'][heart_index], 'Heart pin must follow the coat'
 hands = {node['name']: node for i in torso['children']
          if (node := g['nodes'][i]).get('name', '').startswith('Relaxed unified hand ')}
 assert set(hands) == {'Relaxed unified hand left', 'Relaxed unified hand right'}
