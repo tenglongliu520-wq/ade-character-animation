@@ -91,7 +91,7 @@ export class Ade3DAvatar {
     if(moving){this.time+=dt;this.mixer?.update(dt);}
     const blink=moving?Math.max(0,1-Math.abs((this.time%4.6)-4.35)/.11):0;
     const mouth=moving&&now-this.speech.at<260?this.speech.level:0;
-    if (!this.actions?.has('LookTiltReturn')) this.setFace({blink,mouth});
+    if (!this.actions?.has('LookTiltReturn')&&!this.actions?.has('RowingDance')) this.setFace({blink,mouth});
     this.controls.update();this.renderer.render(this.scene,this.camera);
     if(moving)this.schedule();
     else this.last=0;

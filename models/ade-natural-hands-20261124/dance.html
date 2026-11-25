@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>阿德 · 双桨舞</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f6f4ed; color: #233d33; font: 16px/1.55 system-ui, sans-serif; }
+  main { max-width: 1050px; margin: 0 auto; padding: 28px 22px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; }
+  h1 { margin: 0; font-size: clamp(24px, 4vw, 40px); letter-spacing: .03em; }
+  a { color: #285846; text-underline-offset: 3px; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); gap: 24px; }
+  #stage { height: clamp(390px, 72vh, 650px); background: #17161b; border-radius: 20px; overflow: hidden; }
+  #stage canvas { width: 100%; height: 100%; display: block; touch-action: none; }
+  .controls { display: grid; align-content: start; gap: 16px; padding: 14px 0; }
+  .controls p { margin: 0; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { border: 1px solid #a1b8a9; padding: 8px 13px; background: #fcfbf5; border-radius: 10px; color: inherit; font: inherit; cursor: pointer; }
+  #play { border-color: #285846; background: #285846; color: white; }
+  button:disabled { opacity: .5; cursor: default; }
+  label, input { display: block; }
+  input[type='range'] { width: 100%; accent-color: #3a6a56; }
+  fieldset { display: grid; gap: 9px; margin: 0; border: 1px solid #bcc9bd; border-radius: 12px; padding: 12px; min-width: 0; }
+  input[type='file'] { max-width: 100%; font: inherit; font-size: .875rem; }
+  input[type='number'] { width: 88px; padding: 5px; font: inherit; }
+  #sound-label { overflow-wrap: anywhere; }
+  @media (max-width: 690px) { main { padding: 16px; } .layout { grid-template-columns: minmax(0,1fr); gap: 10px; } #stage { height: min(61vh,520px); min-height: 360px; } }
+</style>
+<main>
+  <header><h1>阿德 · 双桨舞</h1><a href="./">返回阿德预览</a></header>
+  <div class="layout">
+    <div id="stage"></div>
+    <section class="controls" aria-label="舞蹈播放控制">
+      <p id="status" role="status">正在加载阿德…</p>
+      <div class="buttons">
+        <button id="play" type="button" disabled>播放舞蹈</button>
+        <button data-view="front" type="button" disabled>正面</button>
+        <button data-view="leftQuarter" type="button" disabled>斜侧</button>
+      </div>
+      <div><label for="timeline">播放进度</label><input id="timeline" type="range" min="0" max="20" step="0.02" value="0" disabled></div>
+      <fieldset>
+        <legend>伴奏</legend>
+        <p id="sound-label">原创划桨节拍 · 96 BPM</p>
+        <label for="song">载入本地歌曲</label>
+        <input id="song" type="file" accept="audio/*" disabled>
+        <div id="tempo-setting" hidden><label for="tempo">歌曲速度（BPM）</label><input id="tempo" type="number" min="45" max="180" step="1" value="96"></div>
+        <button id="restore" type="button" hidden>换回默认伴奏</button>
+      </fieldset>
+      <a href="./ade-rowing.glb" download>下载舞蹈 GLB</a>
+    </section>
+  </div>
+  <audio id="sound" preload="auto" src="./rowing-beat.wav"></audio>
+</main>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+<script type="module" src="./dance-preview.js"></script>
+</html>

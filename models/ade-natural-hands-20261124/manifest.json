@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "4ad636d97670a29106ffb45bc5965f99c4d5e8ad4db7efe2f0b88b786f9c0c6b"
+    "sha256": "7247352a3145f526ab52a0c2b936ef3e6e26dd05c31af92352d167d3c93e1baf"
   },
   {
     "path": "requirements.txt",
@@ -65,7 +65,7 @@
   },
   {
     "path": "avatar-3d.js",
-    "sha256": "cd660db07691db563c0434def1125bd93fb450654287a942529990c71c0b0d9b"
+    "sha256": "b852a96f1bb8e70e17971b140bdbab9270cc18f4912f0a78bc30e81a0d498cc4"
   },
   {
     "path": "expression-preview.js",
@@ -73,7 +73,7 @@
   },
   {
     "path": "index.html",
-    "sha256": "d9bf226840d6a98b532cb74ddae6cf207d92b905689f0d04e2f45c4b22627ff8"
+    "sha256": "9696a895651572f124390fb256902946e8b60e994c5b56e9df260cfd50b24a86"
   },
   {
     "path": "package.json",
@@ -250,6 +250,38 @@
   {
     "path": "face-symmetry-comparison.jpg",
     "sha256": "3692fff9acc1afbce7169a85d87335c8e57f4fb0c50f7a9fe756378db4aec419"
+  },
+  {
+    "path": "dance.html",
+    "sha256": "6f640225387afdf1a9cf75d0a2589fb378352bb617f04db0cc905e619827a2fd"
+  },
+  {
+    "path": "dance-preview.js",
+    "sha256": "7aa4b81d86f7263defb2d92f226b92989f5166f58a28b15f95fb9144c78e67c5"
+  },
+  {
+    "path": "rowing_dance.py",
+    "sha256": "f97d0690a46cbfb9e8c54c16ae5b33624b5614b68f61ebceb846330e04a7f526"
+  },
+  {
+    "path": "rowing_music.py",
+    "sha256": "7257b43b3b96d27570dc49284979cae6f2a32370502c062598d22d6f98ae5b14"
+  },
+  {
+    "path": "ade-rowing.glb",
+    "sha256": "181ccfb1fa9953807211ca7ba6cd9c4ec78a477df13cfa5b8a405e346b8c51fc"
+  },
+  {
+    "path": "rowing-beat.wav",
+    "sha256": "8fa6a4b0f4c1a3044b5e1ce644094b0bee51eb71cfab3102121d9c576b46597c"
+  },
+  {
+    "path": "rowing-dance-review.jpg",
+    "sha256": "9590724c6dcd1deefd484c58ea55eb266da06433733b71b2a8e0f706d3da9d1b"
+  },
+  {
+    "path": "rowing-validation.json",
+    "sha256": "14f5f32ca9d15d6b8b91feab4433b08020ffe86cd2eb311d4835b70ec6e1b330"
   },
   {
     "path": "vendor/LICENSE",
