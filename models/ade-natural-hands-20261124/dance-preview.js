@@ -21,6 +21,7 @@ let frame = 0;
 
 try {
   const avatar = new Ade3DAvatar(byId('stage'), {modelUrl: './ade-rowing.glb'});
+  avatar.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
   avatar.setPaused(true);
   await avatar.ready;
   avatar.setView('leftQuarter');
