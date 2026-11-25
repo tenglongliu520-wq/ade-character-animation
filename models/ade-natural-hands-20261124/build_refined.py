@@ -366,10 +366,32 @@ for side in (-1,1):
 sphere('Small sculpted nose',(0,face_y(0,1.486)+.005,1.486),(.016,.013,.012),SKIN)
 smile,smile_open=friendly_smile(mesh,face_y,LIP,material('Soft rose mouth interior','a87573'))
 HEAD_PARTS=set(PARTS)
-sphere('Neck',(0,0,1.323),(.063,.067,.105),SKIN)
+
+def add_short_neck():
+ """Shape the neck from the collar flare to the narrow area under the jaw."""
+ rows=[(1.260,.024,.027,-.003),(1.287,.063,.062,-.001),
+       (1.309,.056,.056,.003),(1.326,.046,.050,.006),
+       (1.345,.043,.047,.008),(1.374,.049,.048,.006),
+       (1.412,.034,.034,0),(1.429,.008,.009,0)]
+ vertices,faces=[],[]
+ rings,sides=48,48
+ for ring in range(rings+1):
+  z=rows[0][0]+(rows[-1][0]-rows[0][0])*ring/rings
+  width,depth,center_y=interpolate(rows,z)
+  for side in range(sides):
+   angle=2*PI*side/sides
+   vertices.append((width*math.cos(angle),center_y+depth*math.sin(angle),z))
+   if ring:
+    a=(ring-1)*sides+side
+    b=(ring-1)*sides+(side+1)%sides
+    faces.append((a,b,b+sides,a+sides))
+ faces.extend((tuple(reversed(range(sides))),tuple(range(rings*sides,(rings+1)*sides))))
+ mesh('Neck',vertices,faces,SKIN)
+
+add_short_neck()
 
 # Continuous sloping shoulders and curved open coat replace the old cylinders.
-inner_robe=loft('Inner garment',[(.222,.195,.125),(.42,.205,.133),(.98,.198,.137),(1.20,.18,.115),(1.319,.074,.072)],INNER_CLOTH,pleats=.0035)
+inner_robe=loft('Inner garment',[(.222,.195,.125),(.42,.205,.133),(.98,.198,.137),(1.20,.18,.115),(1.307,.083,.075),(1.326,.062,.061)],INNER_CLOTH,pleats=.0035)
 add_bamboo(inner_robe,material,mesh,curve)
 outer_coat=loft('Flowing open bamboo coat',[(.30,.363,.178,.192),(.48,.309,.147,.170),(.68,.268,.159,.155),(.85,.244,.146,.131),(1.03,.213,.142,.126),(1.17,.205,.125,.096),(1.28,.138,.098,.070),(1.32,.078,.073,.044)],CLOTH,True,.012)
 for side in (-1,1):
@@ -404,8 +426,21 @@ for side in (-1,1):
  # A fine seam follows the upper without a broad white platform.
  curve('Shoe fine seam '+str(side),[(side*.113-.082,-.138,.080),(side*.113,-.190,.083),(side*.113+.082,-.138,.080)],.002,BLACK)
 
-ribbon('Small inner collar left',[(-.055,-.079,1.307),(-.025,-.114,1.27),(.010,-.130,1.237)],.019,INNER_CLOTH)
-ribbon('Small inner collar right',[(.055,-.079,1.307),(.025,-.115,1.27),(-.010,-.132,1.237)],.020,INNER_CLOTH)
+def fit_crossed_collar(garment):
+ bpy.context.view_layer.update()
+ surface=garment.evaluated_get(bpy.context.evaluated_depsgraph_get())
+ direction=Vector((0,1,0))
+ for sign,label in ((-1,'left'),(1,'right')):
+  points=[]
+  for x,z in ((.044,1.319),(.037,1.303),(.027,1.283),(.012,1.262),(-.011,1.240)):
+   x*=sign
+   hit,point,_,_=surface.ray_cast(Vector((x,-.4,z)),direction,distance=.38)
+   assert hit, f'Crossed collar lost contact with the lining at {label}'
+   front_offset=.0040 if sign==1 else .0025
+   points.append((x,point.y-front_offset,z))
+  ribbon('Small inner collar '+label,points,.019,INNER_CLOTH)
+
+fit_crossed_collar(inner_robe)
 loft('Slim waist band',[(.987,.213,.153),(1.052,.210,.151)],GREEN,pleats=0)
 helper=next(o for o in PARTS if o.name=='Slim waist band thin hem');PARTS.remove(helper);bpy.data.objects.remove(helper,do_unlink=True)
 ribbon('Woven sash left',[(.058,-.167,1.017),(.049,-.178,.86),(.027,-.186,.68),(.018,-.192,.578)],.071,SASH,1,fold=.010,taper=.12)

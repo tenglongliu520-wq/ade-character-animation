@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "652ca2332bb4552f480305804834e71e4a3f14313242a5f744a668b06269a641"
+    "sha256": "a5841f30ce118b657b81052dea8c532f04b9de0b17d02e2096f40ff4dc01b991"
   },
   {
     "path": "requirements.txt",
@@ -37,7 +37,7 @@
   },
   {
     "path": "build_refined.py",
-    "sha256": "3013a6f49aa94210bdaf4b349b5ea3d3258a8128b21ad0cddf152550b02dab60"
+    "sha256": "bf6137f34585b83279328afdf246a131c03ed1f311ff3c3adedfc2d3dbefd241"
   },
   {
     "path": "render_outline.py",
@@ -49,7 +49,7 @@
   },
   {
     "path": "verify_candidate.py",
-    "sha256": "c559693bbcff7097211e8f4b1caf78c05fac90d0beda247e31fd53076fe80368"
+    "sha256": "29d9352a322d400f30408eb1f0c9758c998b133d6e5e916259e6ea8f3cb1d88c"
   },
   {
     "path": "validate_gltf.cjs",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "d1ed0943d4845beb80f6708a29e92ee409b76d5364c2a506a44ee7e4853f5994"
+    "sha256": "1075f7b3e114ad08045d0f348b27fca9c21e9b9528c990290fd4b26ff1601e85"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "f09c9f5d71280273a1f68d782f005d2198c8ac22c9221b33c3b1d82d102b5631"
+    "sha256": "92207b7d13294c4602d711a906f231b7e2af3a501a4a79ce43e9920007b14002"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "7c4bb456b2c4d3f50dcaa1caf0887e42e80d486c50eee110eb784ab4de75e536"
+    "sha256": "9b98875955f1ac521fc343ff7124a411f0015d87707ca9b89ddcf2f4619de2b8"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "f1bb544a93ed71926a8555bef8516f46d5b00e547da57ec50648c986d1bc3ad8"
+    "sha256": "5e5cb4eeaaa8b7bf3d029e8fa80d76e383190385badd60512db68bb5132856fc"
   },
   {
     "path": "side.png",
-    "sha256": "fa4ba9ff8d7602acced06271ec8e957d7a760da4b344698b608b985075c003ce"
+    "sha256": "3fc2439cf27e6bd408ad43542c8db853bb0d697c5f4256df66f04544fe4dbe24"
   },
   {
     "path": "back.png",
-    "sha256": "417e60d71a9ce37e9490be236aeaffe9974f89d16041aae9af7c7073ddf07847"
+    "sha256": "2c97898b5de69b89d09d84d71ce54938ed0a8aaad312db4fb0d1426bacfd6fda"
   },
   {
     "path": "gesture.png",
-    "sha256": "c7c43ca59fbb92a3376b5f9bd3909c581e31ec60a87bef25aea99e48920ce75d"
+    "sha256": "bf649684efc65e11f76ecf205f866423daad865b27d14247ecfaf24fd53e62de"
   },
   {
     "path": "blink.png",
-    "sha256": "8465a9ca2319bc5cc5c49b7a83c87a7ec852e80916b01a3a18494aca26e4f363"
+    "sha256": "3bb62d41566ff5c567ed0b99d72a10b3465528a4ceaee5a4d986e721fa9c40a8"
   },
   {
     "path": "glance.png",
-    "sha256": "6ae9b5c7fc752501149c3ab6d3ae199d0ca13192a686fe9c63882f7b1c965db4"
+    "sha256": "8fd2164823f63f107739e017ab6d08369be41e765a4d752755d9147fae258a8d"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,31 +185,31 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "35500afe8a78e5b4ed51f212db65c849efcf9d9a84b3d0bd82fac682dd079ef0"
+    "sha256": "1d406e0a14289a3536fdf6e2088128168545992dec97db2faea460ff78e6d552"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "a475a4d3f4712e8f7782c6bf52e5aed1a7cf9ecb2d16531ac0d143e85cfd816b"
+    "sha256": "f373aa1307f8e86e6b21e9afd4e21997b5536b82db0206f4489fad033677627c"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "9db50c5bcbc0111a1b1fc3406cca6dd6ee66d9bb7bc0b8c9ea93aa11a6d2f9bb"
+    "sha256": "18729d8b9e95e84d978a8e8572778eccf7830b020510e907723335f061175c77"
   },
   {
     "path": "outline-comparison.jpg",
-    "sha256": "6d248195167ab28adc23994ee90fb4de2df5d4a8dc33a5d3eda4a892cad06fde"
+    "sha256": "0c276ad429b78004301e9bd09a2ffc7efabe9f1cf66cfd8ca62b106c70a12586"
   },
   {
     "path": "build-report.json",
-    "sha256": "ad22e7dd6fe4401002361f4ea35b2737451b9e256cc9746c5bc13a45b18384ea"
+    "sha256": "52e748ab09ea8e973d718eba7106d847e8884b37ade340f2441bbff442bcb7f8"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "f4dac8f723f6e294bede8d5bcd6ed8418e62d740527a2690003b0aeb92d52f38"
+    "sha256": "0586b1b686c12245b1cd9960311ae72585ee7f3960df8612cff6195a41f5f950"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "95a83872c594cba6d21316cc20189c920a24a19f42bab81cc71c14b482fb1f7b"
+    "sha256": "914357c22c76f0ce19769164388eafe3c9abfc72cd8b6ba4dd515e8cbc7aa0e0"
   },
   {
     "path": "hand-order.jpg",
@@ -238,6 +238,10 @@
   {
     "path": "face-trace-comparison.jpg",
     "sha256": "03100f0877c45fecce3c16eb54d536a1bd60a02915b73b75f36cfb31ad19660e"
+  },
+  {
+    "path": "neck-collar-comparison.jpg",
+    "sha256": "f17c61f2abef7d44e6831dbdac063fdf70f572aafa53035abd5d1b6c2ba2acf0"
   },
   {
     "path": "vendor/LICENSE",
