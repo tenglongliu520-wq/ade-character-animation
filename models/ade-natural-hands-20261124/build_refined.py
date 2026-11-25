@@ -320,21 +320,26 @@ def recorded_eye(name, contour, crop):
 
 def sculpt_ear(side):
  """Fit a continuous outer rim, shallow bowl, and tapered earlobe."""
- width,depth,height=.060,.053,.061
- ear=sphere('Soft ear '+str(side),(side*.283,-.055,1.541),(width,depth,height),EAR,64,48)
+ width,depth,height=.062,.052,.060
+ ear=sphere('Soft ear '+str(side),(side*.285,-.013,1.529),(width,depth,height),EAR,64,48)
  colors=ear.data.color_attributes.new(name='EarColor',type='FLOAT_COLOR',domain='POINT')
  ear.data.color_attributes.active_color=colors
+ cosine,sine=math.cos(.24),math.sin(.24)
  for vertex,color in zip(ear.data.vertices,colors.data):
   x,y,z=vertex.co
   outward=side*x/width
   vertical=z/height
-  bowl=math.exp(-((outward-.53+.07*vertical)/.36)**2-((vertical-.10)/.52)**2)
+  radius=math.hypot((outward-.49+.10*vertical)/.36,(vertical-.09)/.57)
   front=max(0,min(1,-y/.036))
-  bowl*=front*front*(3-2*front)
-  # Raise the outer rim toward the hair and let the lobe turn into the cheek.
-  vertex.co.x+=side*(.008*vertical-.005*vertical*vertical)
-  vertex.co.y+=.006*outward+.010*bowl
-  tint=.79*bowl
+  front=front*front*(3-2*front)
+  bowl=front*math.exp(-radius*radius)
+  rim=front*math.exp(-((radius-1.12)/.29)**2)
+  # Angle the ear to show the rim and bowl in the three-quarter view.
+  local_x=side*x+.008*vertical-.007*vertical*vertical
+  local_y=y+.017*bowl-.0035*rim
+  vertex.co.x=side*(cosine*local_x-sine*local_y)
+  vertex.co.y=sine*local_x+cosine*local_y
+  tint=.84*bowl
   color.color_srgb=tuple((base*(1-tint)+inner*tint)/255 for base,inner in zip(SKIN_RGB,INNER_EAR_RGB))+(1,)
  return ear
 
@@ -342,12 +347,13 @@ EAR.name='Ear skin with soft inner tint'
 use_vertex_color(EAR,'EarColor')
 eye_groups=[recorded_eye(name,contour,EYE_CROPS[name]) for name,contour in EYES.items()]
 brow_meshes=[]
+brow_traces=[[(216,290),(229,286),(241,286),(252,290)],
+             [(329,292),(340,288),(351,287),(363,292)]]
 for side in (-1,1):
  sculpt_ear(side)
- brows=[[(214,288),(229,284),(243,284),(254,287)],[(327,289),(339,285),(351,284),(364,289)]]
- coordinates=[((px-302)/376,(915-py)/376) for px,py in brows[int(side>0)]]
- taper=(.18,.82,1,.62) if side<0 else (.62,1,.82,.18)
- brow=curve('Sculpted brow '+str(side),[(x,face_y(x,z)-.003,z) for x,z in coordinates],.010,BROW,taper)
+ coordinates=[recorded_coordinates(px,py) for px,py in brow_traces[int(side>0)]]
+ taper=(.14,.69,1,.58) if side<0 else (.61,1,.76,.14)
+ brow=curve('Sculpted brow '+str(side),[(x,face_y(x,z)-.002,z) for x,z in coordinates],.0105,BROW,taper)
  brow_expression(brow,side,face_y)
  brow_meshes.append(brow)
 sphere('Small sculpted nose',(0,face_y(0,1.486)+.005,1.486),(.016,.013,.012),SKIN)
