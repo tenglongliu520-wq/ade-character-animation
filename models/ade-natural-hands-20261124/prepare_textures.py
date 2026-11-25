@@ -10,8 +10,8 @@ def write_skin_blush():
  yy,xx=np.indices((950,720))
  skin=np.empty((950,720,3),float)
  skin[:]=SKIN_RGB
- for cx,cy in ((223,363),(378,366)):
-  weight=.52*np.exp(-((xx-cx)/34)**2-((yy-cy)/21)**2)
+ for cx,cy in ((231,365),(371,368)):
+  weight=.52*np.exp(-((xx-cx)/30)**2-((yy-cy)/20)**2)
   skin=skin*(1-weight[:,:,None])+np.array((251,151,141))*weight[:,:,None]
  Image.fromarray(np.uint8(skin)).resize((1024,1024),Image.Resampling.LANCZOS).save(ROOT/'skin-blush.png')
 

@@ -197,10 +197,10 @@ fringe_controls = {
   (455,268,-.136,.014,.011),(476,251,-.093,.001,.002)],
  "Right raised temple curl": [(388,166,-.118,.022,.019),(419,190,-.134,.034,.024),
   (444,207,-.128,.028,.021),(464,209,-.100,.012,.012),(481,190,-.071,.001,.002)],
- "Left temple hairline taper": [(174,239,-.171,.023,.020),(168,265,-.166,.032,.026),
-  (174,290,-.142,.022,.016),(185,308,-.122,.013,.010),(202,324,-.118,.001,.002)],
- "Right temple hairline taper": [(403,230,-.177,.023,.025),(414,254,-.159,.031,.024),
-  (424,279,-.132,.024,.017),(428,295,-.114,.014,.010),(416,316,-.115,.001,.002)],
+ "Left temple hairline taper": [(174,239,-.171,.023,.020),(170,265,-.169,.032,.026),
+  (181,289,-.156,.024,.017),(193,307,-.133,.014,.010),(207,323,-.134,.001,.002)],
+ "Right temple hairline taper": [(403,230,-.177,.023,.025),(415,254,-.159,.031,.024),
+  (416,279,-.146,.026,.018),(414,297,-.138,.017,.011),(401,320,-.138,.001,.002)],
 }
 tip_movement = {
  "Central swept fringe": ((.011,-.008,.010),0),
@@ -235,33 +235,40 @@ for sign in (-1,1):
 underlay=sphere('Continuous hair underlayer',(0,.04,1.87),(.325,.260,.300),REAR)
 bm=bmesh.new();bm.from_mesh(underlay.data);bmesh.ops.delete(bm,geom=[v for v in bm.verts if (v.co.z<-.10 if v.co.y<.08 else v.co.z<-.32)],context='VERTS');bm.to_mesh(underlay.data);bm.free()
 FACE_Z=1.646
-FACE_UPPER_RADIUS=.308
-FACE_LOWER_RADIUS=.273
-FACE_LOWER_POWER=2.38
+FACE_HEIGHT_RADIUS=.308
+
+# Face-only silhouette traced on the 401 x 225 close-up, excluding the ears.
+# Eye-centre spacing in that frame maps the trace to the existing eye rig.
+# Use sparse chin landmarks so the neck junction does not add a kink.
+FACE_TRACE=((220,158,191),(209,135,213),(200,123,221),
+            (193,116,226),(186,113,229),(179,111,230),(171,111,230),(155,111,229))
+FACE_TRACE_SCALE=.00434
+FACE_WIDTH_ROWS=[(FACE_Z-FACE_HEIGHT_RADIUS-.001,.59)]
+for image_y,left,right in FACE_TRACE:
+ z=1.565+(171.5-image_y)*FACE_TRACE_SCALE
+ traced_width=(right-left)*FACE_TRACE_SCALE/2
+ radial_width=.310*math.sqrt(1-((z-FACE_Z)/FACE_HEIGHT_RADIUS)**2)
+ FACE_WIDTH_ROWS.append((z,traced_width/radial_width))
+FACE_WIDTH_ROWS.extend([(1.687,.89),(1.772,.97),(FACE_Z+FACE_HEIGHT_RADIUS+.001,1)])
 
 def jaw_width(z):
- return 1-.032*math.exp(-((z-1.391)/.058)**2)+.092*math.exp(-((z-1.492)/.090)**2)
+ return interpolate(FACE_WIDTH_ROWS,z)[0]
 
 def cheek_relief(x,z):
- lower_face=.022*math.exp(-((z-1.472)/.133)**2)
- cheeks=.040*math.exp(-((abs(x)-.196)/.095)**2-((z-1.493)/.070)**2)
+ lower_face=.015*math.exp(-((z-1.472)/.133)**2)
+ cheeks=.017*math.exp(-((abs(x)-.167)/.079)**2-((z-1.488)/.072)**2)
  eye_socket=.004*math.exp(-((abs(x)-.146)/.085)**2-((z-1.588)/.055)**2)
  return lower_face+cheeks-eye_socket
 
 def face_y(x,z):
  width=.310*jaw_width(z)
- height=z-FACE_Z
- profile=(height/FACE_UPPER_RADIUS)**2 if height>=0 else (-height/FACE_LOWER_RADIUS)**FACE_LOWER_POWER
+ profile=((z-FACE_Z)/FACE_HEIGHT_RADIUS)**2
  depth=.265*math.sqrt(max(.001,1-(x/width)**2-profile))
  fade=min(1,depth/.12)
  return -.015-depth-cheek_relief(x,z)*fade*fade*(3-2*fade)
 
-head=sphere('Soft tapered face',(0,-.015,FACE_Z),(.310,.265,FACE_UPPER_RADIUS),FACE,80,64)
+head=sphere('Soft tapered face',(0,-.015,FACE_Z),(.310,.265,FACE_HEIGHT_RADIUS),FACE,96,96)
 for v in head.data.vertices:
- if v.co.z<0:
-  # Keep the upper face and shorten only the lower silhouette. This is
-  # the inverse of the lower-face profile used to fit the features above.
-  v.co.z=-FACE_LOWER_RADIUS*(-v.co.z/FACE_UPPER_RADIUS)**(2/FACE_LOWER_POWER)
  z=v.co.z+FACE_Z
  v.co.x*=jaw_width(z)
  if v.co.y<0:
@@ -277,7 +284,7 @@ for vertex in cheek_lift.data:
  x,y,z=vertex.co
  if y>=0:
   continue
- strength=math.exp(-((abs(x)-.183)/.084)**2-((z+FACE_Z-1.490)/.049)**2)*min(1,-y/.18)
+ strength=math.exp(-((abs(x)-.165)/.077)**2-((z+FACE_Z-1.486)/.049)**2)*min(1,-y/.18)
  vertex.co.y-=.005*strength
  vertex.co.z+=.013*strength
 def recorded_eye(name, contour, crop):
