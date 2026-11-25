@@ -1,13 +1,13 @@
 {
-  "bytes": 10103176,
-  "sha256": "d3a7f3275bc4f09f35e68f2778945c9fb89fab4c7a3e622e1c7ba931f0fb5974",
+  "bytes": 10196876,
+  "sha256": "72ba8444d12e87ca4f4217f34a3c912956c4d46e3d65c937636fae5978e3f27f",
   "dimensions_gltf_y_up": [
     0.9552367627620697,
     2.2945318650454283,
     0.789106011390686
   ],
   "depth_height_ratio": 0.34390719231744593,
-  "meshes": 88,
+  "meshes": 86,
   "embedded_images": 5,
   "independent_facial_geometry": [
     "Curved recorded eye left",
@@ -100,6 +100,8 @@
     "Soft bell sleeve 1",
     "Central swept fringe",
     "Left temple curl",
-    "Right raised temple curl"
+    "Right raised temple curl",
+    "Soft ear -1",
+    "Soft ear 1"
   ]
 }

@@ -32,11 +32,15 @@ assert all(any(name.startswith(feature) for name in names) for feature in featur
 colored_surfaces = [
     'Flowing open bamboo coat', 'Soft bell sleeve -1', 'Soft bell sleeve 1',
     'Central swept fringe', 'Left temple curl', 'Right raised temple curl',
+    'Soft ear -1', 'Soft ear 1',
 ]
 for name in colored_surfaces:
     node = next(node for node in g['nodes'] if node.get('name') == name)
     primitives = g['meshes'][node['mesh']]['primitives']
     assert all('COLOR_0' in primitive['attributes'] for primitive in primitives), name
+head = next(node for node in g['nodes'] if node.get('name') == 'Head expression pivot')
+assert {'Soft ear -1', 'Soft ear 1'}.issubset(g['nodes'][i].get('name') for i in head['children'])
+assert not any(name.startswith('Inner ear ') for name in names)
 assert 'Single folded pale sage cap' in names
 clip, = g['animations']
 assert clip['name']=='LookTiltReturn'

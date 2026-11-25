@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "6f1d5f3c28a75f50984762d1a11c4503f9aa7348af23b1d30d576c8f8b8a19a9"
+    "sha256": "9301fd797409bb92f311becf2781d9b750dd0de9cfd9b51483bd2f1e4898db70"
   },
   {
     "path": "requirements.txt",
@@ -37,7 +37,7 @@
   },
   {
     "path": "build_refined.py",
-    "sha256": "447b90be9af850d9b0aaf619aeb80eb59e9231348bbfe0ce3d5bae0a643665c3"
+    "sha256": "67dd523e534ca949dce07fcf87c4a62b4a8a6de652ffabcc18c1fb4e13e51e52"
   },
   {
     "path": "render_outline.py",
@@ -49,7 +49,7 @@
   },
   {
     "path": "verify_candidate.py",
-    "sha256": "24e8d66c1916369d58c14d9bff00c1d4dea8d3eaa9a1dd52f0050f068028997a"
+    "sha256": "b856a9cfc1923547356c939b8829fc3833b8a39e2eb2f5d5dc9a3290c85d6d34"
   },
   {
     "path": "validate_gltf.cjs",
@@ -73,7 +73,7 @@
   },
   {
     "path": "index.html",
-    "sha256": "997b6f22533e3cc048f412975e2d7625d138e2ae3fb83f28170b21ff2f23d4a5"
+    "sha256": "4386e840969a3028a154437749aab352b16586dbdbd049ea438f2573fffa4231"
   },
   {
     "path": "package.json",
@@ -85,7 +85,7 @@
   },
   {
     "path": "ade.glb",
-    "sha256": "d3a7f3275bc4f09f35e68f2778945c9fb89fab4c7a3e622e1c7ba931f0fb5974"
+    "sha256": "72ba8444d12e87ca4f4217f34a3c912956c4d46e3d65c937636fae5978e3f27f"
   },
   {
     "path": "reference-front.png",
@@ -145,35 +145,35 @@
   },
   {
     "path": "front.png",
-    "sha256": "268375e307b7aa445190cd1303ce0f1f972ef376e4166a65dbc25148880ec18e"
+    "sha256": "412382ca5ac8a09f610f2ecd011a2ace4a626a923e29cf19da986ee4bee4807c"
   },
   {
     "path": "quarter-right.png",
-    "sha256": "626a8079fdecf869ad95621aec03ae86abe18f7017bb654e939ef15a706b8b3c"
+    "sha256": "381fa085755119e47b11092a401d086a95e6d7508c8394f214977bc4e00bc2f9"
   },
   {
     "path": "quarter-left.png",
-    "sha256": "d442c366ea69519f7e186c3cb6981f58bfb63da36b7ff3a6b1e8f5a549929a5a"
+    "sha256": "71036edc925f9932d8e158381ee5e1e3a8d8a436fc3c7cb0aa5f1d8d3fd4d42a"
   },
   {
     "path": "side.png",
-    "sha256": "68e1006464f3a21866c6732bbf885e01c1ddc203fe25b8754764865721a1cdd8"
+    "sha256": "919cddb6eb9722160a6325b0debee275e0aa7c2977fa1775feef42610fc6c10a"
   },
   {
     "path": "back.png",
-    "sha256": "5119cf8f53b667e8627998834d436bbfa7d8c0f553acd7704181805fb861f689"
+    "sha256": "15dfe46641335f1585c9720af4d7f0853b375b022b6a7b512b7ed4c15da475ca"
   },
   {
     "path": "gesture.png",
-    "sha256": "d8ede9d269337b3eeeda250ea566e529a620c2de0c34fcf46e505b7ce068a981"
+    "sha256": "e75271f78e4f8d654eceb33042f627e459c81d27d4c6c6dc715ee7030374f2c4"
   },
   {
     "path": "blink.png",
-    "sha256": "0b10bdb66a7dac364c925ad65ad3bcd22ca9fb0b156a129827532f3fee890eb0"
+    "sha256": "6afe15fcd262ad3d2c200ed3316e2ed7ec04b54159e29d467feedb91f3df1bf3"
   },
   {
     "path": "glance.png",
-    "sha256": "caae9145977fb732322772b2b42ebd6691b65489f5d2542ce930d2715970dafa"
+    "sha256": "5f2b7096498a59495abefd069b4162e090be985c9038d8ccc46ddef2706011ee"
   },
   {
     "path": "hand-comparison.jpg",
@@ -185,31 +185,31 @@
   },
   {
     "path": "expression-comparison.jpg",
-    "sha256": "10c0bf4f426d80aec3d09c2d342175cc28fb5c1bd345fc972ba73e046b63e592"
+    "sha256": "7d517a5b154f1b15b4268c1c545220fc12221a858b9f5cdacbe7bbf69ec6c2fd"
   },
   {
     "path": "comparison.jpg",
-    "sha256": "c144b32fc0ed5d2dca706121cabc6c070f9dae45a4bc381f8f012d346fec7d2b"
+    "sha256": "9df2c5d422945edd5c6b9b88739cbd62af23685a2e031f0483d482b50effb56f"
   },
   {
     "path": "multi-view-comparison.jpg",
-    "sha256": "8203fe0a9e250b424d32dbd9c1e68082ced6a8f7c4ace0650293a452f72b4668"
+    "sha256": "c41411488e0ce1381ae18062de5ce00d1c852f4c3ec51403e5a037b25cfb45d1"
   },
   {
     "path": "outline-comparison.jpg",
-    "sha256": "9b48e79b8125160efd7f1147c235e0362e30fa6cf94bde2b3e540b0af443c13a"
+    "sha256": "636befaf27a3a86ca5607d1ec301ab5b2362abb85fd81132dc036c098521b765"
   },
   {
     "path": "build-report.json",
-    "sha256": "b7a94f915baf06c02199aa0bbb3378b587b5bd88509a824539d52470f35a36b0"
+    "sha256": "c2bd791a7295e033ab3d6d4fb6245a1281d34c0ce9c5b0f76b5158f8cb0ca439"
   },
   {
     "path": "candidate-check.json",
-    "sha256": "5359658460caa4f59530c568f01161e712abb7b87073e70ec0e60ab2872a796d"
+    "sha256": "8af90a82c45731cf513cf03bb868873c4199809bddc7edf76e609b5b7bf43023"
   },
   {
     "path": "gltf-validation.json",
-    "sha256": "660b228c72668e3baf3519691622753e9e0f5532b8ede1e80da3ea32994567e5"
+    "sha256": "f3073933689571a24d7c461e9a8698c1b75aff635e2cc68d43a081b922beb7d2"
   },
   {
     "path": "hand-order.jpg",
@@ -218,6 +218,10 @@
   {
     "path": "face-proportion-comparison.jpg",
     "sha256": "4903a5245d3ccc10969912b7e8350b81c5ff59f59e9c1eab881d02d892bdae15"
+  },
+  {
+    "path": "ear-comparison.jpg",
+    "sha256": "6d729ca6f172e941ba8f9edbc8b4ae978904f71c316466ff3e9f8a5c2278f165"
   },
   {
     "path": "vendor/LICENSE",

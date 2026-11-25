@@ -285,13 +285,32 @@ def recorded_eye(name, contour, crop):
  lids,lash=lid_meshes(name,boundary,mesh,face_y,FACE,LASH)
  return eye,lids,lash
 
+def sculpt_ear(side):
+ """Fit a continuous outer rim, shallow bowl, and tapered earlobe."""
+ width,depth,height=.060,.053,.061
+ ear=sphere('Soft ear '+str(side),(side*.283,-.055,1.541),(width,depth,height),EAR,64,48)
+ colors=ear.data.color_attributes.new(name='EarColor',type='FLOAT_COLOR',domain='POINT')
+ ear.data.color_attributes.active_color=colors
+ for vertex,color in zip(ear.data.vertices,colors.data):
+  x,y,z=vertex.co
+  outward=side*x/width
+  vertical=z/height
+  bowl=math.exp(-((outward-.53+.07*vertical)/.36)**2-((vertical-.10)/.52)**2)
+  front=max(0,min(1,-y/.036))
+  bowl*=front*front*(3-2*front)
+  # Raise the outer rim toward the hair and let the lobe turn into the cheek.
+  vertex.co.x+=side*(.008*vertical-.005*vertical*vertical)
+  vertex.co.y+=.006*outward+.010*bowl
+  tint=.79*bowl
+  color.color_srgb=tuple((base*(1-tint)+inner*tint)/255 for base,inner in zip(SKIN_RGB,INNER_EAR_RGB))+(1,)
+ return ear
+
+EAR.name='Ear skin with soft inner tint'
+use_vertex_color(EAR,'EarColor')
 eye_groups=[recorded_eye(name,contour,EYE_CROPS[name]) for name,contour in EYES.items()]
 brow_meshes=[]
 for side in (-1,1):
- ear=sphere('Soft ear '+str(side),(side*.287,-.049,1.532),(.067,.057,.064),SKIN)
- ear.rotation_euler.y=side*.27
- inner=sphere('Inner ear '+str(side),(side*.314,-.091,1.532),(.024,.010,.029),EAR)
- inner.rotation_euler.y=side*.27
+ sculpt_ear(side)
  brows=[[(214,288),(229,284),(243,284),(254,287)],[(327,289),(339,285),(351,284),(364,289)]]
  coordinates=[((px-302)/376,(915-py)/376) for px,py in brows[int(side>0)]]
  taper=(.18,.82,1,.62) if side<0 else (.62,1,.82,.18)

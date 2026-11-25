@@ -2,7 +2,7 @@
   "uri": "ade.glb",
   "mimeType": "model/gltf-binary",
   "validatorVersion": "2.0.0-dev.3.10",
-  "validatedAt": "2026-11-25T02:27:09.779Z",
+  "validatedAt": "2026-11-25T03:06:35.137Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -22,7 +22,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 10021776
+        "byteLength": 10116720
       },
       {
         "pointer": "/images/0",
@@ -96,9 +96,9 @@
     "hasSkins": false,
     "hasTextures": true,
     "hasDefaultScene": true,
-    "drawCallCount": 88,
-    "totalVertexCount": 250285,
-    "totalTriangleCount": 496713,
+    "drawCallCount": 86,
+    "totalVertexCount": 250345,
+    "totalTriangleCount": 496841,
     "maxUVs": 1,
     "maxInfluences": 0,
     "maxAttributes": 3
