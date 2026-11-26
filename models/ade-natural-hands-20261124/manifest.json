@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "b68f58fcb89dc8a44fbc52c7c2a121c2c546dbe19c61752abe7c491dc775d3e6"
+    "sha256": "b344d365925b2e5c4127f2a20df5cee0ab1504cb5ccbcc300e130b0d59fbcd3f"
   },
   {
     "path": "requirements.txt",
@@ -310,6 +310,14 @@
   {
     "path": "add_beihai_lake_motion.py",
     "sha256": "479f7c84e983b0703fcb110ed852a88a4866d82659d5cd27b1a8d46eca980a00"
+  },
+  {
+    "path": "add_detishuo_opening.py",
+    "sha256": "b053462a6fba4d129dae0dde5d431785f507145a34908d5caf61982bf621bcbd"
+  },
+  {
+    "path": "detishuo-brand.webp",
+    "sha256": "f9b00aa0abaaf0558eb47bf5aaf85665246b485fcab057bd5a6e37db4766ce93"
   },
   {
     "path": "vendor/LICENSE",
