@@ -8,6 +8,19 @@
 
 本地打开 `http://127.0.0.1:4205/dance.html`。运行 `python rowing_dance.py` 可从本地 `ade.blend` 重新导出双桨舞。
 
+### 北海公园远景版
+
+`render_beihai_dance.py` 将双桨舞合成到北京北海公园的湖畔。阿德约占画面高度六成，石岸、湖面和白塔留在画面里。镜头缓慢横移，水波带动倒影和微光，脚下的接触阴影随动作变化。`beihai-lake.png` 是使用内置 ImageGen 生成的背景，舞蹈来源为提交 e1bd274cf2cdfcc1dfa9bca0fa27b8b0c0b7387e。
+
+在装好 `requirements.txt` 后，运行 `python build_refined.py` 和 `python rowing_dance.py --no-review` 生成所需的 `ade-rowing.blend`。再运行 `python render_beihai_dance.py` 导出使用原创节拍的 MP4。可用 `--audio` 和 `--tempo` 指定本地音轨和编排节拍。
+
+<details>
+<summary>ImageGen 背景提示词</summary>
+
+Create a high-quality background plate for compositing an existing full-height, centered 3D chibi Chinese character dancing. Do not depict the character or any people, text or graphics. Portrait with framing approximately 5:6. Beijing Beihai Park, recognizable view from the western lakeside in late spring, soft warm morning light matching a gentle polished animated film, realistic landscape with soft natural color, graceful willows and red-walled shoreline temples on Qionghua Island. The authentic Beihai White Dagoba (white inverted-bowl Tibetan stupa with a finial, not a tiered pagoda) rises above the trees in the upper-right, with its spire near 77–82% of the frame width and 20% of the height so it can be seen clear of the central figure; include a little pastel sky above. Distant treeline ends at approximately 43–47% of the frame height. Include the stupa's glimmering reflection and lightly textured horizontal ripples in soft blue-green water, which fills the broad middle and lower frame. The last 13–16% at the bottom is a flat, clean gray-beige stone lakeside terrace on which the character can stand, separated from the lake by a clean unbroken edge, no railing or steps. Reserve the central portion as quiet negative space for the figure; avoid paths or bright focal points there. No modern skyline, no crowds, no graphic overlay, no writing, no letterbox. Single coherent scene from water's edge, natural depth and softly detailed background, locally bright but no hard shadows.
+
+</details>
+
 流畅版参考 `cbda065…` 的单袖上扬与重心摆动，以及 `e78beafb…` 的开臂和回收。逐帧采样衔接曲线，身体重心先起，肩和肘错时跟进，抬脚和落脚用弧线。衣摆、腰带和发带随后回落。动作保留 32 个编排拍点和同一音频时钟。原舞蹈版本见 b15f4d4e5c5e85d4c80df61baa91c52210e86b5d。
 
 大动作版从 `1a6acea2…`、`cbda065…` 和 `e78beafb…` 三段录屏取动作，再按配乐编排双袖上提、左右跨步与单袖抬手、双臂展开、胸前交叉回收和鞠躬。最大横向步幅 0.185 模型单位，肩部展开峰值 72°。双袖上提在第 2 拍，左右跨步压重心在第 6、10、18、22 拍，展开回收主要在第 14、19–20、23–24 和 28–29 拍。每个编排拍点对应参考配乐的两拍。上一版见 d0d599f5876350c4c8d87fe110d35df9d47ed11e。

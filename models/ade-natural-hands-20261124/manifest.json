@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "a8d498dded7b82a60f09dfabdc8e0d3d8ddd5bbd3b99260473d9cbe6818f43d0"
+    "sha256": "4d62398b070f283cf804c3e25d9b3353fcf98236b99489859a088ef9c1863231"
   },
   {
     "path": "requirements.txt",
@@ -282,6 +282,14 @@
   {
     "path": "rowing-validation.json",
     "sha256": "696d316cd1432c170ee496f3be107c5841bcf7e8ec1c38f0e5485505c14dafbd"
+  },
+  {
+    "path": "beihai-lake.png",
+    "sha256": "8d6d047b6b9db2fce6c42de8cdb19859e8466f14684ededc3935c7fa911fb8f9"
+  },
+  {
+    "path": "render_beihai_dance.py",
+    "sha256": "10e517ae1c19df1d5446e387aca234fbc160effee16640f09a9e3ec7f3a7054f"
   },
   {
     "path": "vendor/LICENSE",
