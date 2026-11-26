@@ -1,5 +1,6 @@
 """Composite the rowing dance over an animated Beihai Park landscape."""
 import argparse
+import os
 from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
@@ -79,12 +80,24 @@ def configure_scene(tempo, audio, plates):
     bpy.context.object.name = 'Beihai quay contact shadows'
     bpy.context.object.is_shadow_catcher = True
     scene.render.film_transparent = True
-    scene.cycles.samples = 5
+    scene.cycles.samples = 6
     scene.cycles.use_denoising = True
+    scene.cycles.denoising_input_passes = 'RGB_ALBEDO'
+    scene.cycles.denoising_prefilter = 'FAST'
+    scene.cycles.denoising_quality = 'FAST'
+    scene.cycles.max_bounces = 3
+    scene.cycles.diffuse_bounces = 1
     scene.render.use_persistent_data = True
+    scene.render.threads_mode = 'FIXED'
+    scene.render.threads = min(12, os.cpu_count() or 1)
     scene.render.resolution_x = WIDTH
     scene.render.resolution_y = HEIGHT
     scene.render.resolution_percentage = 100
+    # Only this region contains the model and its shadow. The plate fills the frame.
+    scene.render.use_border = True
+    scene.render.use_crop_to_border = False
+    scene.render.border_min_x, scene.render.border_max_x = .14, .86
+    scene.render.border_min_y, scene.render.border_max_y = .02, .80
 
     scene.use_nodes = True
     scene.render.use_compositing = True
