@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "7ff5d11b809ffe9f49ffa1d6220ac4cf06c5406bbc08b90108cc18f4ca2bb1f4"
+    "sha256": "ed83c1d9b530c09b1e01eab29044c573077fc80024e9598b823f822ec7ca2481"
   },
   {
     "path": "requirements.txt",
@@ -306,6 +306,10 @@
   {
     "path": "rowing-minute-validation.json",
     "sha256": "7781ae597186dc8a554de14083b40b180b0819861060ac34e3aa6d021677b618"
+  },
+  {
+    "path": "add_beihai_lake_motion.py",
+    "sha256": "479f7c84e983b0703fcb110ed852a88a4866d82659d5cd27b1a8d46eca980a00"
   },
   {
     "path": "vendor/LICENSE",
