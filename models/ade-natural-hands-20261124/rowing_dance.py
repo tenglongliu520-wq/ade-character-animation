@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 import bpy
-from mathutils import Matrix, Vector
+from mathutils import Euler, Matrix, Vector
 
 from expression_motion import adopt, pivot
 from relaxed_hands import add_relaxed_hand
@@ -185,7 +185,7 @@ def add_arm_shapes(obj, elbow, bends):
     }, baked=True)
 
 
-def add_side_step(side, foot, beats, steps, max_stride, extra_step):
+def add_side_step(side, foot, beats, steps, extra_step):
     def step(beat):
         additional = extra_step(beat,side)
         if additional is not None:
@@ -211,10 +211,10 @@ def add_side_step(side, foot, beats, steps, max_stride, extra_step):
 
     keys=[(beat,*step(beat)) for beat in beats]
     animate_transform(foot,keys)
-    return [(beat,min(1,abs(offset[0])/max_stride)) for beat,offset,_ in keys]
+    return keys
 
 
-def add_trouser_follow(trouser, side, step_amount, max_stride):
+def add_trouser_follow(trouser, side, foot_keys, max_stride, *, hip_connection=None):
     """Keep the upper trouser inside the robe while the cuff follows the foot."""
     world=trouser.matrix_world.copy()
     inverse=world.inverted()
@@ -227,7 +227,54 @@ def add_trouser_follow(trouser, side, step_amount, max_stride):
         point.x=center_x+(point.x-center_x)*(1-.48*bound)-side*max_stride*.76*bound
         point.y=point.y*(1-.39*bound)+.094*bound
         vertex.co=inverse @ point
-    animate_shapes(trouser,{'Step tuck':step_amount},baked=True)
+    values={'Step tuck':[(beat,min(1,abs(offset[0])/max_stride)) for beat,offset,_ in foot_keys]}
+    if hip_connection is not None:
+        torso_rest, torso_keys, influence = hip_connection
+        values['Step tuck']=[(beat,value*(1-influence(beat))) for beat,value in values['Step tuck']]
+        values.update(add_hip_follow(trouser,side,basis,foot_keys,torso_rest,torso_keys,influence))
+    animate_shapes(trouser,values,baked=True)
+
+
+def add_hip_follow(trouser, side, basis, foot_keys, torso_rest, torso_keys, influence):
+    """Keep each cuff with its foot and draw the upper trouser under the turning hips."""
+    world=trouser.matrix_world.copy()
+    inverse=world.inverted()
+    binding=[]
+    for vertex in basis.data:
+        point=world @ vertex.co
+        binding.append((point,ease((point.z-.128)/.207)))
+
+    gather=trouser.shape_key_add(name='Leg under hip')
+    for vertex,(point,weight) in zip(gather.data,binding):
+        center=side*.113
+        tucked=Vector((center+(point.x-center)*(1-.42*weight),
+                      point.y*(1-.35*weight),point.z+.055*weight))
+        vertex.co=inverse @ tucked
+
+    extent=.5
+    names=('Hip connection X','Hip connection Y','Hip connection Z')
+    for axis,name in enumerate(names):
+        key=trouser.shape_key_add(name=name)
+        key.slider_min=-1
+        shift=Vector((0,0,0))
+        shift[axis]=extent
+        for vertex,(point,weight) in zip(key.data,binding):
+            vertex.co=inverse @ (point+shift*weight)
+
+    anchor=Vector((side*.113,0,.415))
+    foot_rest=Vector((side*.113,-.046,.061))
+    keys={name:[] for name in ('Leg under hip',*names)}
+    for (beat,foot_offset,foot_angles),(_,body_offset,body_angles) in zip(foot_keys,torso_keys):
+        weight=influence(beat)
+        keys['Leg under hip'].append((beat,weight))
+        foot_matrix=Euler(tuple(math.radians(a) for a in foot_angles)).to_matrix()
+        body_matrix=Euler(tuple(math.radians(a) for a in body_angles)).to_matrix()
+        hip=torso_rest+Vector(body_offset)+body_matrix @ (anchor-torso_rest)
+        in_foot=foot_matrix.transposed() @ (hip-foot_rest-Vector(foot_offset))
+        delta=in_foot-(anchor-foot_rest)
+        for axis,name in enumerate(names):
+            keys[name].append((beat,delta[axis]*weight/extent))
+    return keys
 
 
 def add_cloth_follow(obj, waves):
@@ -252,7 +299,7 @@ def add_cloth_follow(obj, waves):
 def build_dance(
     poses=POSES, steps=STEP_PHRASES, *, output='ade-rowing',
     floor_turn=None, extra_step=lambda beat, side: None, spotting=lambda beat: 0,
-    smile=None, blink=None,
+    smile=None, blink=None, hip_weight=None,
 ):
     count=poses[-1].beat
     max_stride=max(stride for _,_,stride,_ in steps)
@@ -275,16 +322,16 @@ def build_dance(
     head = bpy.data.objects['Head expression pivot']
     ribbon = bpy.data.objects['Hair ribbon follow through']
     curves, beats = sample_motion(poses)
+    root=None
     if floor_turn is not None:
         root = pivot('Dance floor turn', (0,0,0))
         adopt(torso,root)
+    foot_tracks={}
     for index,(side,label) in enumerate(((-1,'right'),(1,'left'))):
         shoulder_point = Vector((side*.130,0,1.248))
         elbow_point = Vector((side*.213,0,1.080))
         shoulder = pivot(f'Rowing shoulder {label}', torso.matrix_world.inverted() @ shoulder_point, torso)
-        foot = pivot(f'Dance step {label}', (side*.113,-.046,.061))
-        if floor_turn is not None:
-            adopt(foot,root)
+        foot = pivot(f'Dance step {label}', (side*.113,-.046,.061), root)
         bpy.context.view_layer.update()
         delay = .14+index*.075
         bends = [(beat,curves['bend',index](phased(beat,delay))) for beat in beats]
@@ -305,8 +352,7 @@ def build_dance(
                 curves['sweep',index](phased(beat,.06+index*.03))+side*curves['turn'](phased(beat,.09))*.10,
             )) for beat in beats
         ])
-        step_amount=add_side_step(side,foot,beats,steps,max_stride,extra_step)
-        add_trouser_follow(bpy.data.objects[f'Loose trouser hem {side}'],side,step_amount,max_stride)
+        foot_tracks[side]=add_side_step(side,foot,beats,steps,extra_step)
 
     torso_keys,head_keys,ribbon_keys,waves,tip_follow=[],[],[],[],[]
     for beat in beats:
@@ -330,6 +376,13 @@ def build_dance(
         waves.append((beat,wave if floor_turn is None else max(-1,min(1,wave-lag*.021))))
         turn_change=curves['turn'](cloth_beat)-curves['turn'](phased(beat,.40))
         tip_follow.append((beat,min(.72,abs(turn_change)*.12+abs(curves['nod'](cloth_beat))*.020+abs(lag)*.022)))
+    hip_connection=None if hip_weight is None else (torso.location.copy(),torso_keys,hip_weight)
+    scene.frame_set(1)
+    for side,foot_keys in foot_tracks.items():
+        add_trouser_follow(
+            bpy.data.objects[f'Loose trouser hem {side}'],side,foot_keys,max_stride,
+            hip_connection=hip_connection,
+        )
     if floor_turn is not None:
         animate_transform(root,[(beat,(0,0,0),(0,0,floor_turn(beat))) for beat in beats])
     animate_transform(torso,torso_keys)

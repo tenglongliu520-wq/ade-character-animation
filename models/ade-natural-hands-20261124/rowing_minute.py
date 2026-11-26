@@ -76,19 +76,23 @@ SPOT = make_curve((
 
 # Each landing holds its world-space position until the next swing.
 SWING = {
-    -1: ((43.47,44.18),(44.98,45.78),(46.58,47.35)),
-     1: ((44.18,44.98),(45.78,46.58),(47.35,47.95)),
+    -1: ((43.39,43.92),(44.45,44.98),(45.49,46.02),(46.55,47.08),(47.53,48.00)),
+     1: ((43.92,44.45),(44.98,45.49),(46.02,46.55),(47.08,47.53)),
 }
 
 
+def turn_hip_weight(beat):
+    return ease((beat-43.02)/.37)*ease((48.28-beat)/.28)
+
+
 def spinning_step(beat, side):
-    if not 43.47 <= beat <= 47.95:
+    if not 43.39 <= beat <= 48:
         return None
     rest = Vector((side*.113,-.046,0))
     local_to_world = lambda angle: Matrix.Rotation(math.radians(angle),3,'Z')
     direction = 0
     lift = toe = arc = 0
-    for index, (start, end) in enumerate(SWING[side]):
+    for start, end in SWING[side]:
         if beat < start:
             break
         goal_direction = TURN(end)
@@ -96,15 +100,15 @@ def spinning_step(beat, side):
             progress = (beat-start)/(end-start)
             direction += (goal_direction-direction)*ease(progress)
             arc = math.sin(math.pi*progress)**2
-            lift = (.076 if index<2 else .055)*arc
-            toe = 14*arc*(1-2*progress)
+            lift = (.061 if end<47.35 else .045)*arc
+            toe = 12*arc*(1-2*progress)
             break
         direction = goal_direction
     yaw = TURN(beat)
     center = Vector((0,-.046,0))
-    anchor = center + local_to_world(direction) @ ((rest-center)*(1+.23*arc))
+    anchor = center + local_to_world(direction) @ ((rest-center)*(1+.12*arc))
     offset = local_to_world(-yaw) @ anchor - rest
-    return (offset.x,offset.y,lift), (toe,0,(direction-yaw)*.65)
+    return (offset.x,offset.y,lift), (toe,0,(direction-yaw)*.24)
 
 
 def footwork(beat, side):
@@ -128,7 +132,7 @@ def main():
               (51.8,0),(62.12,0),(62.36,1),(62.62,0),(64,0)]
     return build_dance(
         MINUTE_POSES,STEPS,output='ade-rowing-minute',floor_turn=TURN,
-        extra_step=footwork,spotting=SPOT,smile=expression,blink=blinking,
+        extra_step=footwork,spotting=SPOT,smile=expression,blink=blinking,hip_weight=turn_hip_weight,
     )
 
 

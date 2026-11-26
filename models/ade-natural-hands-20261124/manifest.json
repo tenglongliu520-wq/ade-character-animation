@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "ed83c1d9b530c09b1e01eab29044c573077fc80024e9598b823f822ec7ca2481"
+    "sha256": "b68f58fcb89dc8a44fbc52c7c2a121c2c546dbe19c61752abe7c491dc775d3e6"
   },
   {
     "path": "requirements.txt",
@@ -261,7 +261,7 @@
   },
   {
     "path": "rowing_dance.py",
-    "sha256": "d47a09df1e1b4992f07495e41feaff44a4cbab07fe1b7c2a5c224777a2b41dab"
+    "sha256": "58b3dcc4b1cf30e6358a5f5e42624b718dd17baf4f5330cf69ee3c0df3dca43e"
   },
   {
     "path": "rowing_music.py",
@@ -293,19 +293,19 @@
   },
   {
     "path": "rowing_minute.py",
-    "sha256": "96d542163a18e9244988db688a35a9d72c120b4ef659999f26fd2e1662916436"
+    "sha256": "a30c769c66f79f84d335b636d079173aaef1314ca08835ca4b3ac2efa7606e39"
   },
   {
     "path": "ade-rowing-minute.glb",
-    "sha256": "dc01689d501240bbceb318df0cf6e87778157b228624d1824d6d62dbb0b7b986"
+    "sha256": "b54180a85c3d13763732726b44f5cacc1c95ce757745d65f19d81837b47979a3"
   },
   {
     "path": "rowing-minute-review.jpg",
-    "sha256": "cd2f722410309c662d8936edf3870f14a81fd8982e65fc7a3513e7ec3208d475"
+    "sha256": "dea386fb725b5930c8e81712fe72417a05f3121f8c116b8b4976129c23b8d4d5"
   },
   {
     "path": "rowing-minute-validation.json",
-    "sha256": "7781ae597186dc8a554de14083b40b180b0819861060ac34e3aa6d021677b618"
+    "sha256": "031d0a56a195476dbc2cc2e31f9f6fdc2a5ba0029728031b5b5d5a5d845fd983"
   },
   {
     "path": "add_beihai_lake_motion.py",

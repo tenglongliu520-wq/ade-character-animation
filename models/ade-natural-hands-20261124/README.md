@@ -25,6 +25,8 @@ Create a high-quality background plate for compositing an existing full-height, 
 
 `ade-rowing-minute.glb` 含 64 个编排拍点。前半段借鉴录屏 `1a6acea2…` 的双手抬起、`cbda065f…` 的侧移抬袖，以及 `e78beafb…` 的开臂回收。后半段用街舞两步律动接划桨，侧步最大横移从 0.185 增至 0.222 模型单位，之后交替踩步转 360 度，接脚跟脚尖点步和鞠躬。转圈时支撑脚保持落点，头部先看回前方，衣摆和发带跟随旋转。人物和北海布景来源为 4ca95abecd87bfd36d0a80e8c055811d0aeb674c。
 
+约第 40 秒的转身使用脚踝处的旋转中心和更短的交替踩步。转身时裤腿上端随腰胯，裤脚随鞋，二者之间的布料沿腿长渐变，裤腿上缘收进衣摆。修复前版本见 fa071d1fa218569efa30dc93c3b87cc44db4b63f。
+
 运行 `python rowing_minute.py` 生成长舞段，从 `ade.blend` 读取角色。使用 16 位 PCM WAV 作为输入，运行 `python render_beihai_dance.py --minute --audio 原始音轨.wav --audio-start 7.68` 生成一分钟版。默认以 67.5 BPM 编排，对应配乐约 135 BPM。成片从北海湖面开场，约 1.3 秒起舞，约 58.2 秒回到湖面。公开仓库包含舞蹈模型、渲染代码和分镜预览，视频用的配乐由本地输入。
 
 `python add_beihai_lake_motion.py 原版一分钟视频.mp4` 会在 480 × 576 的一分钟成片上加入动云和小木船。船上的孩子交替伸手、拉桨和回桨，入水时有小水圈，船尾留下水纹。天空蒙版限制云层在白塔和柳枝周围的移动范围。输出沿用输入视频的舞蹈时序和配乐。
