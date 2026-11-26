@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
+import wave
 
 import bpy
 from mathutils import Vector
@@ -14,6 +15,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parent
 WIDTH, HEIGHT = 480, 576
 FPS, ORIGINAL_TEMPO, BEATS = 30, 96, 32
+MINUTE_BEATS, MINUTE_LEAD_IN = 64, 39
 OVERSCAN = 12
 
 
@@ -54,12 +56,14 @@ def make_plates(directory, frames):
         plate.save(directory / f'lake-{frame:04d}.jpg', quality=94, subsampling=0)
 
 
-def configure_scene(tempo, audio, plates):
-    bpy.ops.wm.open_mainfile(filepath=str(ROOT / 'ade-rowing.blend'))
+def configure_scene(tempo, audio, plates, *, minute=False):
+    stem = 'ade-rowing-minute' if minute else 'ade-rowing'
+    bpy.ops.wm.open_mainfile(filepath=str(ROOT / f'{stem}.blend'))
     scene = bpy.context.scene
     scene.frame_set(1)
     scene.frame_start = 1
-    scene.frame_end = round(BEATS*60/tempo*FPS)
+    lead_in = MINUTE_LEAD_IN if minute else 0
+    scene.frame_end = 60*FPS if minute else round(BEATS*60/tempo*FPS)
     scene.render.fps = FPS
     scene.render.fps_base = 1
     for obj in scene.objects:
@@ -71,6 +75,11 @@ def configure_scene(tempo, audio, plates):
                 for track in owner.animation_data.nla_tracks:
                     for strip in track.strips:
                         strip.scale *= ORIGINAL_TEMPO/tempo
+                        if lead_in:
+                            strip.frame_start_raw += lead_in
+                            strip.frame_end_raw += lead_in
+                            strip.blend_in = 0
+                            strip.blend_out = 0
 
     camera = scene.camera
     camera.data.ortho_scale = 3.76
@@ -115,12 +124,38 @@ def configure_scene(tempo, audio, plates):
     tree.links.new(lake.outputs['Image'], composite.inputs[1])
     tree.links.new(actor.outputs['Image'], composite.inputs[2])
     tree.links.new(composite.outputs['Image'], output.inputs['Image'])
+    if minute:
+        dance_end = lead_in+round(MINUTE_BEATS*60/tempo*FPS)
+        opacity = composite.inputs['Fac']
+        for frame,value in ((1,0),(30,0),(lead_in+1,1),(dance_end-5,1),(scene.frame_end-9,0)):
+            opacity.default_value = value
+            opacity.keyframe_insert(data_path='default_value',frame=frame)
 
     if scene.sequence_editor:
         scene.sequence_editor_clear()
-    scene.sequence_editor_create().strips.new_sound('Dance accompaniment', str(audio), 1, 1)
+    scene.sequence_editor_create().strips.new_sound('Dance accompaniment', str(audio), 1, 1+lead_in)
     scene.render.use_sequencer = True
     return scene
+
+
+def minute_audio(source, destination, start, tempo):
+    with wave.open(str(source),'rb') as audio:
+        rate = audio.getframerate()
+        first = round(start*rate)
+        count = round(MINUTE_BEATS*60/tempo*rate)
+        if audio.getsampwidth()!=2 or first<0 or first+count>audio.getnframes():
+            raise ValueError('The one-minute edit needs 16-bit PCM WAV with enough audio after the start time.')
+        channels = audio.getnchannels()
+        audio.setpos(first)
+        samples = np.frombuffer(audio.readframes(count),dtype='<i2').reshape(-1,channels).copy()
+    entry = round(rate*.012)
+    decay = round(rate*.74)
+    samples[:entry] = np.rint(samples[:entry]*np.linspace(0,1,entry)[:,None])
+    samples[-decay:] = np.rint(samples[-decay:]*(.5+.5*np.cos(np.linspace(0,np.pi,decay)))[:,None])
+    with wave.open(str(destination),'wb') as edited:
+        edited.setparams((channels,2,rate,count,'NONE','not compressed'))
+        edited.writeframes(samples.tobytes())
+    return destination
 
 
 def render_video(scene, output, temporary):
@@ -139,24 +174,33 @@ def render_video(scene, output, temporary):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--audio', default=ROOT / 'rowing-beat.wav', type=Path)
-    parser.add_argument('--tempo', type=float, default=ORIGINAL_TEMPO)
-    parser.add_argument('--output', default=ROOT / 'ade-rowing-beihai.mp4', type=Path)
+    parser.add_argument('--tempo', type=float)
+    parser.add_argument('--output', type=Path)
+    parser.add_argument('--minute', action='store_true', help='Use the 64-count choreography and a 60-second edit.')
+    parser.add_argument('--audio-start', default=0, type=float, help='Seconds to skip in the source WAV for the 60-second edit.')
     parser.add_argument('--stills', nargs='+', type=int, help='Render selected frames as PNG previews.')
     arguments = parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
-    if not 45 <= arguments.tempo <= 180:
+    tempo = arguments.tempo if arguments.tempo is not None else (67.5 if arguments.minute else ORIGINAL_TEMPO)
+    if not 45 <= tempo <= 180:
         parser.error('--tempo must be between 45 and 180 BPM')
     if not arguments.audio.is_file():
         parser.error(f'Audio file missing: {arguments.audio}')
-    count = round(BEATS*60/arguments.tempo*FPS)
+    if arguments.minute and MINUTE_LEAD_IN+round(MINUTE_BEATS*60/tempo*FPS)>60*FPS-16:
+        parser.error('The minute choreography needs time to finish before the closing shot.')
+    count = 60*FPS if arguments.minute else round(BEATS*60/tempo*FPS)
     if arguments.stills and any(frame < 1 or frame > count for frame in arguments.stills):
         parser.error(f'Preview frames must be between 1 and {count}')
-    output = arguments.output.resolve()
+    default_name = 'ade-rowing-beihai-minute.mp4' if arguments.minute else 'ade-rowing-beihai.mp4'
+    output = (arguments.output or ROOT / default_name).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(prefix='ade-beihai-', dir=output.parent) as workspace:
         plates = Path(workspace)
+        audio = arguments.audio.resolve()
+        if arguments.minute:
+            audio = minute_audio(audio,plates/'minute-audio.wav',arguments.audio_start,tempo)
         frames = sorted({1, *arguments.stills}) if arguments.stills else range(1, count+1)
         make_plates(plates, frames)
-        scene = configure_scene(arguments.tempo, arguments.audio.resolve(), plates)
+        scene = configure_scene(tempo,audio,plates,minute=arguments.minute)
         if arguments.stills:
             scene.render.image_settings.file_format = 'PNG'
             for frame in arguments.stills:

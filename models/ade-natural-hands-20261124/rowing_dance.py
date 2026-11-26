@@ -71,7 +71,6 @@ POSES = (
 
 STEP_PHRASES = ((-1,5,.165,-.025), (1,9,.165,-.025),
                 (-1,17,.185,-.066), (1,21,.185,-.066))
-MAX_STEP = max(stride for _,_,stride,_ in STEP_PHRASES)
 
 
 def frame_at(beat):
@@ -107,18 +106,13 @@ def make_curve(keys):
     return value_at
 
 
-def sample_motion():
-    curves = {name:make_curve([(p.beat,getattr(p,name)) for p in POSES])
+def sample_motion(poses):
+    curves = {name:make_curve([(p.beat,getattr(p,name)) for p in poses])
               for name in ('sway','rise','turn','nod','spread')}
     for name in ('swing','bend','sweep'):
         for i in range(2):
-            curves[name,i]=make_curve([(p.beat,getattr(p,name)[i]) for p in POSES])
-    return curves, [(frame-1)*BPM/(60*FPS) for frame in range(1,frame_at(BEATS)+1)]
-
-
-def phased(beat, delay):
-    fade = ease(beat/.75)*ease((BEATS-beat)/.85)
-    return beat-delay*fade
+            curves[name,i]=make_curve([(p.beat,getattr(p,name)[i]) for p in poses])
+    return curves, [(frame-1)*BPM/(60*FPS) for frame in range(1,frame_at(poses[-1].beat)+1)]
 
 
 def add_track(owner, name, baked=False):
@@ -191,9 +185,12 @@ def add_arm_shapes(obj, elbow, bends):
     }, baked=True)
 
 
-def add_side_step(side, foot, beats):
+def add_side_step(side, foot, beats, steps, max_stride, extra_step):
     def step(beat):
-        for foot_side,start,stride,depth in STEP_PHRASES:
+        additional = extra_step(beat,side)
+        if additional is not None:
+            return additional
+        for foot_side,start,stride,depth in steps:
             if side!=foot_side:
                 continue
             at = beat-start
@@ -214,10 +211,10 @@ def add_side_step(side, foot, beats):
 
     keys=[(beat,*step(beat)) for beat in beats]
     animate_transform(foot,keys)
-    return [(beat,abs(offset[0])/MAX_STEP) for beat,offset,_ in keys]
+    return [(beat,min(1,abs(offset[0])/max_stride)) for beat,offset,_ in keys]
 
 
-def add_trouser_follow(trouser, side, step_amount):
+def add_trouser_follow(trouser, side, step_amount, max_stride):
     """Keep the upper trouser inside the robe while the cuff follows the foot."""
     world=trouser.matrix_world.copy()
     inverse=world.inverted()
@@ -227,7 +224,7 @@ def add_trouser_follow(trouser, side, step_amount):
         point=world @ rest.co
         bound=ease((point.z-.135)/.223)
         center_x=side*.113
-        point.x=center_x+(point.x-center_x)*(1-.48*bound)-side*MAX_STEP*.76*bound
+        point.x=center_x+(point.x-center_x)*(1-.48*bound)-side*max_stride*.76*bound
         point.y=point.y*(1-.39*bound)+.094*bound
         vertex.co=inverse @ point
     animate_shapes(trouser,{'Step tuck':step_amount},baked=True)
@@ -252,7 +249,18 @@ def add_cloth_follow(obj, waves):
     }, baked=True)
 
 
-def build_dance():
+def build_dance(
+    poses=POSES, steps=STEP_PHRASES, *, output='ade-rowing',
+    floor_turn=None, extra_step=lambda beat, side: None, spotting=lambda beat: 0,
+    smile=None, blink=None,
+):
+    count=poses[-1].beat
+    max_stride=max(stride for _,_,stride,_ in steps)
+
+    def phased(beat, delay):
+        fade=ease(beat/.75)*ease((count-beat)/.85)
+        return beat-delay*fade
+
     bpy.ops.wm.open_mainfile(filepath=str(ROOT/'ade.blend'))
     scene = bpy.context.scene
     scene.frame_set(1)
@@ -266,12 +274,17 @@ def build_dance():
     torso = bpy.data.objects['Upper body balance']
     head = bpy.data.objects['Head expression pivot']
     ribbon = bpy.data.objects['Hair ribbon follow through']
-    curves, beats = sample_motion()
+    curves, beats = sample_motion(poses)
+    if floor_turn is not None:
+        root = pivot('Dance floor turn', (0,0,0))
+        adopt(torso,root)
     for index,(side,label) in enumerate(((-1,'right'),(1,'left'))):
         shoulder_point = Vector((side*.130,0,1.248))
         elbow_point = Vector((side*.213,0,1.080))
         shoulder = pivot(f'Rowing shoulder {label}', torso.matrix_world.inverted() @ shoulder_point, torso)
         foot = pivot(f'Dance step {label}', (side*.113,-.046,.061))
+        if floor_turn is not None:
+            adopt(foot,root)
         bpy.context.view_layer.update()
         delay = .14+index*.075
         bends = [(beat,curves['bend',index](phased(beat,delay))) for beat in beats]
@@ -292,8 +305,8 @@ def build_dance():
                 curves['sweep',index](phased(beat,.06+index*.03))+side*curves['turn'](phased(beat,.09))*.10,
             )) for beat in beats
         ])
-        step_amount=add_side_step(side,foot,beats)
-        add_trouser_follow(bpy.data.objects[f'Loose trouser hem {side}'],side,step_amount)
+        step_amount=add_side_step(side,foot,beats,steps,max_stride,extra_step)
+        add_trouser_follow(bpy.data.objects[f'Loose trouser hem {side}'],side,step_amount,max_stride)
 
     torso_keys,head_keys,ribbon_keys,waves,tip_follow=[],[],[],[],[]
     for beat in beats:
@@ -301,7 +314,7 @@ def build_dance():
         head_beat=phased(beat,.085)
         cloth_beat=phased(beat,.25)
         counterweight=0
-        for side,start,_,_ in STEP_PHRASES:
+        for side,start,_,_ in steps:
             landing=(beat-start+.52)/1.23
             if 0<landing<1:
                 counterweight-=side*.041*math.sin(math.pi*landing)**2
@@ -309,12 +322,16 @@ def build_dance():
         rise=curves['rise'](body_beat)
         turn=curves['turn'](body_beat)
         torso_keys.append((beat,(sway,-rise*.34,rise),(curves['nod'](body_beat)*.25,sway*68,turn)))
-        head_keys.append((beat,(0,0,0),(curves['nod'](head_beat),-curves['sway'](head_beat)*49,-curves['turn'](head_beat)*.48)))
-        ribbon_keys.append((beat,(0,0,0),(-curves['nod'](cloth_beat)*.32,curves['sway'](cloth_beat)*62,-curves['turn'](cloth_beat)*.50)))
+        lag=0 if floor_turn is None else floor_turn(beat)-floor_turn(cloth_beat)
+        head_keys.append((beat,(0,0,0),(curves['nod'](head_beat),-curves['sway'](head_beat)*49,-curves['turn'](head_beat)*.48+spotting(beat))))
+        ribbon_keys.append((beat,(0,0,0),(-curves['nod'](cloth_beat)*.32,curves['sway'](cloth_beat)*62,-curves['turn'](cloth_beat)*.50-lag*.48)))
         follow=curves['sway'](cloth_beat)/.151
-        waves.append((beat,-follow*.63-curves['turn'](cloth_beat)*.012))
+        wave=-follow*.63-curves['turn'](cloth_beat)*.012
+        waves.append((beat,wave if floor_turn is None else max(-1,min(1,wave-lag*.021))))
         turn_change=curves['turn'](cloth_beat)-curves['turn'](phased(beat,.40))
-        tip_follow.append((beat,min(.72,abs(turn_change)*.12+abs(curves['nod'](cloth_beat))*.020)))
+        tip_follow.append((beat,min(.72,abs(turn_change)*.12+abs(curves['nod'](cloth_beat))*.020+abs(lag)*.022)))
+    if floor_turn is not None:
+        animate_transform(root,[(beat,(0,0,0),(0,0,floor_turn(beat))) for beat in beats])
     animate_transform(torso,torso_keys)
     animate_transform(head,head_keys)
     animate_transform(ribbon,ribbon_keys)
@@ -323,8 +340,10 @@ def build_dance():
             add_cloth_follow(obj,waves)
         if obj.type=='MESH' and obj.data.shape_keys and 'tipFollow' in obj.data.shape_keys.key_blocks:
             animate_shapes(obj,{'tipFollow':tip_follow},baked=True)
-    smile=[(0,0),(1,.50),(6,.82),(10,.66),(16,.92),(22,.75),(27,1),(31,.40),(32,0)]
-    blink=[(0,0),(7.55,0),(7.72,1),(7.86,0),(21.73,0),(21.9,1),(22.04,0),(32,0)]
+    if smile is None:
+        smile=[(0,0),(1,.50),(6,.82),(10,.66),(16,.92),(22,.75),(27,1),(31,.40),(32,0)]
+    if blink is None:
+        blink=[(0,0),(7.55,0),(7.72,1),(7.86,0),(21.73,0),(21.9,1),(22.04,0),(32,0)]
     animate_shapes(bpy.data.objects['Sculpted smile'],{'smile':smile})
     animate_shapes(bpy.data.objects['Soft tapered face'],{'cheekLift':smile})
     for side in ('left','right'):
@@ -332,18 +351,18 @@ def build_dance():
             animate_shapes(bpy.data.objects[f'{part} eyelid {side}'],{'blink':blink})
 
     scene.render.fps = FPS
-    scene.frame_end = frame_at(BEATS)
+    scene.frame_end = frame_at(count)
     scene.frame_set(1)
     bpy.ops.object.select_all(action='DESELECT')
     for obj in scene.objects:
         if obj.type in ('MESH','EMPTY'):
             obj.select_set(True)
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/f'{output}.blend'))
     bpy.ops.export_scene.gltf(
-        filepath=str(ROOT/'ade-rowing.glb'), export_format='GLB', use_selection=True,
+        filepath=str(ROOT/f'{output}.glb'), export_format='GLB', use_selection=True,
         export_animations=True, export_animation_mode='NLA_TRACKS', export_skins=False,
         export_current_frame=True, export_morph=True, export_yup=True, export_vertex_color='ACTIVE',
     )
-    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'ade-rowing.blend'))
     return scene
 
 
