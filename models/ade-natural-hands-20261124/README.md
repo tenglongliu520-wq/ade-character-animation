@@ -1,5 +1,11 @@
 # 阿德 · 自然手掌
 
+## 得体说网页版首页
+
+首页复用 `ade-rowing-minute.glb` 的 2026-11-26 转身修复版（84aedc8039f02a96fde01307fffc2240cdd10446），取中性姿势，点击时才播放招呼或小动作。透明底图 `homepage/ade-poster.webp` 来自同一个模型。浏览器同时保留暂停、减少动态和对话状态驱动的表情。
+
+接入时，把 `homepage/home-avatar.js` 和 `homepage/ade-poster.webp` 放入站点的 `public/ade-home-3d/`，将 `ade-rowing-minute.glb` 复制为该目录下的 `ade-84aedc8.glb`，同时复制现有的 `vendor/`。页面在加载首页脚本前，通过 import map 将 `three` 映射到 `/ade-home-3d/vendor/three.module.js`。`homepage/mascot-motion.js` 接管 `#welcomeView .welcome-character` 并保留 `adeAvatar` 接口。首页图片地址使用 `/ade-home-3d/ade-poster.webp`。
+
 ## 双桨舞
 
 `dance.html` 播放 32 个编排拍点组成的 `RowingDance`，包含双手抬起、左右侧步、张臂、交叉和鞠躬。`ade-rowing.glb` 是可单独使用的舞蹈模型，取自已校正左右五官的阿德，来源提交 1af31d0a927e31030305659e13eb29d7195274e1。以 96 BPM 播放时长 20 秒。浏览器用音频时钟推进动作，并支持载入本地音轨和设置速度。公开预览附 `rowing_music.py` 生成的原创节拍。

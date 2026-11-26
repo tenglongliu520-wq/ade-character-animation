@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "b344d365925b2e5c4127f2a20df5cee0ab1504cb5ccbcc300e130b0d59fbcd3f"
+    "sha256": "be39563ddbd813b73d9ebbf67dab67a1bce139a7aea2e5f102e12cea76e9995e"
   },
   {
     "path": "requirements.txt",
@@ -318,6 +318,18 @@
   {
     "path": "detishuo-brand.webp",
     "sha256": "f9b00aa0abaaf0558eb47bf5aaf85665246b485fcab057bd5a6e37db4766ce93"
+  },
+  {
+    "path": "homepage/home-avatar.js",
+    "sha256": "bbd3547b48688811f8774f4d1caffcc5933b2a3b7db08a79961f726cd3f836f5"
+  },
+  {
+    "path": "homepage/mascot-motion.js",
+    "sha256": "0f3d4b1d8a31b5e6245952f3610863f0a7fd372a9376120f832e26e2c1428163"
+  },
+  {
+    "path": "homepage/ade-poster.webp",
+    "sha256": "3c00f7eefeffb46e4eadba3651f35efebae08e8cf8d408d3ce00662e310c21cb"
   },
   {
     "path": "vendor/LICENSE",
